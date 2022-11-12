@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="../css/style.css" />
+        <title>HTML_CSS_2</title>
+    </head>
+    <body>
+        <!-- Header Section -->
+        <header>
+            <div class="logo">
+                <img src="../imgs/iti-logo.png" alt="ITI Logo" />
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Home</a></li>
+                    <li><a href="/docs/roadmap.html">RoadMap</a></li>
+                    <li><a href="/docs/register.html">Registration Form</a></li>
+                    <li><a href="https://www.iti.gov.eg/iti/home">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        <!-- Content Section -->
+        <div class="container">
+            <section class="register">
+                <h1>Register - Create Account</h1>
+                <p>Fields Marked With * Are Required.</p>
+                <form action="" method="get">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="name">Your Name <span class="required">*</span></label>
+                            </td>
+                            <td>
+                                <input type="text" id="name" name="name" required />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="email">Email ID <span class="required">*</span></label>
+                            </td>
+                            <td>
+                                <input type="email" id="email" name="email" required />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="alt-email">Alternative Email ID</label>
+                            </td>
+                            <td>
+                                <input type="email" id="alt-email" name="alt-email" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="phone">Your Phone</label>
+                            </td>
+                            <td>
+                                <div class="phone-description">Country Code - City Code - Phone Number</div>
+                                <div class="phone-content">
+                                    <input type="text" id="country-code" name="country-code" /> - <input type="text" id="city-code" name="city-code" /> -
+                                    <input type="text" id="phone-number" name="phone-number" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="mob-phone">Mobile Phone</label>
+                            </td>
+                            <td>
+                                <input type="text" id="mob-phone" name="mob-phone" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="postal-address">Your Postal Address <span class="required">*</span></label>
+                            </td>
+                            <td>
+                                <textarea name="postal-address" id="postal-address" required></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="country">Country <span class="required">*</span></label>
+                            </td>
+                            <td>
+                                <select name="country" id="country" required>
+                                    <option value="0" disabled selected>Select One</option>
+                                    <option value="1">Egypt</option>
+                                    <option value="2">Saudi Arabia</option>
+                                    <option value="3">United Arab Emirates</option>
+                                    <option value="4">Kuwait</option>
+                                    <option value="5">Bahrain</option>
+                                    <option value="6">Oman</option>
+                                    <option value="7">Qatar</option>
+                                    <option value="8">Jordan</option>
+                                    <option value="9">Lebanon</option>
+                                    <option value="10">Syria</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="pass">Password <span class="required">*</span></label>
+                            </td>
+                            <td>
+                                <input type="password" id="pass" name="pass" required />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="confirm-pass">Re-Enter Password <span class="required">*</span></label>
+                            </td>
+                            <td>
+                                <input type="password" id="confirm-pass" name="confirm-pass" required />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="checkbox" id="agree" name="agree" required /> I Accept The <a class="terms" href="#">Terms Of Use</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" value="Continue >>" />
+                                <input type="reset" value="Reset" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </section>
+        </div>
+        <!-- Footer Section -->
+        <footer>Copyright 2022 By <span>Mostafa Abdullhuq</span> &copy;. All Rights Reserved.</footer>
+    </body>
+</html>
