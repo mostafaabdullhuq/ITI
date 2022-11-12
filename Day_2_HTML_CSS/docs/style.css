@@ -1,0 +1,8 @@
+/* Reset all default values and set font family */
+* {
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    font-family: "Cairo", sans-serif;
+    text-decoration: none;
+}
