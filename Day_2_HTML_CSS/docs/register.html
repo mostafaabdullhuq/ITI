@@ -4,9 +4,11 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- Add Cairo Font From Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
+        <!-- Link External CSS File -->
         <link rel="stylesheet" href="../css/style.css" />
         <title>HTML_CSS_2</title>
     </head>
@@ -25,14 +27,21 @@
                 </ul>
             </nav>
         </header>
-        <!-- Content Section -->
+        <!-- End Header Section -->
         <div class="container">
+            <!-- Content Section -->
             <section class="register">
-                <h1>Register - Create Account</h1>
-                <p>Fields Marked With * Are Required.</p>
+                <!-- Page Heading and description -->
+                <div class="page-heading">
+                    <h1>Register - Create Account</h1>
+                    <p>Fields Marked With * Are Required.</p>
+                </div>
+                <!-- End Page Heading and description -->
+                <!-- Registration Form -->
                 <form action="" method="get">
                     <table>
-                        <tr>
+                        <!-- Name Row -->
+                        <tr class="name-row">
                             <td>
                                 <label for="name">Your Name <span class="required">*</span></label>
                             </td>
@@ -40,7 +49,9 @@
                                 <input type="text" id="name" name="name" required />
                             </td>
                         </tr>
-                        <tr>
+                        <!-- End Name Row -->
+                        <!--  Email Row -->
+                        <tr class="email-row">
                             <td>
                                 <label for="email">Email ID <span class="required">*</span></label>
                             </td>
@@ -48,7 +59,9 @@
                                 <input type="email" id="email" name="email" required />
                             </td>
                         </tr>
-                        <tr>
+                        <!--  End Email Row -->
+                        <!--  Alt Email Row -->
+                        <tr class="confirm-email-row">
                             <td>
                                 <label for="alt-email">Alternative Email ID</label>
                             </td>
@@ -56,19 +69,25 @@
                                 <input type="email" id="alt-email" name="alt-email" />
                             </td>
                         </tr>
-                        <tr>
+                        <!--  End Alt Email Row -->
+                        <!--  Phone Row -->
+                        <tr class="phone-row">
                             <td>
                                 <label for="phone">Your Phone</label>
                             </td>
                             <td>
+                                <!-- Phone Segments Description -->
                                 <div class="phone-description">Country Code - City Code - Phone Number</div>
+                                <!-- Phone Segments Inputs -->
                                 <div class="phone-content">
                                     <input type="text" id="country-code" name="country-code" /> - <input type="text" id="city-code" name="city-code" /> -
                                     <input type="text" id="phone-number" name="phone-number" />
                                 </div>
                             </td>
                         </tr>
-                        <tr>
+                        <!--  End Phone Row -->
+                        <!--  Mobile Phone Row -->
+                        <tr class="mobile-phone-row">
                             <td>
                                 <label for="mob-phone">Mobile Phone</label>
                             </td>
@@ -76,7 +95,9 @@
                                 <input type="text" id="mob-phone" name="mob-phone" />
                             </td>
                         </tr>
-                        <tr>
+                        <!--  End Mobile Phone Row -->
+                        <!--  Postal Address Row -->
+                        <tr class="postal-row">
                             <td>
                                 <label for="postal-address">Your Postal Address <span class="required">*</span></label>
                             </td>
@@ -84,7 +105,9 @@
                                 <textarea name="postal-address" id="postal-address" required></textarea>
                             </td>
                         </tr>
-                        <tr>
+                        <!--  End Postal Address Row -->
+                        <!--  Country Select Row -->
+                        <tr class="country-row">
                             <td>
                                 <label for="country">Country <span class="required">*</span></label>
                             </td>
@@ -104,7 +127,9 @@
                                 </select>
                             </td>
                         </tr>
-                        <tr>
+                        <!--  End Country Select Row -->
+                        <!--  Password Row -->
+                        <tr class="password-row">
                             <td>
                                 <label for="pass">Password <span class="required">*</span></label>
                             </td>
@@ -112,7 +137,9 @@
                                 <input type="password" id="pass" name="pass" required />
                             </td>
                         </tr>
-                        <tr>
+                        <!--  End Password Row -->
+                        <!--  Confirm Password Row -->
+                        <tr class="confirm-password-row">
                             <td>
                                 <label for="confirm-pass">Re-Enter Password <span class="required">*</span></label>
                             </td>
@@ -120,22 +147,30 @@
                                 <input type="password" id="confirm-pass" name="confirm-pass" required />
                             </td>
                         </tr>
-                        <tr>
+                        <!--  End Confirm Password Row -->
+                        <!--  Agree Terms Row -->
+                        <tr class="terms-row">
                             <td></td>
                             <td><input type="checkbox" id="agree" name="agree" required /> I Accept The <a class="terms" href="#">Terms Of Use</a></td>
                         </tr>
-                        <tr>
+                        <!--  End Agree Terms Row -->
+                        <!--  Form Controls Row -->
+                        <tr class="form-controls-row">
                             <td></td>
                             <td>
                                 <input type="submit" value="Continue >>" />
                                 <input type="reset" value="Reset" />
                             </td>
                         </tr>
+                        <!--  End Form Controls Row -->
                     </table>
                 </form>
+                <!-- End Registration Form -->
             </section>
+            <!-- End Content Section -->
         </div>
         <!-- Footer Section -->
         <footer>Copyright 2022 By <span>Mostafa Abdullhuq</span> &copy;. All Rights Reserved.</footer>
+        <!-- End Footer Section -->
     </body>
 </html>

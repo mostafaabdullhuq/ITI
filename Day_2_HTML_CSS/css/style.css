@@ -1,3 +1,5 @@
+/* Global Selectors */
+
 /* Reset all default values and set font family */
 * {
     margin: 0;
@@ -6,14 +8,12 @@
     text-decoration: none;
 }
 
-section.index img {
-    width: 100%;
-}
-
-/* Header Section */
 body {
     background-color: #eee;
 }
+
+/* Header */
+
 header {
     display: flex;
     width: 100vw;
@@ -21,16 +21,24 @@ header {
     padding: 20px 50px;
     height: 10vh;
 }
-header nav {
-    flex-grow: 1;
-    align-self: center;
-}
+
+/* Header Logo Section */
+
 header .logo {
     flex-grow: 1;
 }
 
 header .logo img {
     height: 100%;
+}
+
+/* End Header Logo Section */
+
+/* Header Navbar Section */
+
+header nav {
+    flex-grow: 1;
+    align-self: center;
 }
 
 header nav ul {
@@ -47,12 +55,6 @@ header nav ul li {
     -o-border-radius: 10px;
 }
 
-header nav ul li a {
-    color: white;
-    font-size: 20px;
-    text-transform: uppercase;
-}
-
 header nav ul li:hover {
     cursor: pointer;
     background-color: crimson;
@@ -63,7 +65,18 @@ header nav ul li:hover {
     -o-transition: all 0.3s ease-in-out;
 }
 
+header nav ul li a {
+    color: white;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+/* End Header Navbar Section */
+
+/* End Header */
+
 /* Footer Section  */
+
 footer {
     position: fixed;
     bottom: 0;
@@ -74,16 +87,33 @@ footer {
     text-align: center;
     padding: 20px 0;
 }
+
 footer span {
     font-weight: bold;
 }
 
-/* Roadmap Page Content */
+/* End Footer Section  */
 
 div.container {
     width: 70vw;
     margin: 50px auto 100px auto;
 }
+
+section {
+    margin-bottom: 20px;
+}
+
+/* End Global Selectors */
+
+/* Index Page */
+
+section.index img {
+    width: 100%;
+}
+
+/* End Index Page */
+
+/* Roadmap Page */
 
 div.roadmap section.description h1 {
     text-align: center;
@@ -98,16 +128,6 @@ div.roadmap section.description p span {
     font-style: italic;
 }
 
-section.top {
-    margin-top: 200px;
-    text-align: center;
-}
-
-section.top a {
-    color: crimson;
-    font-weight: bold;
-}
-
 section.content-description {
     display: flex;
     width: 100%;
@@ -118,9 +138,18 @@ section.content-description .container-right {
     width: 50%;
 }
 
-section {
-    margin-bottom: 20px;
+section.top {
+    margin-top: 200px;
+    text-align: center;
 }
+
+section.top a {
+    color: crimson;
+    font-weight: bold;
+}
+/* End Roadmap Page */
+
+/* Register Page */
 
 section.register p {
     color: crimson;
@@ -138,9 +167,12 @@ section.register table label {
     margin-right: 20px;
 }
 
-span.required {
+section.register table label span.required {
     color: red;
 }
+
+/* Form Elements Styling */
+
 section.register form input,
 section.register form select,
 section.register form textarea {
@@ -193,16 +225,24 @@ section.register form input[type="reset"]:hover {
     -o-transition: all 0.3s ease-in-out;
 }
 
-div.phone-description {
+/* End Form Elements Styling */
+
+/* Phone Row Styling */
+
+tr.phone-row div.phone-description {
     margin-bottom: 10px;
 }
 
-div.phone-content input#country-code {
+tr.phone-row div.phone-content input#country-code {
     width: 90px;
 }
-div.phone-content input#city-code {
+tr.phone-row div.phone-content input#city-code {
     width: 62px;
 }
-div.phone-content input#phone-number {
+tr.phone-row div.phone-content input#phone-number {
     width: calc(100% - 181px);
 }
+
+/* End Phone Row Styling */
+
+/* End Register Page */
