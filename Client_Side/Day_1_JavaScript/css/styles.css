@@ -1,0 +1,33 @@
+div.container {
+    width: 70vw;
+    height: 100%;
+    text-align: center;
+    margin: 500px auto;
+}
+
+button {
+    cursor: pointer;
+    margin-right: 20px;
+    font-size: 30px;
+    background-color: crimson;
+    color: white;
+    padding: 20px 30px;
+    border: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border: 1px solid transparent;
+}
+
+button:hover {
+    color: crimson;
+    border: 1px solid crimson;
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+}
