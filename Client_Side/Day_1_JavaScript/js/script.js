@@ -53,5 +53,5 @@ Show the summation result (ex: 30 + 6 = 36)
         num2 = Number(prompt("Enter second number"));
 
     // antonymous function: if both inputs are numbers print the sum of them, else show a message to user
-    num1 && num2 ? alert(`${num1} + ${num2} = ${sum(num1, num2)}`) : alert("Please enter valid numbers");
+    num1 && num2 ? alert(`${num1} + ${num2} = ${sum(num1, num2)}`) : alert("Please enter valid numbers.");
 }
