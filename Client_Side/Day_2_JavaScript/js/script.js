@@ -71,7 +71,7 @@ $(function () {
             // loop through the array elements
             textArray.forEach((char) => {
                 // if the current character is vowel
-                switch (char) {
+                switch (char.toLowerCase()) {
                     case "a":
                     case "e":
                     case "o":
