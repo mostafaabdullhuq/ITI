@@ -28,7 +28,7 @@ $(function () {
                 break;
             }
             // validate user input (if user enter a number that is greater than 0)
-            else if (userAge > 0 && Number(userAge) !== NaN) {
+            else if (userAge > 0 && !isNaN(userAge)) {
                 // check for age type and alert that type
                 if (userAge >= 1 && userAge <= 10) {
                     alert("Child");
@@ -110,7 +110,7 @@ $(function () {
         // if user didn't press cancel
         if (userTime !== null) {
             // validate user input ( if the time is between 0~24 and it's a number)
-            if (userTime >= 0 && Number(userTime) !== NaN && userTime <= 24) {
+            if (userTime >= 0 && !isNaN(userTime) && userTime <= 24) {
                 // if the time is between 0~12 alert the same time in AM, else convert the time to 12-hour format and alert it in PM
                 userTime <= 12 ? alert(`Time in 12-hour format is : ${userTime}AM`) : alert(`Time in 12-hour format is : ${userTime - 12}PM`);
             } else {
