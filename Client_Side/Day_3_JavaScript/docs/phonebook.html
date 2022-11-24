@@ -7,21 +7,23 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="css/styles.css" />
-        <script type="text/javascript" src="js/jquery.js"></script>
+        <link rel="stylesheet" href="../css/styles.css" />
+        <script type="text/javascript" src="../js/jquery.js"></script>
         <title>Day_2_JS</title>
     </head>
     <body>
         <header></header>
         <div class="container">
-            <button id="assignment_1">Part 1 - Lab 1</button>
-            <button id="assignment_2">Part 1 - Lab 2 & Bonus</button>
-            <button id="assignment_3">Part 2 - Lab 1</button>
-            <button id="assignment_4">Part 2 - Lab 2</button>
-            <button id="assignment_5">Assignment 5</button>
-            <button id="assignment_6">Assignment 6</button>
+            <form id="phonebook" method="get">
+                <input type="text" id="contact_name" placeholder="Contact Name" required />
+                <input type="text" id="contact_phone" placeholder="Contact Number" />
+                <p class="contact_search_result">No Contacts Found.</p>
+                <div class="controls-container">
+                    <input type="button" id="add" value="Add" />
+                </div>
+            </form>
         </div>
         <footer></footer>
-        <script src="js/script.js"></script>
+        <script src="../js/script.js"></script>
     </body>
 </html>
