@@ -1,7 +1,7 @@
 // wait until the page loads, then invoke this function
 $((e) => {
     /* 
-- Assignment [1] 
+- Part [1] - Lab [1] 
 
 Create JS script to be run in web browser ,
 User will enter his Username , Password
@@ -31,13 +31,13 @@ If he entered incorrect username or password Tell him which data entered wrong
         let userName = document.querySelector("input#username").value,
             passWord = document.querySelector("input#password").value,
             // select the login status paragraph
-            loginStatus = document.querySelector("p#result");
+            loginStatus = document.querySelector("p#login");
         // when validation complete, change the status paragraph content according to the validation status
         validateForm(userName, passWord) ? (loginStatus.innerHTML = "Logged in Successfully") : (loginStatus.innerHTML = "Invalid Username or Password");
     });
 
     /* 
-- Assignment [2] 
+- Part [1] - Lab [2] & Bonus 
 
 Create JS script to be run in web browser ,
 User will enter first number
@@ -102,7 +102,7 @@ As example user enter 1 then sum then 3 then show 4 then sum then 5 then show 9 
     });
 
     /* 
-- Assignment [3] 
+- Part [2] - Lab [1] 
 
 Calculate the Sum and average Of the user entered values
 Ask the user to enter how many number he wants to get the sum of Save the number in array
@@ -163,6 +163,19 @@ Show him the sum and average of the entered values
             resultContainer.value = "Please enter more than one number.";
         }
     });
+
+    /* 
+- Part [2] - Lab [2] 
+
+Create phone book app
+Ask the user for operation through JS prompt If user enters “add”
+Ask him for the name of the contact and phone number
+Then create js object for that contact and add it to contacts array Then ask him for new operation and repeat
+If user enters “search”
+Ask him for something to search for
+Get the user input and search in the contacts array in name and phone Then show the user the full details of that contact
+Then ask him for new operation and repeat
+*/
 
     // when assignment 4 button clicked, invoke this arrow func.
     $("button#assignment_4").click((e) => {
@@ -284,4 +297,88 @@ Show him the sum and average of the entered values
             contactsContainer.innerHTML = "No Contacts Found.";
         }
     });
+});
+
+/* 
+- Part [2] - Bonus
+
+Area calculator
+Ask the user to enter the name of the shape he wants to calc area for Ask the user for the dimensions of that shape
+Calculate the area and show it to user
+
+1- Circle
+    π × r2              r = radius of the circle
+2- Triangle
+    1⁄2 × b× h          b = base h = height
+3- Square
+    a2                  a = length of side
+4- Rectangle
+    l× w                l = length w = width
+5- Parallelogram
+    b× h                b=base h=vertical height
+6- Trapezium
+    1⁄2(a+b) × h        a and b are the length of parallel sides h = height
+7- Ellipse
+    πab                 a = 1⁄2 minor axis b = 1⁄2 major axis
+*/
+
+// when assignment 4 button clicked, invoke this arrow func.
+$("button#assignment_5").click((e) => {
+    // prevent the default behavior of the button
+    e.preventDefault();
+    // redirect to phonebook form page
+    window.location = "./docs/area_calc.html";
+});
+
+validateInput = (shapeType, shapeDimension) => {
+    if (shapeType > 0 && shapeType <= 7 && shapeDimension !== "") {
+        if ((shapeType == 2 || shapeType == 4 || shapeType == 5 || shapeType == 7) && shapeDimension.split(",").length != 2) {
+            return false;
+        }
+        if (shapeType == 6 && shapeDimension.split(",").length != 3) {
+            return false;
+        }
+
+        return true;
+    } else {
+        return false;
+    }
+};
+
+$("form#area_calc").on("submit", (e) => {
+    e.preventDefault();
+
+    let shapeType = Number(document.querySelector("select.shape").value),
+        shapeDimension = document.querySelector("input#shape_dimension").value,
+        resultContainer = document.querySelector("input#result_area");
+    if (validateInput(shapeType, shapeDimension)) {
+        let dimensionsArray = shapeDimension.split(","),
+            result = 0;
+        switch (shapeType) {
+            case 1:
+                result = Math.PI * Math.pow(Number(dimensionsArray[0]), 2);
+                break;
+            case 2:
+                result = (Number(dimensionsArray[0]) * Number(dimensionsArray[1])) / 2;
+                break;
+            case 3:
+                result = Math.pow(Number(dimensionsArray[0]), 2);
+                break;
+            case 4:
+                result = Number(dimensionsArray[0]) * Number(dimensionsArray[1]);
+                break;
+            case 5:
+                result = Number(dimensionsArray[0]) * Number(dimensionsArray[1]);
+                break;
+            case 6:
+                result = ((Number(dimensionsArray[0]) + Number(dimensionsArray[1])) * Number(dimensionsArray[2])) / 2;
+                break;
+            case 7:
+                result = Math.PI * Number(dimensionsArray[0]) * Number(dimensionsArray[1]);
+                break;
+        }
+        resultContainer.value = result;
+    } else {
+        resultContainer.value = "Please enter valid data.";
+    }
 });

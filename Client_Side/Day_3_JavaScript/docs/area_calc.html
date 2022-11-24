@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="../css/styles.css" />
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <title>Day_2_JS</title>
+    </head>
+    <body>
+        <header></header>
+        <div class="container">
+            <form id="area_calc" method="get">
+                <select class="shape">
+                    <option value="0" selected disabled>Select a shape</option>
+                    <option value="1">Circle</option>
+                    <option value="2">Triangle</option>
+                    <option value="3">Square</option>
+                    <option value="4">Rectangle</option>
+                    <option value="5">Parallelogram</option>
+                    <option value="6">Trapezium</option>
+                    <option value="7">Ellipse</option>
+                </select>
+                <input type="text" id="shape_dimension" name="shape_dimension" placeholder="Enter Required Values Separated By Comma ( , )" required />
+                <input type="text" id="result_area" name="result" placeholder="" value="0" readonly />
+                <input id="calc_area" type="submit" value="Calculate Area" />
+            </form>
+        </div>
+        <footer></footer>
+        <script src="../js/script.js"></script>
+    </body>
+</html>

@@ -165,6 +165,8 @@ form#calc input#result,
 form#calc input#result_sum_average,
 form#average_sum input#result,
 form#average_sum input#result_sum_average,
+form#area_calc input#result,
+form#area_calc input#result_area,
 p.contact_search_result {
     text-align: center;
     color: crimson;
@@ -186,10 +188,10 @@ p.contact_search_result:first-of-type {
 }
 select.shape {
     width: 100%;
-    padding: 10px 20px;
+    padding: 10px 30px;
     font-size: 25px;
     cursor: pointer;
-    font-size: 25px;
+    font-size: 22px;
     color: crimson;
     border: none;
     border-radius: 10px;
