@@ -1,5 +1,5 @@
 // wait until the page loads, then invoke this function
-$(function () {
+$((e) => {
     /* 
 - Assignment [1] 
 
