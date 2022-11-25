@@ -297,8 +297,8 @@ console.log(evenNums); // [ 2, 4, 6, 8 ]
 console.log(oddNums); // [ 1, 3, 5, 7, 9 ]
 */
 
-/*
 //TODO: [2]: Write a nested function and explain the closure -> lexical environment.
+/*
 
 function parent() {
     // create a local variable in parent function
