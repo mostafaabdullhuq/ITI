@@ -54,9 +54,8 @@ function Person(fullName, money, sleepMode, healthRate) {
             return this.healthRate;
         }
     };
-    this.buyItem = () => {
-        this.money -= 10;
-        return `You have ${this.money} LE`;
+    this.buyItem = (itemsNo) => {
+        return `You have ${!isNaN(itemsNo) ? (this.money -= itemsNo * 10) : this.money} LE`;
     };
 }
 
@@ -67,11 +66,10 @@ console.log(ahmed.sleep(7)); // Happy
 console.log(ahmed.eat(3)); // 100
 console.log(ahmed.sleep()); // Lazy (default)
 console.log(ahmed.eat()); // 90 (default)
-console.log(ahmed.buyItem()); // You have 90 LE
-console.log(ahmed.buyItem()); // You have 80 LE
+console.log(ahmed.buyItem()); // You have 100 LE
+console.log(ahmed.buyItem(5)); // You have 50 LE
 */
 // // [2] - Using Classes
-
 /*
 class Person {
     constructor(fullName, money, sleepMode, healthRate) {
@@ -112,9 +110,8 @@ class Person {
         }
     }
 
-    buyItem() {
-        this.money -= 10;
-        return `You have ${this.money} LE`;
+    buyItem(itemsNo) {
+        return `You have ${!isNaN(itemsNo) ? (this.money -= itemsNo * 10) : this.money} LE`;
     }
 }
 
@@ -126,10 +123,10 @@ console.log(mohamed.sleep(2)); // Tired
 console.log(mohamed.sleep()); // Lazy
 console.log(mohamed.eat(1)); // 50
 console.log(mohamed.eat()); // 90
-console.log(mohamed.buyItem()); // You have 60 LE
+console.log(mohamed.buyItem()); // You have 70 LE
+console.log(mohamed.buyItem(4)); // You have 30 LE
 */
 // [3] - Using Objects Linking to Other Objects (OLOO)
-
 /*
 const Person = {
     init(fullName, money, sleepMode, healthRate) {
@@ -168,9 +165,8 @@ const Person = {
             return this.healthRate;
         }
     },
-    buyItem() {
-        this.money -= 10;
-        return `You have ${this.money} LE`;
+    buyItem(itemsNo) {
+        return `You have ${!isNaN(itemsNo) ? (this.money -= itemsNo * 10) : this.money} LE`;
     },
 };
 
@@ -182,10 +178,10 @@ console.log(sameh.sleep(9)); // Lazy
 console.log(sameh.sleep()); // Lazy
 console.log(sameh.eat(2)); // 75
 console.log(sameh.eat()); // 90
-console.log(sameh.buyItem()); // You have 490 LE
+console.log(sameh.buyItem()); // You have 500 LE
+console.log(sameh.buyItem(6)); // You have 440 LE
 */
 // [4] - Using Factory functions
-
 /*
 function Person(fullName, money, sleepMode, healthRate) {
     return {
@@ -222,9 +218,8 @@ function Person(fullName, money, sleepMode, healthRate) {
                 return healthRate;
             }
         },
-        buyItem() {
-            this.money -= 10;
-            return `You have ${this.money} LE`;
+        buyItem(itemsNo) {
+            return `You have ${!isNaN(itemsNo) ? (this.money -= itemsNo * 10) : this.money} LE`;
         },
     };
 }
@@ -237,5 +232,6 @@ console.log(ali.sleep(12)); // Lazy
 console.log(ali.sleep()); // Lazy
 console.log(ali.eat(3)); // 100
 console.log(ali.eat()); // 90
-console.log(ali.buyItem()); // You have 990 LE
+console.log(ali.buyItem()); // You have 1000 LE
+console.log(ali.buyItem(1)); // You have 990 LE
 */
