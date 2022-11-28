@@ -7,7 +7,7 @@ Person:
 
 Implement Person methods:
 	Sleep(hours): 
-(7-> happy, 
+(7-> happy,
 < 7 -> tired,
  >7 ->lazy)
 	Eat(meals): (3 meals -> 100 health rate, 
@@ -17,12 +17,14 @@ Implement Person methods:
 */
 
 // [1] - Constructor function
-
-function Person(fullName, money) {
+/*
+function Person(fullName, money, sleepMode, healthRate) {
     this.fullName = fullName;
     this.money = money;
+    this.sleepMode = sleepMode;
+    this.healthRate = healthRate;
 
-    this.sleepMood = (sleepHours) => {
+    this.sleep = (sleepHours) => {
         if (!isNaN(sleepHours)) {
             if (sleepHours < 7) {
                 return "Tired";
@@ -32,11 +34,11 @@ function Person(fullName, money) {
                 return "Happy";
             }
         } else {
-            return "Invalid Sleep Hours";
+            return this.sleepMode;
         }
     };
 
-    this.healthRate = (mealsNo) => {
+    this.eat = (mealsNo) => {
         if (!isNaN(mealsNo)) {
             switch (mealsNo) {
                 case 1:
@@ -46,10 +48,10 @@ function Person(fullName, money) {
                 case 3:
                     return 100;
                 default:
-                    return 0;
+                    return this.healthRate;
             }
         } else {
-            return "Invalid Meal Count.";
+            return this.healthRate;
         }
     };
     this.buyItem = () => {
@@ -59,23 +61,27 @@ function Person(fullName, money) {
 }
 
 // create a new instance
-let ahmed = new Person("Ahmed Ali", 100);
-
-console.log(ahmed); // Person {fullName: 'Ahmed Ali',money: 100,sleepMood: [Function (anonymous)],healthRate: [Function (anonymous)],buyItem: [Function (anonymous)]}
-console.log(ahmed.sleepMood(7)); // Happy
-console.log(ahmed.healthRate(3)); // 100
+let ahmed = new Person("Ahmed Ali", 100, "Lazy", 90);
+console.log(ahmed); // Person { fullName: 'Ahmed Ali', money: 100, sleepMode: 'Lazy', healthRate: 90 }
+console.log(ahmed.sleep(7)); // Happy
+console.log(ahmed.eat(3)); // 100
+console.log(ahmed.sleep()); // Lazy (default)
+console.log(ahmed.eat()); // 90 (default)
 console.log(ahmed.buyItem()); // You have 90 LE
 console.log(ahmed.buyItem()); // You have 80 LE
+*/
+// // [2] - Using Classes
 
-// [2] - Using Classes
-
+/*
 class Person {
-    constructor(fullName, money) {
+    constructor(fullName, money, sleepMode, healthRate) {
         this.fullName = fullName;
         this.money = money;
+        this.sleepMode = sleepMode;
+        this.healthRate = healthRate;
     }
 
-    sleepMood(sleepHours) {
+    sleep(sleepHours) {
         if (!isNaN(sleepHours)) {
             if (sleepHours < 7) {
                 return "Tired";
@@ -85,11 +91,11 @@ class Person {
                 return "Happy";
             }
         } else {
-            return "Invalid Sleep Hours";
+            return this.sleepMode;
         }
     }
 
-    healthRate(mealsNo) {
+    eat(mealsNo) {
         if (!isNaN(mealsNo)) {
             switch (mealsNo) {
                 case 1:
@@ -99,10 +105,10 @@ class Person {
                 case 3:
                     return 100;
                 default:
-                    return 0;
+                    return this.healthRate;
             }
         } else {
-            return "Invalid Meal Count.";
+            return this.healthRate;
         }
     }
 
@@ -112,23 +118,28 @@ class Person {
     }
 }
 
-let mohamed = new Person("Mohamed Ali", 70); // Person { fullName: 'Mohamed Ali', money: 70 }
+let mohamed = new Person("Mohamed Ali", 70, "Lazy", 90);
 
 console.log(mohamed);
 
-console.log(mohamed.sleepMood(2)); // Tired
-console.log(mohamed.healthRate(1)); // 50
+console.log(mohamed.sleep(2)); // Tired
+console.log(mohamed.sleep()); // Lazy
+console.log(mohamed.eat(1)); // 50
+console.log(mohamed.eat()); // 90
 console.log(mohamed.buyItem()); // You have 60 LE
-
+*/
 // [3] - Using Objects Linking to Other Objects (OLOO)
 
+/*
 const Person = {
-    init(fullName, money) {
+    init(fullName, money, sleepMode, healthRate) {
         this.fullName = fullName;
         this.money = money;
+        this.sleepMode = sleepMode;
+        this.healthRate = healthRate;
         return this;
     },
-    sleepMood(sleepHours) {
+    sleep(sleepHours) {
         if (!isNaN(sleepHours)) {
             if (sleepHours < 7) {
                 return "Tired";
@@ -138,10 +149,10 @@ const Person = {
                 return "Happy";
             }
         } else {
-            return "Invalid Sleep Hours";
+            return this.sleepMode;
         }
     },
-    healthRate(mealsNo) {
+    eat(mealsNo) {
         if (!isNaN(mealsNo)) {
             switch (mealsNo) {
                 case 1:
@@ -151,10 +162,10 @@ const Person = {
                 case 3:
                     return 100;
                 default:
-                    return 0;
+                    return this.healthRate;
             }
         } else {
-            return "Invalid Meal Count.";
+            return this.healthRate;
         }
     },
     buyItem() {
@@ -163,21 +174,26 @@ const Person = {
     },
 };
 
-let sameh = Object.create(Person).init("Sameh Ali", 500); // Person { fullName: 'Sameh Ali', money: 500 }
+let sameh = Object.create(Person).init("Sameh Ali", 500, "Lazy", 90);
 
 console.log(sameh);
 
-console.log(sameh.sleepMood(9)); // Lazy
-console.log(sameh.healthRate(2)); // 75
+console.log(sameh.sleep(9)); // Lazy
+console.log(sameh.sleep()); // Lazy
+console.log(sameh.eat(2)); // 75
+console.log(sameh.eat()); // 90
 console.log(sameh.buyItem()); // You have 490 LE
-
+*/
 // [4] - Using Factory functions
 
-function Person(fullName, money) {
+/*
+function Person(fullName, money, sleepMode, healthRate) {
     return {
         fullName,
         money,
-        sleepMood(sleepHours) {
+        sleepMode,
+        healthRate,
+        sleep(sleepHours) {
             if (!isNaN(sleepHours)) {
                 if (sleepHours < 7) {
                     return "Tired";
@@ -187,10 +203,10 @@ function Person(fullName, money) {
                     return "Happy";
                 }
             } else {
-                return "Invalid Sleep Hours";
+                return sleepMode;
             }
         },
-        healthRate(mealsNo) {
+        eat(mealsNo) {
             if (!isNaN(mealsNo)) {
                 switch (mealsNo) {
                     case 1:
@@ -200,10 +216,10 @@ function Person(fullName, money) {
                     case 3:
                         return 100;
                     default:
-                        return 0;
+                        return healthRate;
                 }
             } else {
-                return "Invalid Meal Count.";
+                return healthRate;
             }
         },
         buyItem() {
@@ -213,10 +229,13 @@ function Person(fullName, money) {
     };
 }
 
-let ali = Person("Ali Ali", 1000);
+let ali = Person("Ali Ali", 1000, "Lazy", 90);
 
-console.log(ali); // { fullName: 'Ali Ali', money: 1000, sleepMood: [Function: sleepMood], healthRate: [Function: healthRate], buyItem: [Function: buyItem] }
+console.log(ali);
 
-console.log(ali.sleepMood(12)); // Lazy
-console.log(ali.healthRate(4)); // 0
+console.log(ali.sleep(12)); // Lazy
+console.log(ali.sleep()); // Lazy
+console.log(ali.eat(3)); // 100
+console.log(ali.eat()); // 90
 console.log(ali.buyItem()); // You have 990 LE
+*/
