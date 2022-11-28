@@ -17,31 +17,39 @@ Implement Person methods:
 */
 
 // [1] - Constructor function
-/*
+
 function Person(fullName, money) {
     this.fullName = fullName;
     this.money = money;
 
     this.sleepMood = (sleepHours) => {
-        if (sleepHours < 7) {
-            return "Tired";
-        } else if (sleepHours > 7) {
-            return "Lazy";
+        if (!isNaN(sleepHours)) {
+            if (sleepHours < 7) {
+                return "Tired";
+            } else if (sleepHours > 7) {
+                return "Lazy";
+            } else {
+                return "Happy";
+            }
         } else {
-            return "Happy";
+            return "Invalid Sleep Hours";
         }
     };
 
     this.healthRate = (mealsNo) => {
-        switch (mealsNo) {
-            case 1:
-                return 50;
-            case 2:
-                return 75;
-            case 3:
-                return 100;
-            default:
-                return 0;
+        if (!isNaN(mealsNo)) {
+            switch (mealsNo) {
+                case 1:
+                    return 50;
+                case 2:
+                    return 75;
+                case 3:
+                    return 100;
+                default:
+                    return 0;
+            }
+        } else {
+            return "Invalid Meal Count.";
         }
     };
     this.buyItem = () => {
@@ -59,10 +67,8 @@ console.log(ahmed.healthRate(3)); // 100
 console.log(ahmed.buyItem()); // You have 90 LE
 console.log(ahmed.buyItem()); // You have 80 LE
 
-*/
 // [2] - Using Classes
 
-/*
 class Person {
     constructor(fullName, money) {
         this.fullName = fullName;
@@ -70,25 +76,33 @@ class Person {
     }
 
     sleepMood(sleepHours) {
-        if (sleepHours < 7) {
-            return "Tired";
-        } else if (sleepHours > 7) {
-            return "Lazy";
+        if (!isNaN(sleepHours)) {
+            if (sleepHours < 7) {
+                return "Tired";
+            } else if (sleepHours > 7) {
+                return "Lazy";
+            } else {
+                return "Happy";
+            }
         } else {
-            return "Happy";
+            return "Invalid Sleep Hours";
         }
     }
 
     healthRate(mealsNo) {
-        switch (mealsNo) {
-            case 1:
-                return 50;
-            case 2:
-                return 75;
-            case 3:
-                return 100;
-            default:
-                return 0;
+        if (!isNaN(mealsNo)) {
+            switch (mealsNo) {
+                case 1:
+                    return 50;
+                case 2:
+                    return 75;
+                case 3:
+                    return 100;
+                default:
+                    return 0;
+            }
+        } else {
+            return "Invalid Meal Count.";
         }
     }
 
@@ -106,12 +120,8 @@ console.log(mohamed.sleepMood(2)); // Tired
 console.log(mohamed.healthRate(1)); // 50
 console.log(mohamed.buyItem()); // You have 60 LE
 
-
-*/
-
 // [3] - Using Objects Linking to Other Objects (OLOO)
 
-/*
 const Person = {
     init(fullName, money) {
         this.fullName = fullName;
@@ -119,24 +129,32 @@ const Person = {
         return this;
     },
     sleepMood(sleepHours) {
-        if (sleepHours < 7) {
-            return "Tired";
-        } else if (sleepHours > 7) {
-            return "Lazy";
+        if (!isNaN(sleepHours)) {
+            if (sleepHours < 7) {
+                return "Tired";
+            } else if (sleepHours > 7) {
+                return "Lazy";
+            } else {
+                return "Happy";
+            }
         } else {
-            return "Happy";
+            return "Invalid Sleep Hours";
         }
     },
     healthRate(mealsNo) {
-        switch (mealsNo) {
-            case 1:
-                return 50;
-            case 2:
-                return 75;
-            case 3:
-                return 100;
-            default:
-                return 0;
+        if (!isNaN(mealsNo)) {
+            switch (mealsNo) {
+                case 1:
+                    return 50;
+                case 2:
+                    return 75;
+                case 3:
+                    return 100;
+                default:
+                    return 0;
+            }
+        } else {
+            return "Invalid Meal Count.";
         }
     },
     buyItem() {
@@ -152,33 +170,40 @@ console.log(sameh);
 console.log(sameh.sleepMood(9)); // Lazy
 console.log(sameh.healthRate(2)); // 75
 console.log(sameh.buyItem()); // You have 490 LE
-*/
+
 // [4] - Using Factory functions
 
-/*
 function Person(fullName, money) {
     return {
         fullName,
         money,
         sleepMood(sleepHours) {
-            if (sleepHours < 7) {
-                return "Tired";
-            } else if (sleepHours > 7) {
-                return "Lazy";
+            if (!isNaN(sleepHours)) {
+                if (sleepHours < 7) {
+                    return "Tired";
+                } else if (sleepHours > 7) {
+                    return "Lazy";
+                } else {
+                    return "Happy";
+                }
             } else {
-                return "Happy";
+                return "Invalid Sleep Hours";
             }
         },
         healthRate(mealsNo) {
-            switch (mealsNo) {
-                case 1:
-                    return 50;
-                case 2:
-                    return 75;
-                case 3:
-                    return 100;
-                default:
-                    return 0;
+            if (!isNaN(mealsNo)) {
+                switch (mealsNo) {
+                    case 1:
+                        return 50;
+                    case 2:
+                        return 75;
+                    case 3:
+                        return 100;
+                    default:
+                        return 0;
+                }
+            } else {
+                return "Invalid Meal Count.";
             }
         },
         buyItem() {
@@ -195,4 +220,3 @@ console.log(ali); // { fullName: 'Ali Ali', money: 1000, sleepMood: [Function: s
 console.log(ali.sleepMood(12)); // Lazy
 console.log(ali.healthRate(4)); // 0
 console.log(ali.buyItem()); // You have 990 LE
-*/
