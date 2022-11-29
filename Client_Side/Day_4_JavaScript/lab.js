@@ -1,6 +1,6 @@
 // TODO:
 /*
-Setup following Using Constructor functions, Using Classes, Using Objects Linking to Other Objects (OLOO), Using Factory functions
+Setu`p` following Using Constructor functions, Using Classes, Using Objects Linking to Other Objects (OLOO), Using Factory functions
 Person:
 -	Attributes (full name, money, sleep mood, health Rate)
 -	Methods (sleep, eat, buy)

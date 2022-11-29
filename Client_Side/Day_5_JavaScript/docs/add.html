@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="../css/styles.css" />
+        <script type="text/javascript" src="../js/jquery.js"></script>
+        <title>Day_5_JS</title>
+    </head>
+    <body>
+        <header></header>
+        <div class="container">
+            <p id="login">Please Enter Employee Details</p>
+            <!-- # name, age, sleepMode, healthRate, money, email, workMood, salary, isManager -->
+            <form id="add" method="post">
+                <input type="text" id="name" name="name" placeholder="Name" required />
+                <input type="number" id="age" name="age" placeholder="Age" min="0" max="80" required />
+                <div class="select-container">
+                    <select id="sleep-mode" required>
+                        <option value="0" selected disabled>Select Sleep Mode</option>
+                        <option value="Happy">Happy</option>
+                        <option value="Tired">Tired</option>
+                        <option value="Lazy">Lazy</option>
+                    </select>
+                    <select id="work-mode" required>
+                        <option value="0" selected disabled>Select Work Mode</option>
+                        <option value="Happy">Happy</option>
+                        <option value="Tired">Tired</option>
+                        <option value="Lazy">Lazy</option>
+                    </select>
+                </div>
+                <input type="number" id="health-rate" name="health-rate" placeholder="Health Rate" min="0" max="100" required />
+                <input type="number" id="money" name="money" placeholder="Money" min="0" required />
+                <input type="email" id="email" name="email" placeholder="Email Address" required />
+                <input type="number" id="salary" name="salary" placeholder="Salary" min="1000" required />
+                <select id="employee-type">
+                    <option value="1" selected>Employee</option>
+                    <option value="2">Manager</option>
+                </select>
+                <input type="submit" value="Add" />
+            </form>
+        </div>
+        <footer></footer>
+        <script src="../js/script.js"></script>
+        <script src="../js/sweetalert2.js"></script>
+    </body>
+</html>
