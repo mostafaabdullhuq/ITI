@@ -1,0 +1,208 @@
+/* General */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Cairo", sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+
+.background-overlay {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(252, 252, 252);
+    /* background: url("../imgs/background.jpg"); */
+    background-repeat: no-repeat;
+    background-position-y: -80px;
+    background-position-x: 54%;
+    background-size: 110%;
+    /* background-attachment: fixed; */
+}
+/* .background-overlay::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(14, 11, 11, 0.439);
+} */
+
+div.container {
+    width: 60% !important;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+div.todo-container {
+    font-size: 20px;
+}
+
+form {
+    background-color: #fff;
+    padding: 90px 70px;
+    margin: auto;
+    width: 70%;
+    height: 100%;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+}
+
+div.notification {
+    background-color: rgb(206, 18, 28);
+    color: white;
+    padding: 15px 10px;
+    width: 70%;
+    margin: auto;
+    font-size: 19px;
+    visibility: hidden;
+}
+
+div.notification.active {
+    visibility: visible;
+}
+
+form input {
+    border-radius: 2px !important;
+    font-size: 18px !important;
+    border: 1px solid transparent !important;
+    background-color: rgb(243, 243, 243) !important;
+    border-radius: 0px !important;
+    -webkit-border-radius: 2px !important;
+    -moz-border-radius: 2px !important;
+    -ms-border-radius: 2px !important;
+    -o-border-radius: 2px !important;
+    outline: none !important;
+}
+
+form input.invalid {
+    border: 1px solid rgba(206, 18, 27, 0.672) !important;
+}
+
+form input.invalid::placeholder {
+    color: rgba(206, 18, 27, 0.579) !important;
+}
+
+input:focus,
+input:hover {
+    outline: none !important;
+    border: 1px solid transparent !important;
+}
+
+input:hover::placeholder {
+    color: rgba(92, 91, 91, 0.798) !important;
+}
+input:focus::placeholder {
+    color: transparent !important;
+}
+
+*:focus {
+    transform: scale(103%);
+    -webkit-transform: scale(103%);
+    -moz-transform: scale(103%);
+    -ms-transform: scale(103%);
+    -o-transform: scale(103%);
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+
+form button {
+    font-size: 20px !important;
+    text-transform: uppercase;
+    border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    -o-border-radius: 0px !important;
+}
+
+form input::placeholder {
+    color: rgba(92, 91, 91, 0.56) !important;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+a.register {
+    font-weight: bold;
+}
+
+div.todo,
+div.no-todo {
+    cursor: pointer;
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+div.no-todo {
+    display: none;
+}
+
+div.no-todo.active {
+    display: block;
+}
+
+/* div.todo .status {
+    position: relative;
+    top: 50%;
+    left: -10%;
+    transform: translate(0%, -50%);
+} */
+
+/* div.todo .status:after {
+    content: "Delete";
+    position: relative;
+    top: 50%;
+    left: -5px;
+    transform: translate(0%, -50%);
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    -webkit-transform: translate(0%, -50%);
+    -moz-transform: translate(0%, -50%);
+    -ms-transform: translate(0%, -50%);
+    -o-transform: translate(0%, -50%);
+} */
+
+.todo-control {
+    color: crimson;
+    margin: auto;
+    transform: scale(2);
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+}

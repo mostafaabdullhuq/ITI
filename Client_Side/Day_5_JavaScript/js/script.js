@@ -374,7 +374,6 @@ $("button#show-office").click((e) => {
     if (officeEmployees.length !== 0) {
         // reset the table value
         document.querySelector("table tbody").innerHTML = "";
-
         // loop over all office employees
         officeEmployees.forEach((employee) => {
             // create new table row
