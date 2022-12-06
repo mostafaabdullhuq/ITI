@@ -20,13 +20,13 @@
         <!-- navbar -->
         <nav class="navbar fixed-top">
             <div class="nav-container container p-0">
-                <div class="search-container col-lg-6 col-12 me-md-3 mb-3 mb-lg-0">
+                <div class="search-container col-lg-8 col-12 me-md-3 mb-3 mb-lg-0">
                     <input id="todo-text" class="form-control bg-white create-text" placeholder="Enter todo text here." aria-label="Search" />
                 </div>
                 <button id="add-todo" class="new-todo btn btn-outline-danger col me-3" type="submit">Add</button>
                 <div class="dropdown col">
                     <button class="btn todo-dropdown dropdown-toggle col-12" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Todos: <span id="todos-count">0</span> | Completed: <span id="completed-count">0</span> &ThickSpace;
+                        <span id="todos-count" class="me-3">0</span>/<span id="completed-count" class="ms-3">0</span> &ThickSpace;
                     </button>
                     <ul style="width: 100% !important" class="dropdown-menu">
                         <li><a id="logout" class="logout-link dropdown-item text-center" href="./../index.html">Log out</a></li>
@@ -41,17 +41,7 @@
                 <p class="col m-0 text-center">There's no todos to show.</p>
             </div>
             <div id="cards-container" class="card card-container" spellcheck="false">
-                <ul id="todos-list" class="list-group list-group-flush">
-                    <!-- <li class="todo list-group-item">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
-                        sequi, nulla porro eaque praesentium qui voluptates commodi.
-                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
-                        <ul class="list-group list-group-flush controls-container">
-                            <li class="todo-control list-group-item edit-item">Edit</li>
-                            <li class="todo-control list-group-item delete-item">Delete</li>
-                        </ul>
-                    </li> -->
-                </ul>
+                <ul id="todos-list" class="list-group list-group-flush"></ul>
             </div>
         </div>
         <!-- content container -->

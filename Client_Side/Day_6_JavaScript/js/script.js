@@ -209,7 +209,7 @@ class Users {
     // method to delete specific user todo
     deleteTodo(user, todoID) {
         user.todosList.forEach((todo, index) => {
-            if (todo.id === todoID) {
+            if (todo.id == todoID) {
                 user.todosList.splice(index, 1);
             }
         });
@@ -263,7 +263,6 @@ var todoUsers = new Users();
 // class that represents one user only
 class User {
     // initialize the user todos list
-    // todosList = [];
     constructor(id, firstName, lastName, emailAddress, userName, passWord) {
         this.id = id;
         this.emailAddress = emailAddress;
@@ -273,55 +272,13 @@ class User {
         this.passWord = passWord;
         this.todosList = [];
     }
-
-    // method to add new todo to user todo list
-    addTodo(todo) {
-        // set an id to the todo
-        todo.id = this.todosCount + 1;
-        // add the todo to the user todos list
-        this.todosList.push(todo);
-        // replace the user new todos with the old todos
-        todoUsers.syncUsersData(this.id, this.todosList);
-    }
-
-    // method to delete specific user todo
-    deleteTodo(todoID) {
-        this.todosList.forEach((todo, index) => {
-            if (todo.id === todoID) {
-                this.todosList.splice(index, 1);
-            }
-        });
-        // replace the user new todos with the old todos
-        todoUsers.syncUsersData(this.id, this.todosList);
-    }
-
-    // method to change specific todo complete status
-    changeTodoStatus(todoID, isCompleted) {
-        this.todosList.forEach((todo) => {
-            if (todo.id == todoID) {
-                todo.isCompleted = isCompleted;
-            }
-        });
-        // replace the user new todos with the old todos
-        todoUsers.syncUsersData(this.id, this.todosList);
-    }
-
-    // method to change specific todo text
-    changeTodoText(todoID, newText) {
-        this.todosList.forEach((todo) => {
-            if (todo.id == todoID) {
-                todo.text = newText;
-            }
-        });
-        // replace the user new todos with the old todos
-        todoUsers.syncUsersData(this.id, this.todosList);
-    }
 }
 
+/*
+    // if you want to create admin account to test
 let admin = new User(todoUsers.usersCount + 1, "Admin", "Admin", "admin@admin.com", "admin", "123");
-// create admin account
 todoUsers.createAccount(admin);
-// console.log(todoUsers.usersList);
+*/
 // todos class
 class Todo {
     constructor(text) {
@@ -368,7 +325,6 @@ function resetInputError(...errorElements) {
 
 //! if in login page
 if (loginForm) {
-    console.log("login page");
     // add an event listener when the login form is submitted
     loginForm.addEventListener("submit", (e) => {
         // prevent the submit behavior
@@ -513,41 +469,114 @@ else if (todoContainer) {
         // scroll to the top of the page
         window.scrollTo(0, 0);
 
+        // function to dynamically add event listner to show todo controls i
+        function syncTodoOperations() {
+            // get all todos controls dots
+            let todoShowControls = document.querySelectorAll("i.show-todo-controls"),
+                editItem = document.querySelectorAll("li.edit-item"),
+                // get all todos delete controls
+                deleteItem = document.querySelectorAll("li.delete-item");
+
+            console.log(todoShowControls.length);
+            todoShowControls.forEach(function (todoShow) {
+                todoShow.addEventListener("click", function (e) {
+                    this.parentElement.querySelector("ul.controls-container").classList.toggle("active");
+                });
+            });
+
+            editItem.forEach(function (item) {
+                item.addEventListener("click", function (e) {
+                    this.parentElement.parentElement.toggleAttribute("contenteditable");
+                    this.focus();
+                    this.parentElement.classList.remove("active");
+                });
+            });
+            // when delete todo button clicked
+            deleteItem.forEach(function (item) {
+                // add event for click in delete todo button
+                item.addEventListener("click", function (e) {
+                    // find the parent todo li
+                    let todoElement = e.path.find((eachElement) => {
+                            return eachElement instanceof HTMLLIElement && eachElement.classList.contains("todo");
+                        }),
+                        // get the id of the todo
+                        todoID = todoElement.getAttribute("data-todo-id");
+
+                    // delete the todo from user todos
+                    todoUsers.deleteTodo(user, todoID);
+                    console.log(todoElement);
+                    console.log(todoID);
+                    // animate the deletion
+                    todoElement.classList.add("animate__animated", "animate__bounceOutLeft");
+
+                    // wait 700ms then remove it from the document
+                    setTimeout(() => {
+                        todoElement.remove();
+                        checkNoTodo();
+                    }, 500);
+                    // wait 300 seconds then add animation classes to complete span and update the value of it
+                    setTimeout(() => {
+                        updateStatusSpans(user);
+                    }, 200);
+
+                    // remove animation classes from completed span
+                    updateStatusSpans();
+                });
+            });
+        }
+
+        function checkNoTodo() {
+            // if user have todos
+            if (todoUsers.userTodosCount(user) > 0) {
+                // remove classes of no todos message if found
+                noTodosMessage.classList.remove("animate__bounceIn");
+                noTodosMessage.classList.remove("active");
+                // show the cards container
+                cardsContainer.classList.add("active");
+                return false;
+            }
+            // if user don't have todos
+            else {
+                noTodosMessage.classList.add("animate__animated", "animate__bounceIn");
+                noTodosMessage.classList.add("active");
+                cardsContainer.classList.remove("active");
+                return true;
+            }
+        }
+
         // select required elements
-        let navbar = document.querySelector("nav.navbar"),
-            todosCountSpan = document.getElementById("todos-count"),
+        let todosCountSpan = document.getElementById("todos-count"),
             completedTodosSpan = document.getElementById("completed-count"),
             logoutButton = document.getElementById("logout"),
             noTodosMessage = document.getElementById("no-todos-message"),
             addTodoButton = document.getElementById("add-todo"),
             todoTextInput = document.getElementById("todo-text"),
             cardsContainer = document.getElementById("cards-container"),
-            todosList = document.getElementById("todos-list");
+            todosListContainer = document.getElementById("todos-list");
 
-        /*
-            // create show-todo-controls, controls container, and add classes and text to them
-            todosList = document.getElementById("todos-list"),
-            cardsContainer = document.getElementById("cards-container"),
-            showTodoControls = document.createElement("i"),
-            controlsContainer = document.createElement("ul"),
-            editTodoLi = document.createElement("li"),
-            deleteTodoLi = document.createElement("li");
-        showTodoControls.classList.add("fa-solid", "fa-ellipsis", "show-todo-controls");
-        controlsContainer.classList.add("list-group", "list-group-flush", "controls-container");
-        editTodoLi.classList.add("todo-control", "list-group-item", "edit-item");
-        deleteTodoLi.classList.add("todo-control", "list-group-item", "delete-item");
-        editTodoLi.appendChild(document.createTextNode("Edit"));
-        deleteTodoLi.appendChild(document.createTextNode("Delete"));
-        controlsContainer.appendChild(editTodoLi);
-        controlsContainer.appendChild(deleteTodoLi);
-*/
+        // a function to update completed and todos count spans
+        function updateStatusSpans(user = false) {
+            // if user is given as argument
+            if (user) {
+                // add animation classes and update text values
+                completedTodosSpan.classList.add("animate__animated", "animate__bounceIn");
+                completedTodosSpan.textContent = todoUsers.completedTodosCount(user);
+                todosCountSpan.classList.add("animate__animated", "animate__bounceIn");
+                todosCountSpan.textContent = todoUsers.userTodosCount(user);
+            }
+            // if user not given
+            else {
+                // remove animation classes
+                completedTodosSpan.classList.remove("animate__animated", "animate__bounceIn");
+                todosCountSpan.classList.remove("animate__animated", "animate__bounceIn");
+            }
+        }
+
         // get user todos
         let userTodos = todoUsers.userTodosList(user);
 
         // update todos, completed count spans values
-        todosCountSpan.textContent = todoUsers.userTodosCount(user);
-        completedTodosSpan.textContent = todoUsers.completedTodosCount(user);
-
+        updateStatusSpans(user);
         // function to create todo element and add it to the page
         function createTodo(todo) {
             // create show-todo-controls, controls container, and add classes and text to them
@@ -571,6 +600,7 @@ else if (todoContainer) {
                 todoContainer.classList.add("completed");
             }
             todoContainer.classList.add("todo", "list-group-item");
+
             // add todo id
             todoContainer.setAttribute("data-todo-id", todo.id);
             // create text node contains the todo text and append it to the container
@@ -578,54 +608,69 @@ else if (todoContainer) {
             // append todo controls and show controls
             todoContainer.appendChild(showTodoControls);
             todoContainer.appendChild(controlsContainer);
-            todosList.appendChild(todoContainer);
+            todosListContainer.appendChild(todoContainer);
+            // todoContainer.classList.add("animate__animated", "animate__bounceIn");
+            return todoContainer;
         }
 
-        // if user have todos
-        if (todoUsers.userTodosCount(user) > 0) {
-            // remove classes of no todos message if found
-            noTodosMessage.classList.remove("animate__bounceIn");
-            noTodosMessage.classList.remove("active");
-
+        // if there's todos
+        if (!checkNoTodo()) {
             // for each todo in user todos
             userTodos.map((todo) => {
                 // create the todo and append it to the page
                 createTodo(todo);
             });
-            // show the cards container
-            cardsContainer.classList.add("active");
         }
-        // if user don't have todos
-        else {
-            noTodosMessage.classList.add("animate__bounceIn");
-            noTodosMessage.classList.add("active");
-        }
-        ////////////// todo ////////////////
+
+        // add event for click in add todo button
         addTodoButton.addEventListener("click", function (e) {
+            // get the todo text input value
             let todoText = todoTextInput.value;
+
+            // if value is not empty
             if (todoText) {
+                // add todo to user todos
                 let todo = todoUsers.addTodo(user, new Todo(todoText));
-                console.log(todo);
+                // if todo added to user todo
                 if (todo) {
-                    createTodo(todo);
+                    // create todo in dom
+                    let createdTodo = createTodo(todo);
+                    console.log(createdTodo);
+                    // add animation to created todo
+                    createdTodo.classList.add("animate__animated", "animate__bounceInLeft");
+                    // reset todo input text
                     todoTextInput.value = "";
+
+                    // remove no todo classes to hide it
                     noTodosMessage.classList.remove("animate__bounceIn");
                     noTodosMessage.classList.remove("active");
                     cardsContainer.classList.add("active");
-                    todosCountSpan.textContent = todoUsers.userTodosCount(user);
+
+                    // wait 300 seconds then add animation classes to complete span and update the value of it
+                    setTimeout(() => {
+                        updateStatusSpans(user);
+                    }, 200);
+                    setTimeout(() => {
+                        createdTodo.classList.remove("animate__animated", "animate__bounceInLeft");
+                    }, 500);
+
+                    // remove animation classes from completed span
+                    updateStatusSpans();
+                    syncTodoOperations();
+
+                    // createdTodo.classList.remove("animate__animated", "animate__bounceInLeft");
                 }
             }
         });
 
         // get all todos elements
-        let todos = document.querySelectorAll("li.todo"),
-            // get all todos controls dots
-            todoShowControls = document.querySelectorAll("i.show-todo-controls"),
-            // get all todos edit controls
-            editItem = document.querySelectorAll("li.edit-item"),
-            // get all todos delete controls
-            deleteItem = document.querySelectorAll("li.delete-item");
-
+        let todos = document.querySelectorAll("li.todo");
+        // // get all todos controls dots
+        // todoShowControls = document.querySelectorAll("i.show-todo-controls"),
+        // // get all todos edit controls
+        // editItem = document.querySelectorAll("li.edit-item"),
+        // // get all todos delete controls
+        // deleteItem = document.querySelectorAll("li.delete-item");
         // for each todo
         todos.forEach(function (todo) {
             // when mouse move in the todo item, show the controls bullets
@@ -635,7 +680,6 @@ else if (todoContainer) {
 
             // when mouse move out the todo item, hide the controls bullets
             todo.addEventListener("mouseleave", function (e) {
-                // console.log(e);
                 this.querySelector(".show-todo-controls").classList.remove("active");
             });
             // when any todo is clicked
@@ -643,24 +687,51 @@ else if (todoContainer) {
                 // if the todo is not in edit mode and the controls popup is not visible and not clicked on show controls bullets
                 if (!this.hasAttribute("contenteditable") && !this.querySelector("ul").classList.contains("active") && !e.target.classList.contains("show-todo-controls")) {
                     // toggle the completed class
+
                     this.classList.toggle("completed");
+                    // get the todo id
+                    let todoId = this.getAttribute("data-todo-id");
+
+                    // check for todo state and update in user object
+                    this.classList.contains("completed") ? todoUsers.changeTodoStatus(user, todoId, true) : todoUsers.changeTodoStatus(user, todoId, false);
+
+                    // wait 300 seconds then add animation classes to complete span and update the value of it
+                    setTimeout(() => {
+                        updateStatusSpans(user);
+                    }, 200);
+
+                    // remove animation classes from completed span
+                    updateStatusSpans();
                 }
             });
+
+            // when todo element hovered out, add event
             todo.addEventListener("blur", function () {
                 let todoText = "";
+                // if todo was in edit mode, loop through each child in todo
                 document.querySelector("li.todo[contenteditable]").childNodes.forEach(function (child) {
-                    console.log(child.nodeType);
+                    // if the current child is the main text, add it to todo text
+                    child instanceof Text ? (todoText += child.textContent) : "";
+                    // if the current child is div, loop through it's children
+                    if (child instanceof HTMLDivElement) {
+                        child.childNodes.forEach((subChild) => {
+                            // if div child is text , add it to todo text and add new line
+                            subChild instanceof Text ? (todoText += "\n" + subChild.textContent) : "";
+                        });
+                    }
                 });
+                todoUsers.changeTodoText(user, Number(this.getAttribute("data-todo-id")), todoText);
                 this.toggleAttribute("contenteditable");
             });
         });
+        syncTodoOperations();
+        /*
         todoShowControls.forEach(function (todoShow) {
             todoShow.addEventListener("click", function (e) {
-                console.log("clicked");
-
                 this.parentElement.querySelector("ul.controls-container").classList.toggle("active");
             });
         });
+        
         editItem.forEach(function (item) {
             item.addEventListener("click", function (e) {
                 this.parentElement.parentElement.toggleAttribute("contenteditable");
@@ -668,13 +739,42 @@ else if (todoContainer) {
                 this.parentElement.classList.remove("active");
             });
         });
+        // when delete todo button clicked
         deleteItem.forEach(function (item) {
+            // add event for click in delete todo button
             item.addEventListener("click", function (e) {
-                this.parentElement.parentElement.remove();
-                this.parentElement.classList.toggle("active");
+                // find the parent todo li
+                let todoElement = e.path.find((eachElement) => {
+                        return eachElement instanceof HTMLLIElement && eachElement.classList.contains("todo");
+                    }),
+                    // get the id of the todo
+                    todoID = todoElement.getAttribute("data-todo-id");
+
+                // delete the todo from user todos
+                todoUsers.deleteTodo(user, todoID);
+                console.log(todoElement);
+                console.log(todoID);
+                // animate the deletion
+                todoElement.classList.add("animate__animated", "animate__bounceOutLeft");
+
+                // wait 700ms then remove it from the document
+                setTimeout(() => {
+                    todoElement.remove();
+                    checkNoTodo();
+                }, 500);
+                // wait 300 seconds then add animation classes to complete span and update the value of it
+                setTimeout(() => {
+                    updateStatusSpans(user);
+                }, 200);
+
+                // remove animation classes from completed span
+                updateStatusSpans();
             });
         });
+*/
+        // when logout button clicked, add event
         logoutButton.addEventListener("click", (e) => {
+            // logout from the user account
             todoUsers.logOut("user-id", "username");
         });
     }
