@@ -12,21 +12,167 @@
         <link rel="stylesheet" href="../css/fontawesome/css/all.min.css" />
         <link rel="stylesheet" href="../css/styles.css" />
         <script type="text/javascript" src="../js/jquery.js"></script>
-        <title>Todo</title>
+        <title>Todo App</title>
     </head>
     <body>
         <!-- overlay background -->
         <div class="background-overlay"></div>
-        <div class="container todo-container">
+        <!-- navbar -->
+        <nav class="navbar fixed-top">
+            <div class="nav-container container p-0">
+                <div class="search-container col-lg-10 col-12 me-md-3 mb-3 mb-lg-0">
+                    <input class="form-control bg-white create-text" placeholder="Enter todo text here." aria-label="Search" />
+                </div>
+                <button class="new-todo btn btn-outline-danger col" type="submit">Add</button>
+            </div>
+        </nav>
+
+        <!-- todos section -->
+        <div id="todos" class="container todo-container">
             <div class="no-todo mb-3 row">
                 <p class="col m-0 text-center">There's no tasks to show.</p>
             </div>
-            <div class="card card-container" style="width: 18rem" spellcheck="false">
+            <div class="card card-container" spellcheck="false">
                 <ul class="list-group list-group-flush">
                     <li class="todo list-group-item">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
                         sequi, nulla porro eaque praesentium qui voluptates commodi.
-                        <i class="fa-solid fa-ellipsis show-todo-controls active"></i>
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
+                        <ul class="list-group list-group-flush controls-container">
+                            <li class="todo-control list-group-item edit-item">Edit</li>
+                            <li class="todo-control list-group-item delete-item">Delete</li>
+                        </ul>
+                    </li>
+                    <li class="todo list-group-item">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam nihil distinctio, soluta sit sapiente perspiciatis esse assumenda ea, voluptas temporibus accusamus aliquid
+                        sequi, nulla porro eaque praesentium qui voluptates commodi.
+                        <i class="fa-solid fa-ellipsis show-todo-controls"></i>
                         <ul class="list-group list-group-flush controls-container">
                             <li class="todo-control list-group-item edit-item">Edit</li>
                             <li class="todo-control list-group-item delete-item">Delete</li>

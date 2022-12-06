@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <link rel="stylesheet" href="../css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../css/styles.css" />
+        <title>Register</title>
+    </head>
+    <body>
+        <!-- overlay background -->
+        <div class="background-overlay"></div>
+
+        <!-- content container -->
+        <div class="container">
+            <div class="login-container row align-items-center">
+                <!-- invalid login notification box -->
+                <div id="notification-bar" class="text-center notification col-12">
+                    <div id="reg-alert" class="col-12">Invalid username or password.</div>
+                </div>
+                <!-- login form -->
+                <form id="register-form" class="animate__repeat-3 col-12" method="post" action="./docs/todo.html">
+                    <!-- username input -->
+                    <div class="mb-3 row">
+                        <div class="col-12 col-lg p-0 me-0 me-lg-2 mb-3 mb-lg-0">
+                            <input id="reg-fName" type="text" class="form-control p-4" placeholder="First Name" />
+                        </div>
+                        <div class="col-12 col-lg p-0 ms-0 ms-lg-2">
+                            <input id="reg-lName" type="text" class="form-control p-4" placeholder="Last Name" />
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <input id="reg-email" type="text" class="form-control p-4" placeholder="Email Address" />
+                    </div>
+                    <div class="mb-3 row">
+                        <input id="reg-username" type="text" class="form-control p-4" placeholder="Username" />
+                    </div>
+
+                    <!-- password input -->
+                    <div class="mb-3 row">
+                        <input id="reg-password" type="password" class="form-control p-4" placeholder="Password" />
+                    </div>
+
+                    <!-- login button -->
+                    <div class="mb-3 row">
+                        <button type="submit" class="register-button btn btn-danger col-12 p-4">Register</button>
+                    </div>
+
+                    <!-- not registered box -->
+                </form>
+            </div>
+        </div>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/sweetalert2.js"></script>
+        <script src="../js/script.js"></script>
+    </body>
+</html>

@@ -9,53 +9,27 @@
 
 body {
     background-color: rgba(238, 238, 238, 0.834);
+    overflow: scroll;
 }
 
-/* .background-overlay {
-    overflow: hidden;
-    z-index: -9999;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: url("../imgs/background.jpg");
-    background-repeat: no-repeat;
-    background-position-y: -80px;
-    background-position-x: 54%;
-    background-size: 110%;
-    background-attachment: fixed;
-} */
-
-div.container {
-    width: 60% !important;
-    height: 100%;
-    /* padding: 100px 0 !important; */
-    /* margin: auto auto; */
-    /* position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%); */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }
 
-div.todos-container {
-    margin-top: 100px;
-    font-size: 20px;
+/* login page */
+
+.login-container {
+    height: 100vh;
+    align-content: center !important;
 }
 
-div.todo-container {
-    background-color: transparent;
-    padding: 100px 0;
-}
-
-form {
-    background-color: #fff;
-    padding: 90px 70px;
+form#login-form,
+form#register-form {
+    max-width: 800px;
     margin: auto;
-    width: 70%;
-    height: 100%;
+    background-color: #fff;
+    padding: 100px 80px;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
     border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -65,11 +39,12 @@ form {
 }
 
 div.notification {
+    max-width: 800px;
+    margin: auto;
     background-color: rgb(206, 18, 28);
     color: white;
+    margin-bottom: 10px !important;
     padding: 15px 10px;
-    width: 70%;
-    margin: auto;
     font-size: 19px;
     visibility: hidden;
 }
@@ -78,41 +53,49 @@ div.notification.active {
     visibility: visible;
 }
 
-form input {
+form#login-form input,
+form#register-form input {
     border-radius: 2px !important;
     font-size: 18px !important;
     border: 1px solid transparent !important;
     background-color: rgb(243, 243, 243) !important;
     border-radius: 0px !important;
-    -webkit-border-radius: 2px !important;
-    -moz-border-radius: 2px !important;
-    -ms-border-radius: 2px !important;
-    -o-border-radius: 2px !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    -o-border-radius: 0px !important;
     outline: none !important;
 }
 
-form input.invalid {
+form#login-form input.invalid,
+form#register-form input.invalid {
     border: 1px solid rgba(206, 18, 27, 0.672) !important;
 }
 
-form input.invalid::placeholder {
+form#login-form input.invalid::placeholder,
+form#register-form input.invalid::placeholder {
     color: rgba(206, 18, 27, 0.579) !important;
 }
 
-input:focus,
-input:hover {
+form#login-form input:focus,
+form#login-form input:hover,
+form#register-form input:focus,
+form#register-form input:hover {
     outline: none !important;
     border: 1px solid transparent !important;
 }
 
-input:hover::placeholder {
-    color: rgba(92, 91, 91, 0.798) !important;
+form#login-form input:hover::placeholder,
+form#register-form input:hover::placeholder {
+    color: rgba(206, 18, 27, 0.579) !important;
 }
-input:focus::placeholder {
+form#login-form input:focus::placeholder,
+form#register-form input:focus::placeholder {
     color: transparent !important;
 }
 
-*:focus {
+form#login-form *:focus,
+form#register-form *:focus {
     transform: scale(103%);
     -webkit-transform: scale(103%);
     -moz-transform: scale(103%);
@@ -125,7 +108,8 @@ input:focus::placeholder {
     -o-transition: all 0.3s ease-in-out;
 }
 
-form button {
+form#login-form button,
+form#register-form button {
     font-size: 20px !important;
     text-transform: uppercase;
     border-radius: 0px !important;
@@ -135,7 +119,8 @@ form button {
     -o-border-radius: 0px !important;
 }
 
-form input::placeholder {
+form#login-form input::placeholder,
+form#register-form input::placeholder {
     color: rgba(92, 91, 91, 0.56) !important;
     text-transform: uppercase;
     font-size: 18px;
@@ -147,8 +132,76 @@ form input::placeholder {
     box-shadow: none;
 }
 
+.login-button,
+.register-button {
+    background-color: rgb(227, 60, 60);
+}
+
 a.register {
     font-weight: bold;
+    color: rgb(227, 60, 60) !important;
+}
+
+/* todo page */
+
+nav {
+    width: 100% !important;
+    padding: 20px 0px !important;
+    background-color: rgb(227, 60, 60) !important;
+    border-radius: 0px 0px 3px 3px;
+    -webkit-border-radius: 0px 0px 3px 3px;
+    -moz-border-radius: 0px 0px 3px 3px;
+    -ms-border-radius: 0px 0px 3px 3px;
+    -o-border-radius: 0px 0px 3px 3px;
+}
+
+nav input.create-text {
+    font-size: 18px;
+    padding: 15px 30px !important;
+    text-align: left !important;
+    cursor: text;
+    outline: none !important;
+    border: 1px solid white !important;
+}
+
+nav input.create-text:focus::placeholder {
+    color: transparent !important;
+}
+
+nav input.create-text:focus {
+    outline: none !important;
+}
+nav input.create-text::placeholder {
+    text-transform: uppercase;
+    color: rgb(227, 60, 60);
+}
+
+button.new-todo {
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 15px 30px !important;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    font-size: 18px;
+}
+
+button.new-todo:hover {
+    background-color: white;
+    color: rgb(227, 60, 60);
+}
+
+div.nav-container {
+    width: 100%;
+}
+
+div.todos-container {
+    margin-top: 100px;
+    font-size: 20px;
+}
+
+div.todo-container {
+    padding: 200px 0;
 }
 
 li.todo,
@@ -212,7 +265,7 @@ li.todo:hover {
     font: var(--fa-font-solid);
     content: "\f141";
     cursor: pointer;
-    color: crimson;
+    color: rgb(227, 60, 60);
 }
 
 .show-todo-controls.active {
@@ -225,7 +278,7 @@ li.todo:hover {
 }
 
 li[contenteditable] {
-    background-color: crimson !important;
+    background-color: rgb(227, 60, 60) !important;
     color: white;
     width: 100% !important;
     color: 100% !important;
@@ -238,20 +291,20 @@ li[contenteditable] {
 }
 li[contenteditable]:focus,
 li[contenteditable]:hover {
-    background-color: crimson !important;
+    background-color: rgb(227, 60, 60) !important;
 }
 
 ul.controls-container {
     text-align: center;
-    /* font-weight: bold; */
+    /*font-weight: bold;
+    */
     font-size: 17px;
     position: absolute;
     top: 53%;
     right: -4.5%;
-    z-index: 10000;
     cursor: pointer;
     display: none;
-    z-index: 99999;
+    z-index: 999;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -271,6 +324,6 @@ ul.controls-container li {
 }
 
 ul.controls-container li:hover {
-    background-color: crimson;
+    background-color: rgb(227, 60, 60);
     color: white;
 }
