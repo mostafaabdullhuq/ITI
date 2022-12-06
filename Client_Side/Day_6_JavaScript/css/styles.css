@@ -176,7 +176,8 @@ nav input.create-text::placeholder {
     color: rgb(227, 60, 60);
 }
 
-button.new-todo {
+button.new-todo,
+button.todo-dropdown {
     font-weight: bold;
     text-transform: uppercase;
     padding: 15px 30px !important;
@@ -186,7 +187,13 @@ button.new-todo {
     font-size: 18px;
 }
 
-button.new-todo:hover {
+button.new-todo:hover,
+button.todo-dropdown:hover,
+.todo-dropdown.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
     background-color: white;
     color: rgb(227, 60, 60);
 }
@@ -234,6 +241,10 @@ li.todo.completed {
 
 .card-container {
     width: 100% !important;
+    visibility: hidden;
+}
+.card-container.active {
+    visibility: visible;
 }
 
 li.todo:hover {
@@ -326,4 +337,12 @@ ul.controls-container li {
 ul.controls-container li:hover {
     background-color: rgb(227, 60, 60);
     color: white;
+}
+
+.logout-link {
+    padding: 5px 20px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+    color: rgb(227, 60, 60);
 }

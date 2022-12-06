@@ -1,3 +1,31 @@
+// a function to create a new cookie
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+// a function to get a value of a specific cookie
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == " ") {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+// a function to delete a specific cookie
+function deleteCookie(name) {
+    document.cookie = name + "=; Max-Age=-99999999;";
+}
+
 // a function to validate password requirements
 var isPassValid = (passWord) => {
     if (passWord) {
@@ -141,6 +169,16 @@ class Users {
         // sync with the local storage
         this.syncUpload;
     }
+    validateLoginCookies(userID, userName) {
+        return this.usersList.find((user) => user.id == userID && user.userName == userName);
+    }
+    logOut(...cookiesNames) {
+        // set cookies value to 0 and 0 and expire time to 0 to clear it
+
+        cookiesNames.map((cookie) => {
+            setCookie(cookie, 0, 0);
+        });
+    }
 }
 // create new Users Object to store all website users
 var todoUsers = new Users();
@@ -213,7 +251,7 @@ class User {
 }
 
 // create admin account
-todoUsers.createAccount(new User(todoUsers.usersCount + 1, "Admin", "Admin", "admin@admin.com", "admin", "Admin@123", todoUsers));
+todoUsers.createAccount(new User(todoUsers.usersCount + 1, "Admin", "Admin", "admin@admin.com", "admin", "Admin@123"));
 
 // todos class
 class Todo {
@@ -283,9 +321,13 @@ if (loginForm) {
             // if username and password is given
             if (userName && passWord) {
                 // validate username and password
-                if (todoUsers.loginAccount(userName, passWord)) {
+                let loginDetails = todoUsers.loginAccount(userName, passWord);
+                if (loginDetails) {
                     loginForm.classList.add("animate__hinge");
                     setTimeout(() => {
+                        setCookie("user_id", loginDetails.id, 3);
+                        setCookie("username", loginDetails.userName, 3);
+                        console.log(document.cookie);
                         window.location = "../docs/todo.html";
                     }, 1950);
                 } else {
@@ -339,6 +381,15 @@ else if (regForm) {
 
                         // if username is valid
                         if (userValidation[0]) {
+                            // create an account
+                            let accountCreate = todoUsers.createAccount(new User(todoUsers.usersCount + 1, fName, lName, emailAddress, userName, passWord));
+
+                            if (accountCreate.isCreated) {
+                                window.location = "../docs/todo.html";
+                            } else {
+                                // show alert bar with the message returned from create account
+                                showNotificationBar(accountCreate.error, regAlert);
+                            }
                         }
 
                         // if username is not valid
@@ -382,82 +433,129 @@ else if (regForm) {
 
 //! if in todo page
 else if (todoContainer) {
-    console.log("todo page");
-    //* todo page
-    let navbar = document.querySelector("nav.navbar");
-    if (window.scrollY > 50) {
-        navbar.style.backgroundColor = "white";
-        navbar.style.boxShadow = "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px";
-    }
-    window.scrollTo(0, 0);
-    window.onscroll = function (e) {
-        if (window.scrollY > 50) {
-            navbar.style.backgroundColor = "white";
-            navbar.style.boxShadow = "rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px";
-        } else {
-            navbar.style.backgroundColor = "transparent";
-            navbar.style.boxShadow = "none";
-        }
-    };
+    // check if there's cookies in the session, if so get the user with cookies
+    let user = todoUsers.validateLoginCookies(getCookie("user_id"), getCookie("username"));
+    if (user) {
+        window.scrollTo(0, 0);
+        let navbar = document.querySelector("nav.navbar"),
+            todosCountSpan = document.getElementById("todos-count"),
+            completedTodosSpan = document.getElementById("completed-count"),
+            logoutButton = document.getElementById("logout"),
+            noTodosMessage = document.getElementById("no-todos-message");
 
-    // get all todos
-    let todos = document.querySelectorAll("li.todo"),
-        // get all todos controls dots
-        todoShowControls = document.querySelectorAll("i.show-todo-controls"),
-        // get all todos edit controls
-        editItem = document.querySelectorAll("li.edit-item"),
-        // get all todos delete controls
-        deleteItem = document.querySelectorAll("li.delete-item");
+        // get user todos
+        let userTodos = user.todosList;
 
-    // for each todo
-    todos.forEach(function (todo) {
-        // when mouse move in the todo item, show the controls bullets
-        todo.addEventListener("mouseenter", function (e) {
-            this.querySelector(".show-todo-controls").classList.add("active");
-        });
+        // if user have todos
+        if (user.todosCount > 0) {
+            // remove classes of no todos message if found
+            noTodosMessage.classList.remove("animate__bounceIn");
+            noTodosMessage.classList.remove("active");
 
-        // when mouse move out the todo item, hide the controls bullets
-        todo.addEventListener("mouseleave", function (e) {
-            // console.log(e);
-            this.querySelector(".show-todo-controls").classList.remove("active");
-        });
-        // when any todo is clicked
-        todo.addEventListener("click", function (e) {
-            // if the todo is not in edit mode and the controls popup is not visible and not clicked on show controls bullets
-            if (!this.hasAttribute("contenteditable") && !this.querySelector("ul").classList.contains("active") && !e.target.classList.contains("show-todo-controls")) {
-                // toggle the completed class
-                this.classList.toggle("completed");
-            }
-        });
-        ////////todo
-        todo.addEventListener("blur", function () {
-            let todoText = "";
-            document.querySelector("li.todo[contenteditable]").childNodes.forEach(function (child) {
-                console.log(child.nodeType);
+            // create show-todo-controls, controls container, and add classes and text to them
+            let todosList = document.getElementById("todos-list"),
+                cardsContainer = document.getElementById("cards-container"),
+                showTodoControls = document.createElement("i"),
+                controlsContainer = document.createElement("ul"),
+                editTodoLi = document.createElement("li"),
+                deleteTodoLi = document.createElement("li");
+            showTodoControls.classList.add("fa-solid", "fa-ellipsis", "show-todo-controls");
+            controlsContainer.classList.add("list-group", "list-group-flush", "controls-container");
+            editTodoLi.classList.add("todo-control", "list-group-item", "edit-item");
+            deleteTodoLi.classList.add("todo-control", "list-group-item", "delete-item");
+            editTodoLi.appendChild(document.createTextNode("Edit"));
+            deleteTodoLi.appendChild(document.createTextNode("Delete"));
+            controlsContainer.appendChild(editTodoLi);
+            controlsContainer.appendChild(deleteTodoLi);
+
+            // for each todo in user todos
+            userTodos.map((todo) => {
+                // create todo container
+                let todoContainer = document.createElement("li");
+                // add classes to the card container, and check if todo is completed to add completed class
+                todoContainer.classList.add("todo", "list-group-item", todo.isCompleted ? "completed" : "");
+                // add todo id
+                todoContainer.setAttribute("data-todo-id", todo.id);
+                // create text node contains the todo text and append it to the container
+                todoContainer.appendChild(document.createTextNode(todo.text));
+                // append todo controls and show controls
+                todoContainer.appendChild(showTodoControls);
+                todoContainer.appendChild(controlsContainer);
+                todosList.appendChild(todoContainer);
             });
-            this.toggleAttribute("contenteditable");
-        });
-    });
-    todoShowControls.forEach(function (todoShow) {
-        todoShow.addEventListener("click", function (e) {
-            console.log("clicked");
+            // show the cards container
+            cardsContainer.classList.add("active");
+        }
+        // if user don't have todos
+        else {
+            noTodosMessage.classList.add("animate__bounceIn");
+            noTodosMessage.classList.add("active");
+        }
 
-            this.parentElement.querySelector("ul.controls-container").classList.toggle("active");
+        // get all todos
+        let todos = document.querySelectorAll("li.todo"),
+            // get all todos controls dots
+            todoShowControls = document.querySelectorAll("i.show-todo-controls"),
+            // get all todos edit controls
+            editItem = document.querySelectorAll("li.edit-item"),
+            // get all todos delete controls
+            deleteItem = document.querySelectorAll("li.delete-item");
+
+        // for each todo
+        todos.forEach(function (todo) {
+            // when mouse move in the todo item, show the controls bullets
+            todo.addEventListener("mouseenter", function (e) {
+                this.querySelector(".show-todo-controls").classList.add("active");
+            });
+
+            // when mouse move out the todo item, hide the controls bullets
+            todo.addEventListener("mouseleave", function (e) {
+                // console.log(e);
+                this.querySelector(".show-todo-controls").classList.remove("active");
+            });
+            // when any todo is clicked
+            todo.addEventListener("click", function (e) {
+                // if the todo is not in edit mode and the controls popup is not visible and not clicked on show controls bullets
+                if (!this.hasAttribute("contenteditable") && !this.querySelector("ul").classList.contains("active") && !e.target.classList.contains("show-todo-controls")) {
+                    // toggle the completed class
+                    this.classList.toggle("completed");
+                }
+            });
+            ////////todo
+            todo.addEventListener("blur", function () {
+                let todoText = "";
+                document.querySelector("li.todo[contenteditable]").childNodes.forEach(function (child) {
+                    console.log(child.nodeType);
+                });
+                this.toggleAttribute("contenteditable");
+            });
         });
-    });
-    editItem.forEach(function (item) {
-        item.addEventListener("click", function (e) {
-            this.parentElement.parentElement.toggleAttribute("contenteditable");
-            this.focus();
-            this.parentElement.classList.remove("active");
+        todoShowControls.forEach(function (todoShow) {
+            todoShow.addEventListener("click", function (e) {
+                console.log("clicked");
+
+                this.parentElement.querySelector("ul.controls-container").classList.toggle("active");
+            });
         });
-    });
-    deleteItem.forEach(function (item) {
-        item.addEventListener("click", function (e) {
-            this.parentElement.parentElement.remove();
-            this.parentElement.classList.toggle("active");
+        editItem.forEach(function (item) {
+            item.addEventListener("click", function (e) {
+                this.parentElement.parentElement.toggleAttribute("contenteditable");
+                this.focus();
+                this.parentElement.classList.remove("active");
+            });
         });
-    });
-} else {
-    console.log("none page");
+        deleteItem.forEach(function (item) {
+            item.addEventListener("click", function (e) {
+                this.parentElement.parentElement.remove();
+                this.parentElement.classList.toggle("active");
+            });
+        });
+        logoutButton.addEventListener("click", (e) => {
+            todoUsers.logOut("user-id", "username");
+        });
+    }
+    // if cookies not validated, redirect to login page
+    else {
+        window.location = "../index.html";
+    }
 }
