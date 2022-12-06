@@ -8,9 +8,9 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-        <link rel="stylesheet" href="../css/bootstrap.min.css" />
-        <link rel="stylesheet" href="../css/fontawesome/css/all.min.css" />
-        <link rel="stylesheet" href="../css/styles.css" />
+        <link rel="stylesheet" href="./../css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./../css/fontawesome/css/all.min.css" />
+        <link rel="stylesheet" href="./../css/styles.css" />
 
         <title>Todo App</title>
     </head>
@@ -21,9 +21,9 @@
         <nav class="navbar fixed-top">
             <div class="nav-container container p-0">
                 <div class="search-container col-lg-6 col-12 me-md-3 mb-3 mb-lg-0">
-                    <input class="form-control bg-white create-text" placeholder="Enter todo text here." aria-label="Search" />
+                    <input id="todo-text" class="form-control bg-white create-text" placeholder="Enter todo text here." aria-label="Search" />
                 </div>
-                <button class="new-todo btn btn-outline-danger col me-3" type="submit">Add</button>
+                <button id="add-todo" class="new-todo btn btn-outline-danger col me-3" type="submit">Add</button>
                 <div class="dropdown col">
                     <button class="btn todo-dropdown dropdown-toggle col-12" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Todos: <span id="todos-count">0</span> | Completed: <span id="completed-count">0</span> &ThickSpace;
@@ -56,9 +56,9 @@
         </div>
         <!-- content container -->
         <div class="container"></div>
-        <script src="../js/popper.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
-        <script src="../js/sweetalert2.js"></script>
-        <script src="../js/script.js"></script>
+        <script src="./../js/popper.min.js"></script>
+        <script src="./../js/bootstrap.min.js"></script>
+        <script src="./../js/sweetalert2.js"></script>
+        <script src="./../js/script.js"></script>
     </body>
 </html>

@@ -94,7 +94,7 @@ class Users {
             : // if there's already a users list in the local storage, sync it with the current one
               this.syncDownload;
     }
-
+    //! Users methods
     /*
         a method to create a new user, returns an object contains boolean value represents the state of creation 
         and a text value contains the error if the state is false
@@ -109,6 +109,8 @@ class Users {
     get syncDownload() {
         this.usersList = JSON.parse(localStorage.getItem(this.#usersName));
     }
+
+    // a method to create a new user
     createAccount(userData) {
         // initialize the return response object
         let response = {
@@ -133,7 +135,6 @@ class Users {
 
         if (response.isCreated) {
             this.usersList.push(userData);
-            console.log(this.usersList);
             localStorage.setItem(this.#usersName, JSON.stringify(this.usersList));
         }
         // return the response object
@@ -147,12 +148,8 @@ class Users {
         if there's a user return the user, if user not found return false
         */
         return this.usersList.find((user) => {
-            return user.userName === userName && user.passWord === passWord;
+            return user.userName.toLowerCase() === userName.toLowerCase() && user.passWord === passWord;
         });
-    }
-
-    get usersCount() {
-        return this.usersList.length;
     }
 
     // method to sync user todos changes
@@ -179,6 +176,86 @@ class Users {
             setCookie(cookie, 0, 0);
         });
     }
+
+    // a method that returns the count of users in this users object
+    get usersCount() {
+        return this.usersList.length;
+    }
+
+    //! User methods
+
+    // a method that returns specific user todos count
+    userTodosCount(user) {
+        return user.todosList.length;
+    }
+
+    // a method that returns the list of todos for specific user
+    userTodosList(user) {
+        return user.todosList;
+    }
+
+    // method to add new todo to specific user todo list
+    addTodo(user, todo) {
+        // set an id to the todo
+        todo.id = this.userTodosCount(user) + 1;
+        // add the todo to the user todos list
+        user.todosList.push(todo);
+        // replace the user new todos with the old todos
+        this.syncUsersData(user.id, user.todosList);
+
+        return todo;
+    }
+
+    // method to delete specific user todo
+    deleteTodo(user, todoID) {
+        user.todosList.forEach((todo, index) => {
+            if (todo.id === todoID) {
+                user.todosList.splice(index, 1);
+            }
+        });
+        // replace the user new todos with the old todos
+        this.syncUsersData(user.id, user.todosList);
+    }
+
+    // method to change specific user todo complete status
+    changeTodoStatus(user, todoID, isCompleted) {
+        user.todosList.forEach((todo) => {
+            if (todo.id == todoID) {
+                todo.isCompleted = isCompleted;
+            }
+        });
+        // replace the user new todos with the old todos
+        this.syncUsersData(user.id, user.todosList);
+    }
+
+    // method to change specific user todo text
+    changeTodoText(user, todoID, newText) {
+        user.todosList.forEach((todo) => {
+            if (todo.id == todoID) {
+                todo.text = newText;
+            }
+        });
+        // replace the user new todos with the old todos
+        this.syncUsersData(user.id, user.todosList);
+    }
+
+    // get number of completed todos for specific user
+    completedTodosCount(user) {
+        // initialize count to 0
+        let completedTodosCount = 0;
+
+        // loop through each todo
+        user.todosList.forEach((todo) => {
+            // if the todo is completed
+            if (todo.isCompleted) {
+                // increment the counter
+                completedTodosCount++;
+            }
+        });
+
+        // return the completed count
+        return completedTodosCount;
+    }
 }
 // create new Users Object to store all website users
 var todoUsers = new Users();
@@ -186,7 +263,7 @@ var todoUsers = new Users();
 // class that represents one user only
 class User {
     // initialize the user todos list
-    todosList = [];
+    // todosList = [];
     constructor(id, firstName, lastName, emailAddress, userName, passWord) {
         this.id = id;
         this.emailAddress = emailAddress;
@@ -194,16 +271,7 @@ class User {
         this.lastName = lastName;
         this.userName = userName;
         this.passWord = passWord;
-    }
-
-    // property to get the list of user todos
-    get todosList() {
-        return this.todosList;
-    }
-
-    // property to get the todos count of the user
-    get todosCount() {
-        return this.todosList.length;
+        this.todosList = [];
     }
 
     // method to add new todo to user todo list
@@ -250,9 +318,10 @@ class User {
     }
 }
 
+let admin = new User(todoUsers.usersCount + 1, "Admin", "Admin", "admin@admin.com", "admin", "123");
 // create admin account
-todoUsers.createAccount(new User(todoUsers.usersCount + 1, "Admin", "Admin", "admin@admin.com", "admin", "Admin@123"));
-
+todoUsers.createAccount(admin);
+// console.log(todoUsers.usersList);
 // todos class
 class Todo {
     constructor(text) {
@@ -327,7 +396,6 @@ if (loginForm) {
                     setTimeout(() => {
                         setCookie("user_id", loginDetails.id, 3);
                         setCookie("username", loginDetails.userName, 3);
-                        console.log(document.cookie);
                         window.location = "../docs/todo.html";
                     }, 1950);
                 } else {
@@ -381,11 +449,17 @@ else if (regForm) {
 
                         // if username is valid
                         if (userValidation[0]) {
+                            let userDetails = new User(todoUsers.usersCount + 1, fName, lName, emailAddress, userName, passWord);
                             // create an account
-                            let accountCreate = todoUsers.createAccount(new User(todoUsers.usersCount + 1, fName, lName, emailAddress, userName, passWord));
+                            let accountCreate = todoUsers.createAccount(userDetails);
 
                             if (accountCreate.isCreated) {
-                                window.location = "../docs/todo.html";
+                                regForm.classList.add("animate__hinge");
+                                setTimeout(() => {
+                                    setCookie("user_id", userDetails.id, 3);
+                                    setCookie("username", userDetails.userName, 3);
+                                    window.location = "../docs/todo.html";
+                                }, 1950);
                             } else {
                                 // show alert bar with the message returned from create account
                                 showNotificationBar(accountCreate.error, regAlert);
@@ -436,26 +510,48 @@ else if (todoContainer) {
     // check if there's cookies in the session, if so get the user with cookies
     let user = todoUsers.validateLoginCookies(getCookie("user_id"), getCookie("username"));
     if (user) {
+        // scroll to the top of the page
         window.scrollTo(0, 0);
+
+        // select required elements
         let navbar = document.querySelector("nav.navbar"),
             todosCountSpan = document.getElementById("todos-count"),
             completedTodosSpan = document.getElementById("completed-count"),
             logoutButton = document.getElementById("logout"),
-            noTodosMessage = document.getElementById("no-todos-message");
+            noTodosMessage = document.getElementById("no-todos-message"),
+            addTodoButton = document.getElementById("add-todo"),
+            todoTextInput = document.getElementById("todo-text"),
+            cardsContainer = document.getElementById("cards-container"),
+            todosList = document.getElementById("todos-list");
 
-        // get user todos
-        let userTodos = user.todosList;
-
-        // if user have todos
-        if (user.todosCount > 0) {
-            // remove classes of no todos message if found
-            noTodosMessage.classList.remove("animate__bounceIn");
-            noTodosMessage.classList.remove("active");
-
+        /*
             // create show-todo-controls, controls container, and add classes and text to them
-            let todosList = document.getElementById("todos-list"),
-                cardsContainer = document.getElementById("cards-container"),
-                showTodoControls = document.createElement("i"),
+            todosList = document.getElementById("todos-list"),
+            cardsContainer = document.getElementById("cards-container"),
+            showTodoControls = document.createElement("i"),
+            controlsContainer = document.createElement("ul"),
+            editTodoLi = document.createElement("li"),
+            deleteTodoLi = document.createElement("li");
+        showTodoControls.classList.add("fa-solid", "fa-ellipsis", "show-todo-controls");
+        controlsContainer.classList.add("list-group", "list-group-flush", "controls-container");
+        editTodoLi.classList.add("todo-control", "list-group-item", "edit-item");
+        deleteTodoLi.classList.add("todo-control", "list-group-item", "delete-item");
+        editTodoLi.appendChild(document.createTextNode("Edit"));
+        deleteTodoLi.appendChild(document.createTextNode("Delete"));
+        controlsContainer.appendChild(editTodoLi);
+        controlsContainer.appendChild(deleteTodoLi);
+*/
+        // get user todos
+        let userTodos = todoUsers.userTodosList(user);
+
+        // update todos, completed count spans values
+        todosCountSpan.textContent = todoUsers.userTodosCount(user);
+        completedTodosSpan.textContent = todoUsers.completedTodosCount(user);
+
+        // function to create todo element and add it to the page
+        function createTodo(todo) {
+            // create show-todo-controls, controls container, and add classes and text to them
+            let showTodoControls = document.createElement("i"),
                 controlsContainer = document.createElement("ul"),
                 editTodoLi = document.createElement("li"),
                 deleteTodoLi = document.createElement("li");
@@ -468,20 +564,33 @@ else if (todoContainer) {
             controlsContainer.appendChild(editTodoLi);
             controlsContainer.appendChild(deleteTodoLi);
 
+            // create todo container
+            let todoContainer = document.createElement("li");
+            // add classes to the card container, and check if todo is completed to add completed class
+            if (todo.isCompleted) {
+                todoContainer.classList.add("completed");
+            }
+            todoContainer.classList.add("todo", "list-group-item");
+            // add todo id
+            todoContainer.setAttribute("data-todo-id", todo.id);
+            // create text node contains the todo text and append it to the container
+            todoContainer.appendChild(document.createTextNode(todo.text));
+            // append todo controls and show controls
+            todoContainer.appendChild(showTodoControls);
+            todoContainer.appendChild(controlsContainer);
+            todosList.appendChild(todoContainer);
+        }
+
+        // if user have todos
+        if (todoUsers.userTodosCount(user) > 0) {
+            // remove classes of no todos message if found
+            noTodosMessage.classList.remove("animate__bounceIn");
+            noTodosMessage.classList.remove("active");
+
             // for each todo in user todos
             userTodos.map((todo) => {
-                // create todo container
-                let todoContainer = document.createElement("li");
-                // add classes to the card container, and check if todo is completed to add completed class
-                todoContainer.classList.add("todo", "list-group-item", todo.isCompleted ? "completed" : "");
-                // add todo id
-                todoContainer.setAttribute("data-todo-id", todo.id);
-                // create text node contains the todo text and append it to the container
-                todoContainer.appendChild(document.createTextNode(todo.text));
-                // append todo controls and show controls
-                todoContainer.appendChild(showTodoControls);
-                todoContainer.appendChild(controlsContainer);
-                todosList.appendChild(todoContainer);
+                // create the todo and append it to the page
+                createTodo(todo);
             });
             // show the cards container
             cardsContainer.classList.add("active");
@@ -491,8 +600,24 @@ else if (todoContainer) {
             noTodosMessage.classList.add("animate__bounceIn");
             noTodosMessage.classList.add("active");
         }
+        ////////////// todo ////////////////
+        addTodoButton.addEventListener("click", function (e) {
+            let todoText = todoTextInput.value;
+            if (todoText) {
+                let todo = todoUsers.addTodo(user, new Todo(todoText));
+                console.log(todo);
+                if (todo) {
+                    createTodo(todo);
+                    todoTextInput.value = "";
+                    noTodosMessage.classList.remove("animate__bounceIn");
+                    noTodosMessage.classList.remove("active");
+                    cardsContainer.classList.add("active");
+                    todosCountSpan.textContent = todoUsers.userTodosCount(user);
+                }
+            }
+        });
 
-        // get all todos
+        // get all todos elements
         let todos = document.querySelectorAll("li.todo"),
             // get all todos controls dots
             todoShowControls = document.querySelectorAll("i.show-todo-controls"),
@@ -521,7 +646,6 @@ else if (todoContainer) {
                     this.classList.toggle("completed");
                 }
             });
-            ////////todo
             todo.addEventListener("blur", function () {
                 let todoText = "";
                 document.querySelector("li.todo[contenteditable]").childNodes.forEach(function (child) {
