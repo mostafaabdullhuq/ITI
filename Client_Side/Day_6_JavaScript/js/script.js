@@ -274,11 +274,10 @@ class User {
     }
 }
 
-/*
-    // if you want to create admin account to test
+// if you want to create admin account to test
 let admin = new User(todoUsers.usersCount + 1, "Admin", "Admin", "admin@admin.com", "admin", "123");
 todoUsers.createAccount(admin);
-*/
+
 // todos class
 class Todo {
     constructor(text) {
@@ -328,7 +327,7 @@ function resetInputError(...errorElements) {
 if (loginForm) {
     // if user is already logged in, redirect him to todo page
     if (todoUsers.validateLoginCookies(getCookie("user_id"), getCookie("username"))) {
-        window.location = "../docs/todo.html";
+        window.location = "/docs/todo.html";
     }
 
     // add an event listener when the login form is submitted
@@ -492,14 +491,29 @@ else if (todoContainer) {
         }
 
         // function to dynamically add event listner to edit todo
-        function addEditTodoEvents(editItem) {
+        function addEditTodoEvents(user, editItem) {
             // add event for click in edit button
             editItem.addEventListener("click", function (e) {
+                // remove animations from status spans
+                updateStatusSpans();
+
+                // find the parent todo li
                 let parentTodoContainer = this.parentElement.parentElement;
+
                 // make the parent todo editable
                 parentTodoContainer.toggleAttribute("contenteditable");
+
                 // hide the controls popup
                 this.parentElement.classList.remove("active");
+
+                // change todo status to non completed
+                todoUsers.changeTodoStatus(user, parentTodoContainer.getAttribute("data-todo-id"), false);
+
+                // remove the completed effect from todo
+                parentTodoContainer.classList.remove("completed");
+
+                // update status spans
+                updateStatusSpans(user);
             });
         }
 
@@ -516,16 +530,21 @@ else if (todoContainer) {
 
                 // delete the todo from user todos
                 todoUsers.deleteTodo(user, todoID);
+
                 // animate the deletion
                 todoElement.classList.add("animate__animated", "animate__bounceOutLeft");
 
                 // wait 700ms then remove it from the document
                 setTimeout(() => {
                     todoElement.remove();
+
+                    // check if there's any todo left
                     checkNoTodo();
                 }, 500);
+
                 // wait 300 seconds then add animation classes to complete span and update the value of it
                 setTimeout(() => {
+                    // update status spans
                     updateStatusSpans(user);
                 }, 200);
 
@@ -733,7 +752,7 @@ else if (todoContainer) {
                     // sync events for all todos and controls
                     addTodosEvents(createdTodo);
                     addShowTodoControlsEvents(showTodoControls);
-                    addEditTodoEvents(editTodoLi);
+                    addEditTodoEvents(user, editTodoLi);
                     addDeleteTodoEvents(deleteTodoLi);
                     // update stats spans
                     updateStatusSpans();
@@ -753,7 +772,7 @@ else if (todoContainer) {
 
         // select all edit todo controls and call a function for each one to add events
         document.querySelectorAll("li.edit-item").forEach(function (editItem) {
-            addEditTodoEvents(editItem);
+            addEditTodoEvents(user, editItem);
         });
 
         // select all delete todo controls and call a function for each one to add events
