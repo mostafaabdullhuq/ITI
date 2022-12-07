@@ -326,6 +326,11 @@ function resetInputError(...errorElements) {
 
 //! if in login page
 if (loginForm) {
+    // if user is already logged in, redirect him to todo page
+    if (todoUsers.validateLoginCookies(getCookie("user_id"), getCookie("username"))) {
+        window.location = "../docs/todo.html";
+    }
+
     // add an event listener when the login form is submitted
     loginForm.addEventListener("submit", (e) => {
         // prevent the submit behavior
@@ -368,6 +373,12 @@ if (loginForm) {
 }
 //! if in register page
 else if (regForm) {
+    // if user is already logged in, redirect him to todo page
+
+    if (todoUsers.validateLoginCookies(getCookie("user_id"), getCookie("username"))) {
+        window.location = "../docs/todo.html";
+    }
+
     regForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -470,7 +481,6 @@ else if (todoContainer) {
     // if user returned
     if (user) {
         // scroll to the top of the page
-        window.scrollTo(0, 0);
 
         // function to dynamically add event listner to show todo controls i
         function addShowTodoControlsEvents(showTodoControls) {
@@ -674,6 +684,17 @@ else if (todoContainer) {
                 createTodo(todo);
             });
         }
+
+        // for each click in the body of the page
+        document.querySelector("body").addEventListener("click", (e) => {
+            // if the body element is clicked
+            if (e.target instanceof HTMLBodyElement) {
+                // remove all controls containers
+                document.querySelectorAll(".controls-container").forEach((controlsContainer) => {
+                    controlsContainer.classList.remove("active");
+                });
+            }
+        });
 
         // add event for click in add todo button
         addTodoButton.addEventListener("click", function (e) {
