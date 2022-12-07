@@ -41,12 +41,17 @@ form#register-form {
 div.notification {
     max-width: 800px;
     margin: auto;
-    background-color: rgb(206, 18, 28);
+    background-color: #c72f1e;
     color: white;
     margin-bottom: 10px !important;
     padding: 15px 10px;
     font-size: 19px;
     visibility: hidden;
+}
+
+.btn-danger:hover {
+    background-color: #c72f1e !important;
+    border-color: #c72f1e !important;
 }
 
 div.notification.active {
@@ -68,12 +73,12 @@ form#register-form input {
 
 form#login-form input.invalid,
 form#register-form input.invalid {
-    border: 1px solid rgba(206, 18, 27, 0.672) !important;
+    border: 1px solid #c72f1e !important;
 }
 
 form#login-form input.invalid::placeholder,
 form#register-form input.invalid::placeholder {
-    color: rgba(206, 18, 27, 0.579) !important;
+    color: #c72f1e !important;
 }
 
 form#login-form input:focus,
@@ -86,7 +91,10 @@ form#register-form input:hover {
 
 form#login-form input:hover::placeholder,
 form#register-form input:hover::placeholder {
-    color: rgba(206, 18, 27, 0.579) !important;
+
+
+
+    color: #c72f1e !important;
 }
 form#login-form input:focus::placeholder,
 form#register-form input:focus::placeholder {
@@ -134,20 +142,20 @@ form#register-form input::placeholder {
 
 .login-button,
 .register-button {
-    background-color: rgb(227, 60, 60);
+    background-color:#d74635;
 }
 
 a.register {
     font-weight: bold;
-    color: rgb(227, 60, 60) !important;
+    color:#d74635 !important;
 }
 
 /* todo page */
 
 nav {
     width: 100% !important;
-    padding: 20px 0px !important;
-    background-color: rgb(227, 60, 60) !important;
+    padding: 10px 0px !important;
+    background-color:#d74635 !important;
     -webkit-border-radius: 0px 0px 3px 3px;
     -moz-border-radius: 0px 0px 3px 3px;
     -ms-border-radius: 0px 0px 3px 3px;
@@ -157,7 +165,7 @@ nav {
 
 nav input.create-text {
     font-size: 18px;
-    padding: 15px 30px !important;
+    padding: 10px 30px !important;
     text-align: left !important;
     cursor: text;
     outline: none !important;
@@ -173,14 +181,14 @@ nav input.create-text:focus {
 }
 nav input.create-text::placeholder {
     text-transform: uppercase;
-    color: rgb(227, 60, 60);
+    color:#d74635;
 }
 
 button.new-todo,
 button.todo-dropdown {
     font-weight: bold;
     text-transform: uppercase;
-    padding: 15px 30px !important;
+    padding: 10px 30px !important;
     color: white;
     background-color: transparent;
     border: 1px solid white;
@@ -195,20 +203,16 @@ button.todo-dropdown:hover,
 .btn:first-child:active,
 :not(.btn-check) + .btn:active {
     background-color: white;
-    color: rgb(227, 60, 60);
+    color:#d74635;
 }
 
 div.nav-container {
     width: 100%;
 }
 
-div.todos-container {
-    margin-top: 100px;
-    font-size: 20px;
-}
 
 div.todo-container {
-    padding: 200px 0;
+    padding: 100px 0 0 0;
 }
 
 li.todo,
@@ -276,7 +280,7 @@ li.todo:hover {
     font: var(--fa-font-solid);
     content: "\f141";
     cursor: pointer;
-    color: rgb(227, 60, 60);
+    color:#d74635;
 }
 
 .show-todo-controls.active {
@@ -289,7 +293,7 @@ li.todo:hover {
 }
 
 li[contenteditable] {
-    background-color: rgb(227, 60, 60) !important;
+    background-color:#d74635 !important;
     color: white;
     width: 100% !important;
     color: 100% !important;
@@ -299,10 +303,11 @@ li[contenteditable] {
     -ms-transform: scale(100%);
     -o-transform: scale(100%);
     transform: scale(100%);
+    cursor:text;
 }
 li[contenteditable]:focus,
 li[contenteditable]:hover {
-    background-color: rgb(227, 60, 60) !important;
+    background-color:#d74635 !important;
 }
 
 ul.controls-container {
@@ -335,14 +340,14 @@ ul.controls-container li {
 }
 
 ul.controls-container li:hover {
-    background-color: rgb(227, 60, 60);
+    background-color:#d74635;
     color: white;
 }
 
 .logout-link {
-    padding: 5px 20px !important;
+    padding: 0px 20px !important;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 18px;
-    color: rgb(227, 60, 60);
+    font-size: 17px;
+    color:#d74635;
 }
