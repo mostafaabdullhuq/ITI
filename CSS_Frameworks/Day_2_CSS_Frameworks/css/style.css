@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* font: 13px/22px Helvetica, Arial, sans-serif; */
+    background: #f0f0f0;
+}
+
+.bor {
+    border: 1px solid red;
+    padding: 5px;
+}
+
+.right {
+    background: url("../imgs/sidebar_background.png") top left !important;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
+p#post-details,
+p#post-details a {
+    color: #777;
+}

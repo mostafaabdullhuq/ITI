@@ -1,49 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <title>The Flower Blog</title>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
-    <script src="js/bootstrap.min.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <title>The Flower Blog</title>
+    </head>
+    <body>
+        <!-- Website Heading  -->
+        <div class="container">
+            <header class="pt-4">
+                <p class="h1 pt-4 pb-4">The Flower Blog</p>
+            </header>
+        </div>
+        <!-- Website Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbar-content"
+                    aria-controls="navbar-content"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse container fs-5" id="navbar-content">
+                    <ul class="navbar-nav m-auto mb-2 mb-lg-0 w-75 d-flex justify-content-between">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Archives</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Subscribe Via. RSS</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- page content -->
+        <div class="container">
+            <!-- introduction -->
+            <div id="intro" class="card mt-3 rounded-5 overflow-hidden">
+                <img src="/imgs/intro_flower.png" class="card-img rounded-5" alt="flower image" />
+                <div class="card-img-overlay ps-lg-5 pe-lg-5 ps-2 pe-2 text-light d-flex flex-column justify-content-center">
+                    <h2 class="card-title m-lg-0 text-center text-lg-start fs-1">Do you love flowers as <br class="d-none d-lg-block" />much as we do?</h2>
+                    <p class="card-text d-none d-md-flex mt-0 mt-lg-4 ps-md-5 pe-md-5 ps-lg-0 pe-lg-0 text-md-center text-lg-start">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi harum modi <br class="d-none d-lg-block" />
+                        laudantium nam placeat quae explicabo pariatur labore recusandae, tempore <br class="d-none d-lg-block" />
+                        magni culpa nulla sapiente animi distinctio debitis, amet inventore! Quos?
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- blog content -->
+        <div class="row">
+            <div class="left col-8 pt-5">
+                <div class="container"></div>
+                <header>
+                    <h2 class="mb-4 h1">This is the title of a blog post</h2>
+                    <p id="post-details" class="fst-italic">
+                        Posted on June 29th 2009 by <a class="text-decoration-underline" href="#">Mads Kjaer</a> - <a class="text-decoration-underline" href="#comments">3 comments</a>
+                    </p>
+                </header>
+            </div>
+            <div class="right col pt-5">
+                <div id="categories" class="row p-4">
+                    <h5 class="row">Categories</h5>
+                    <ul class="row ms-2 list-unstyled">
+                        <li><a class="text-dark" href="#">Lorem ipsum dolor</a></li>
+                        <li><a href="#">Slit amet consectetur</a></li>
+                        <li><a href="#">Adipisicing elit sed</a></li>
+                        <li><a href="#">Do eisumod tempor</a></li>
+                        <li><a href="#">Incididunt ut labore</a></li>
+                    </ul>
+                </div>
+                <div id="archives" class="row p-4">
+                    <h5 class="row">Categories</h5>
+                    <ul class="row ms-2 list-unstyled">
+                        <li><a href="#">Lorem ipsum dolor</a></li>
+                        <li><a href="#">Slit amet consectetur</a></li>
+                        <li><a href="#">Adipisicing elit sed</a></li>
+                        <li><a href="#">Do eisumod tempor</a></li>
+                        <li><a href="#">Incididunt ut labore</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="js/bootstrap.min.js"></script>
+    </body>
 </html>
