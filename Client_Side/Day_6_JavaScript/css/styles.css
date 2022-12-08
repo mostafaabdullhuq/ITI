@@ -17,6 +17,13 @@ body {
     background: transparent; /* make scrollbar transparent */
 }
 
+@media all and (max-width: 800px) {
+    form#login-form,
+    form#register-form {
+        padding: 50px 40px !important;
+    }
+}
+
 /* login page */
 
 .login-container {
@@ -91,9 +98,6 @@ form#register-form input:hover {
 
 form#login-form input:hover::placeholder,
 form#register-form input:hover::placeholder {
-
-
-
     color: #c72f1e !important;
 }
 form#login-form input:focus::placeholder,
@@ -142,12 +146,12 @@ form#register-form input::placeholder {
 
 .login-button,
 .register-button {
-    background-color:#d74635;
+    background-color: #d74635;
 }
 
 a.register {
     font-weight: bold;
-    color:#d74635 !important;
+    color: #d74635 !important;
 }
 
 /* todo page */
@@ -155,7 +159,7 @@ a.register {
 nav {
     width: 100% !important;
     padding: 10px 0px !important;
-    background-color:#d74635 !important;
+    background-color: #d74635 !important;
     -webkit-border-radius: 0px 0px 3px 3px;
     -moz-border-radius: 0px 0px 3px 3px;
     -ms-border-radius: 0px 0px 3px 3px;
@@ -181,7 +185,7 @@ nav input.create-text:focus {
 }
 nav input.create-text::placeholder {
     text-transform: uppercase;
-    color:#d74635;
+    color: #d74635;
 }
 
 button.new-todo,
@@ -203,16 +207,15 @@ button.todo-dropdown:hover,
 .btn:first-child:active,
 :not(.btn-check) + .btn:active {
     background-color: white;
-    color:#d74635;
+    color: #d74635;
 }
 
 div.nav-container {
     width: 100%;
 }
 
-
 div.todo-container {
-    padding: 100px 0 0 0;
+    padding: 20vh 0 0 0;
 }
 
 li.todo,
@@ -228,7 +231,7 @@ div.no-todo {
     -o-border-radius: 5px;
     border-radius: 5px;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-    white-space: pre-line; 
+    white-space: pre-line;
 }
 
 div.no-todo {
@@ -280,7 +283,7 @@ li.todo:hover {
     font: var(--fa-font-solid);
     content: "\f141";
     cursor: pointer;
-    color:#d74635;
+    color: #d74635;
 }
 
 .show-todo-controls.active {
@@ -293,7 +296,7 @@ li.todo:hover {
 }
 
 li[contenteditable] {
-    background-color:#d74635 !important;
+    background-color: #d74635 !important;
     color: white;
     width: 100% !important;
     color: 100% !important;
@@ -303,11 +306,11 @@ li[contenteditable] {
     -ms-transform: scale(100%);
     -o-transform: scale(100%);
     transform: scale(100%);
-    cursor:text;
+    cursor: text;
 }
 li[contenteditable]:focus,
 li[contenteditable]:hover {
-    background-color:#d74635 !important;
+    background-color: #d74635 !important;
 }
 
 ul.controls-container {
@@ -340,7 +343,7 @@ ul.controls-container li {
 }
 
 ul.controls-container li:hover {
-    background-color:#d74635;
+    background-color: #d74635;
     color: white;
 }
 
@@ -349,5 +352,5 @@ ul.controls-container li:hover {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 17px;
-    color:#d74635;
+    color: #d74635;
 }
