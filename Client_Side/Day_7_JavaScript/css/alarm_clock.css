@@ -12,7 +12,7 @@ body {
 
 .clock-container {
     color: rgba(100, 100, 100, 0.661);
-    font-family: "Antonio", sans-serif;
+    font-family: "Cute Font", cursive;
 }
 
 .bor {
@@ -79,13 +79,23 @@ p.time-format {
 }
 
 p.time {
-    font-size: 11rem;
+    font-size: 12rem;
     font-weight: bold;
 }
+
 p.time-format,
 i {
     position: relative;
-    bottom: 35px;
+}
+
+p.time-format {
+    font-size: 50px;
+    bottom: 77px;
+}
+i {
+    font-size: 32px;
+    left: 8px;
+    bottom: 100px;
 }
 
 .alarm-overlay {
