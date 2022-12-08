@@ -22,6 +22,21 @@ body {
     form#register-form {
         padding: 50px 40px !important;
     }
+    div.todo-container {
+        padding: 250px 0 0 0 !important;
+    }
+}
+
+@media all and (min-width: 800px) and (max-width: 1000px) {
+    div.todo-container {
+        padding: 170px 0 0 0 !important;
+    }
+}
+
+@media all and (max-height: 746px) {
+    form#register-form {
+        padding: 20px 40px !important;
+    }
 }
 
 /* login page */
@@ -215,7 +230,7 @@ div.nav-container {
 }
 
 div.todo-container {
-    padding: 20vh 0 0 0;
+    padding: 100px 0 0 0;
 }
 
 li.todo,
