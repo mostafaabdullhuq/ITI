@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&display=swap" rel="stylesheet" />
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <link rel="stylesheet" href="css/fontawesome/css/all.min.css" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/alarm_clock.css" />
+        <title>Alarm & Clock</title>
+    </head>
+    <body>
+        <!--  d-flex justify-content-center align-items-center h-100 -->
+
+        <div class="alarm-overlay align-items-center align-content-center justify-content-center d-none">
+            <div class="alarm-form-container d-flex flex-column">
+                <p class="text-center text-uppercase mb-5 alarm-notification">Set Alarm After</p>
+                <div class="alarm-time col-12 d-flex mb-5">
+                    <div class="col me-2">
+                        <div class="fs-5 text-uppercase text-center mb-3">Hours</div>
+                        <input type="number" class="alarm-hours form-control p-3 pt-4 pb-4 text-uppercase col" aria-describedby="passwordHelpInline" value="0" />
+                    </div>
+                    <div class="col me-2">
+                        <div class="col fs-5 text-uppercase text-center mb-3">Minutes</div>
+
+                        <input type="number" class="alarm-minutes form-control p-3 pt-4 pb-4 text-uppercase" aria-describedby="passwordHelpInline" value="0" />
+                    </div>
+                    <div class="col">
+                        <div class="col fs-5 text-uppercase text-center mb-3">Seconds</div>
+
+                        <input type="number" class="alarm-seconds form-control p-3 pt-4 pb-4 text-uppercase" aria-describedby="passwordHelpInline" value="0" />
+                    </div>
+                </div>
+                <div class="controls col-12 d-flex align-content-center justify-content-center ps-5 pe-5">
+                    <button type="button" class="btn set-alarm btn-info text-light col ms-5 me-3 pt-3 pb-3 fs-5 text-uppercase">Set</button>
+                    <button type="button" class="btn close-alarm btn-danger col text-uppercase pt-3 pb-3 fs-5 me-5">Close</button>
+                </div>
+            </div>
+        </div>
+        <div class="container clock-container d-flex justify-content-center align-items-center h-100">
+            <div class="alarm_clock w-75 bg-white">
+                <div class="alarm-trigger"></div>
+                <div class="clock-overlay w-100 rounded-3">
+                    <ul class="days-of-week list-unstyled col-12 d-inline-flex fs-4 d-flex justify-content-between text-uppercase">
+                        <li>Mon</li>
+                        <li>Tue</li>
+                        <li>Wed</li>
+                        <li>Thu</li>
+                        <li>Fri</li>
+                        <li>Sat</li>
+                        <li>Sun</li>
+                    </ul>
+                    <div class="clock col-12 flex-grow-1 d-flex">
+                        <div class="clock-icon-container col d-flex justify-content-end fs-2 align-items-end">
+                            <i class="clock-icon fa-regular fa-clock"></i>
+                        </div>
+                        <p class="time col-11 text-center">00: 00: 00</p>
+                        <div class="time-format-container col d-flex justify-content-start fs-2 align-items-end">
+                            <p class="time-format">AM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/sweetalert2.js"></script>
+        <script src="js/alarm_clock.js"></script>
+    </body>
+</html>
