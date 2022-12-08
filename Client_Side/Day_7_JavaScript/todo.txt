@@ -1,0 +1,2 @@
+remove completed when editing a note
+edit window locations
