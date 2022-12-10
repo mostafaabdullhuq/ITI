@@ -1,29 +1,36 @@
+/* global */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
-body {
-    /* font: 13px/22px Helvetica, Arial, sans-serif; */
-    background: #f0f0f0;
-}
-
+/* for debugging */
 .bor {
     border: 1px solid red;
     padding: 5px;
 }
 
-.right {
-    background: url("../imgs/sidebar_background.png") top left !important;
+body {
+    background: #f0f0f0;
 }
 
-a {
+/* navbar section */
+
+nav {
+    background: url("../imgs/nav_background.png") repeat-x;
+}
+
+/* blog section */
+.bolg-content .right {
+    background: url("../imgs/sidebar_background.png") top left;
+}
+
+.bolg-content a {
     color: #000;
     text-decoration: none;
 }
 
-a:hover {
+.bolg-content a:hover {
     text-decoration: underline;
     color: #000;
 }
@@ -31,4 +38,54 @@ a:hover {
 p#post-details,
 p#post-details a {
     color: #777;
+}
+
+div#categories,
+div#archives {
+    background: url("../imgs/sidebar_section_background.png") repeat-x;
+}
+
+img.flower-img {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* comments section */
+.accordion-button {
+    color: rgba(0, 0, 0, 0.35);
+    background-color: transparent !important;
+}
+.accordion-button:not(.collapsed) {
+    color: rgba(0, 0, 0, 0.657);
+    background-color: #cfcfcf !important;
+}
+
+.accordion-item {
+    background-color: transparent !important;
+}
+
+.accordion-item:hover {
+    background: #cfcfcf !important;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+}
+
+/* footer section */
+footer {
+    color: #777;
+    background-color: #222;
+}
+
+footer a {
+    color: #999;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: white;
+}
+footer ul {
+    list-style: square;
 }

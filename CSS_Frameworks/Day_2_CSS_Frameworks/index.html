@@ -31,7 +31,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse container fs-5" id="navbar-content">
-                    <ul class="navbar-nav m-auto mb-2 mb-lg-0 w-75 d-flex justify-content-between">
+                    <ul class="navbar-nav m-auto mb-2 mb-lg-0 w-75 d-flex justify-content-between fs-6">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#">Blog</a>
                         </li>
@@ -45,7 +45,8 @@
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Subscribe Via. RSS</a>
+                            <img src="/imgs/rss.png" class="mb-1" alt="" />
+                            <a class="nav-link d-inline-block" href="#">Subscribe Via. RSS</a>
                         </li>
                     </ul>
                 </div>
@@ -67,39 +68,214 @@
             </div>
         </div>
         <!-- blog content -->
-        <div class="row">
-            <div class="left col-8 pt-5">
-                <div class="container"></div>
-                <header>
-                    <h2 class="mb-4 h1">This is the title of a blog post</h2>
-                    <p id="post-details" class="fst-italic">
-                        Posted on June 29th 2009 by <a class="text-decoration-underline" href="#">Mads Kjaer</a> - <a class="text-decoration-underline" href="#comments">3 comments</a>
-                    </p>
-                </header>
-            </div>
-            <div class="right col pt-5">
-                <div id="categories" class="row p-4">
-                    <h5 class="row">Categories</h5>
-                    <ul class="row ms-2 list-unstyled">
-                        <li><a class="text-dark" href="#">Lorem ipsum dolor</a></li>
-                        <li><a href="#">Slit amet consectetur</a></li>
-                        <li><a href="#">Adipisicing elit sed</a></li>
-                        <li><a href="#">Do eisumod tempor</a></li>
-                        <li><a href="#">Incididunt ut labore</a></li>
-                    </ul>
+        <div class="bolg-content container">
+            <div class="row">
+                <!-- main left section -->
+                <div class="left col-xl-9 pt-5 me-4 pb-5 col-12">
+                    <!-- post section -->
+                    <header class="post mb-5 text-sm-center text-md-start">
+                        <!-- post title -->
+                        <h2 class="mb-4 h1 post-title">This is the title of a blog post</h2>
+                        <!-- post details -->
+                        <p id="post-details" class="fst-italic mb-5">
+                            Posted on June 29th 2009 by <a class="text-decoration-underline" href="#">Mads Kjaer</a> - <a class="text-decoration-underline" href="#comments">3 comments</a>
+                        </p>
+                        <!-- post content -->
+                        <div class="post-content">
+                            <p class="mb-5">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin euismod tellus eu orci imperdiet nec rutrum lacus blandit. Cras enim nibh, sodales ultricies elementum
+                                vel, fermentum id tellus. Proin metus odio, ultricies eu pharetra dictum, laoreet id odio. Curabitur in odio augue. Morbi congue auctor interdum. Phasellus sit amet
+                                metus justo. Phasellus vitae tellus orci, at elementum ipsum. In in quam eget diam adipiscing condimentum. Maecenas gravida diam vitae nisi convallis vulputate quis sit
+                                amet nibh. Nullam ut velit tortor. Curabitur ut elit id nisl volutpat consectetur ac ac lorem. Quisque non elit et elit lacinia lobortis nec a velit. Sed ac nisl sed
+                                enim consequat porttitor.
+                            </p>
+                            <div class="flower-container mb-4 col col-md-6">
+                                <img src="/imgs/flower.png" alt="Flower image" class="flower-img img-fluid" />
+                                <p class="mt-4 fst-italic">This is a beautiful flower.</p>
+                            </div>
+                            <p class="mb-3">
+                                Pellentesque ut sapien arcu, egestas mollis massa. Fusce lectus leo, fringilla at aliquet sit amet, volutpat non erat. Aenean molestie nibh vitae turpis venenatis vel
+                                accumsan nunc tincidunt. Suspendisse id purus vel felis auctor mattis non ac erat. Pellentesque sodales venenatis condimentum. Aliquam sit amet nibh nisi, ut pulvinar
+                                est. Sed ullamcorper nisi vel tortor volutpat eleifend. Vestibulum iaculis ullamcorper diam consectetur sagittis. Quisque vitae mauris ut elit semper condimentum varius
+                                nec nisl. Nulla tempus porttitor dolor ac eleifend. Proin vitae purus lectus, a hendrerit ipsum. Aliquam mattis lacinia risus in blandit.
+                            </p>
+                            <p>
+                                Vivamus vitae nulla dolor. Suspendisse eu lacinia justo. Vestibulum a felis ante, non aliquam leo. Aliquam eleifend, est viverra semper luctus, metus purus commodo
+                                elit, a elementum nisi lectus vel magna. Praesent faucibus leo sit amet arcu vehicula sed facilisis eros aliquet. Etiam sodales, enim sit amet mollis vestibulum, ipsum
+                                sapien accumsan lectus, eget ultricies arcu velit ut diam. Aenean fermentum luctus nulla, eu malesuada urna consequat in. Pellentesque habitant morbi tristique senectus
+                                et netus et malesuada fames ac turpis egestas. Pellentesque massa lacus, sodales id facilisis ac, lobortis sed arcu. Donec hendrerit fringilla ligula, ac rutrum nulla
+                                bibendum id. Cras sapien ligula, tincidunt eget euismod nec, ultricies eu augue. Nulla vitae velit sollicitudin magna mattis eleifend. Nam enim justo, vulputate vitae
+                                pretium ac, rutrum at turpis. Aenean id magna neque. Sed rhoncus aliquet viverra.
+                            </p>
+                        </div>
+                    </header>
+                    <hr class="mt-5 mb-5" />
+                    <!-- comments section -->
+                    <div class="comments text-sm-center text-md-start">
+                        <!-- section heading -->
+                        <h4 class="mb-4">Comments</h4>
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <!-- first comment -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button
+                                        class="accordion-button"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne"
+                                        aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne"
+                                    >
+                                        <a class="comment-owner fw-bold" href="#"> George Washington </a>
+                                        <small class="fst-italic ms-2"> on June 29th 2009 at 23:35 </small>
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- second comment -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                    <button
+                                        class="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseTwo"
+                                        aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseTwo"
+                                    >
+                                        <a class="comment-owner fw-bold" href="#"> Benjamin Franklin </a>
+                                        <small class="fst-italic ms-2"> on June 29th 2009 at 23:40 </small>
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                    <div class="accordion-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- third comment -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                    <button
+                                        class="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseThree"
+                                        aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseThree"
+                                    >
+                                        <a class="comment-owner fw-bold" href="#"> Barack Obama </a>
+                                        <small class="fst-italic ms-2"> on June 29th 2009 at 23:59 </small>
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                                    <div class="accordion-body">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mt-5 mb-5" />
+                    <!-- comments form -->
+                    <div class="comments-form text-sm-center text-md-start">
+                        <h4 class="h3 mb-4">Post a comment</h4>
+                        <form class="w-75 m-auto">
+                            <div class="mb-3">
+                                <label for="commentOwnerName" class="form-label fw-bold">Name</label>
+                                <input type="text" class="form-control" id="commentOwnerName" aria-describedby="emailHelp" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="commentOwnerEmail" class="form-label fw-bold">E-mail</label>
+                                <input type="email" class="form-control" id="commentOwnerEmail" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="commentOwnerWebsite" class="form-label fw-bold">Website</label>
+                                <input type="text" class="form-control" id="commentOwnerWebsite" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="commentText" class="form-label fw-bold">Comment</label>
+                                <textarea class="form-control" id="commentText" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-light">Post comment</button>
+                        </form>
+                    </div>
                 </div>
-                <div id="archives" class="row p-4">
-                    <h5 class="row">Categories</h5>
-                    <ul class="row ms-2 list-unstyled">
-                        <li><a href="#">Lorem ipsum dolor</a></li>
-                        <li><a href="#">Slit amet consectetur</a></li>
-                        <li><a href="#">Adipisicing elit sed</a></li>
-                        <li><a href="#">Do eisumod tempor</a></li>
-                        <li><a href="#">Incididunt ut labore</a></li>
-                    </ul>
+                <!-- main right section -->
+                <div class="right col pt-5 ps-5 pb-5 d-xl-block d-none">
+                    <div id="categories" class="row p-4 rounded-3">
+                        <h5 class="row fw-bold">Categories</h5>
+                        <ul class="row ms-2 list-unstyled">
+                            <li><a class="text-dark" href="#">Lorem ipsum dolor</a></li>
+                            <li><a href="#">Slit amet consectetur</a></li>
+                            <li><a href="#">Adipisicing elit sed</a></li>
+                            <li><a href="#">Do eisumod tempor</a></li>
+                            <li><a href="#">Incididunt ut labore</a></li>
+                        </ul>
+                    </div>
+                    <div id="archives" class="row p-4 rounded-3 mt-5">
+                        <h5 class="row fw-bold">Archives</h5>
+                        <ul class="row ms-2 list-unstyled">
+                            <li><a href="#">December 2008</a></li>
+                            <li><a href="#">January 2009</a></li>
+                            <li><a href="#">February 2009</a></li>
+                            <li><a href="#">March 2009</a></li>
+                            <li><a href="#">April 2009</a></li>
+                            <li><a href="#">May 2009</a></li>
+                            <li><a href="#">June 2009</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- footer section -->
+        <footer class="container-fluid pt-5 pb-5">
+            <div class="container d-flex flex-column flex-lg-row">
+                <!-- about footer section -->
+                <div class="left col-12 col-lg mb-3 mb-lg-0">
+                    <h6 class="mb-4 h5 text-light">About</h6>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                        ullamco
+                        <a class="footer-about-href" href="#">laboris nisi ut aliquip</a> ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+                <!-- blogroll footer section -->
+                <div class="center col-12 col-lg mb-3 mb-lg-0">
+                    <h6 class="mb-4 h5 text-light">Blogroll</h6>
+                    <ul class="blog-roll-list">
+                        <li class="text-uppercase"><a href="#">Nettuts+</a></li>
+                        <li><a href="#">FreelanceSwitch</a></li>
+                        <li><a href="#">In The Woods</a></li>
+                        <li><a href="#">Netsetter</a></li>
+                        <li class="text-uppercase"><a href="#">PSDTuts+</a></li>
+                    </ul>
+                </div>
+                <!-- popular footer section -->
+                <div class="right col-12 col-lg">
+                    <h6 class="mb-4 h5 text-light">Popular</h6>
+                    <ul class="popular-list">
+                        <li><a href="#">This is the title of a blog post</a></li>
+                        <li><a href="#">Lorem ipsum dolor sit amet</a></li>
+                        <li><a href="#">Consectetur adipisicing elit, sed do eiusmod</a></li>
+                        <li><a href="#">Duis aute irure dolor</a></li>
+                        <li><a href="#">Excepteur sint occaecat cupidatat</a></li>
+                        <li><a href="#">Reprehenderit in voluptate velit</a></li>
+                        <li><a href="#">Officia deserunt mollit anim id est laborum</a></li>
+                        <li><a href="#">Lorem ipsum dolor sit amet</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+
         <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
