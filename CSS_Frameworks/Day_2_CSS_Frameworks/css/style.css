@@ -17,12 +17,12 @@ body {
 /* navbar section */
 
 nav {
-    background: url("../imgs/nav_background.png") repeat-x;
+    background: url("./../imgs/nav_background.png") repeat-x;
 }
 
 /* blog section */
 .bolg-content .right {
-    background: url("../imgs/sidebar_background.png") top left;
+    background: url("./../imgs/sidebar_background.png") top left;
 }
 
 .bolg-content a {
@@ -42,7 +42,7 @@ p#post-details a {
 
 div#categories,
 div#archives {
-    background: url("../imgs/sidebar_section_background.png") repeat-x;
+    background: url("./../imgs/sidebar_section_background.png") repeat-x;
 }
 
 img.flower-img {
