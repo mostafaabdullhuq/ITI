@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css" />
+        <title>Triangle</title>
+        <style>
+            body {
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+            }
+            math {
+                color: red;
+            }
+            .bor {
+                border: 1px solid red;
+            }
+            .triangle {
+                position: relative;
+                left: -20%;
+            }
+            .triangle .letters .bottom {
+                position: absolute;
+                bottom: -5%;
+                left: 70%;
+                transform: translateX(-50%);
+            }
+            .triangle .letters .right {
+                position: absolute;
+                top: 70%;
+                right: 7%;
+                transform: translateY(-50%);
+            }
+            .triangle .letters .left {
+                position: absolute;
+                top: 70%;
+                left: 63%;
+                transform: translateY(-50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container d-flex flex-column w-75 h-75 text-center">
+            <div class="col d-flex m-auto flex-column justify-content-center align-items-center w-100 h-100 triangle mb-5">
+                <svg id="triangle" viewBox="0 0 100 100" class="w-100 h-100">
+                    <polygon points="100 30, 100 100, 50 100" fill="red" />
+                </svg>
+                <div class="letters col-12">
+                    <p class="h4 bottom">a</p>
+                    <p class="h4 right">b</p>
+                    <p class="h4 left">c</p>
+                </div>
+            </div>
+            <div class="text text-center">
+                <h2>According to Pythagoras Theorem</h2>
+                <math class="fs-2 mt-5">
+                    <mi>c</mi>
+                    <mo>=</mo>
+                    <msqrt>
+                        <msup>
+                            <mi>a</mi>
+                            <mn>2</mn>
+                        </msup>
+                        <mo>+</mo>
+                        <msup>
+                            <mi>b</mi>
+                            <mn>2</mn>
+                        </msup>
+                    </msqrt>
+                </math>
+            </div>
+        </div>
+
+        <script src="./js/bootstrap.min.js"></script>
+    </body>
+</html>
