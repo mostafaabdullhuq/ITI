@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./css/fontawesome/css/all.min.css" />
+        <link rel="stylesheet" href="./css/video_player.css" />
+        <title>Video Player</title>
+    </head>
+    <body>
+        <section id="video-player" class="container d-flex flex-column justify-content-center align-items-center w-100 h-100">
+            <video class="col-12">
+                <source src="./videos/frozen.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-info col-12 text-light fs-2 d-flex text-center flex-column pb-3">
+                <progress class="time-progress col-12" min="0" max="100" value="0" data-label=""></progress>
+                <div class="video-controls col-12 d-flex mt-4">
+                    <div class="play-pause-video col-1">
+                        <i class="fa-solid fa-play"></i>
+                    </div>
+                    <div class="backward col-1">
+                        <i class="fa-solid fa-backward"></i>
+                    </div>
+                    <div class="backward-step col-1">
+                        <i class="fa-solid fa-backward-step"></i>
+                    </div>
+                    <div class="forward-step col-1">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </div>
+                    <div class="forward col-1">
+                        <i class="fa-solid fa-forward"></i>
+                    </div>
+                    <div class="volume-control col me-3 d-flex justify-content-between align-items-center">
+                        <i class="fa-solid fa-volume-high col-3 d-inline-block"></i>
+                        <input type="range" class="col" name="volume" id="volume-step" min="0" max="100" step="5" value="0" />
+                    </div>
+                    <div class="playback-control d-flex col justify-content-between align-items-center">
+                        <i class="fa-solid fa-plus-minus speed-control col-3"></i>
+                        <input class="col d-inline-block" type="range" name="playback" id="playback-rate" min="0.25" max="16" step="0.25" value="1" />
+                    </div>
+                    <div class="view-control col-1">
+                        <i class="fa-solid fa-maximize"></i>
+                    </div>
+                    <!-- <i class="fa-solid fa-minimize col hidden"></i> -->
+                </div>
+            </div>
+        </section>
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="./js/video_player.js"></script>
+    </body>
+</html>
