@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./css/fontawesome/css/all.min.css" />
+        <link rel="stylesheet" href="./css/color_range.css" />
+
+        <title>Color Range</title>
+    </head>
+    <body>
+        <section class="color-range container d-flex flex-column justify-content-center align-items-center w-100 h-100 text-center">
+            <div class="controls-container m-auto">
+                <div class="red col d-flex justify-content-center align-items-center">
+                    <p class="fs-3 col-2 me-3">R</p>
+                    <input type="range" class="form-range col" name="red" id="red" min="0" max="255" " />
+                </div>
+                <div class="green col d-flex justify-content-center align-items-center">
+                    <p class="fs-3 col-2 me-3">G</p>
+                    <input type="range" class="form-range" name="green" id="green" min="0" max="255" " />
+                </div>
+                <div class="blue col d-flex justify-content-center align-items-center">
+                    <p class="fs-3 col-2 me-3">B</p>
+                    <input type="range" class="form-range" name="blue" id="blue" min="0" max="255" " />
+                </div>
+
+                <div class="hex-value fs-2 mt-2"></div>
+            </div>
+        </section>
+        <script src="./js/bootstrap.min.js"></script>
+        <script src="./js/color_range.js"></script>
+    </body>
+</html>
