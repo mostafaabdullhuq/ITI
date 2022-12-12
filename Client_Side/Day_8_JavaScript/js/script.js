@@ -21,8 +21,8 @@ window.addEventListener("load", function () {
                     cardBody = document.createElement("div"),
                     cardTitle = document.createElement("h5"),
                     cardList = document.createElement("ul"),
-                    cardListItem1 = document.createElement("li");
-                cardListItem2 = document.createElement("li");
+                    cardListItem1 = document.createElement("li"),
+                    cardListItem2 = document.createElement("li");
                 userCard.classList.add("card", "col-3", "me-3", "mb-3");
                 cardImg.src = user.avatar;
                 cardImg.alt = user.name;
