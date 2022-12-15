@@ -11,7 +11,6 @@ $(() => {
         }, 3000);
 
     $(".task1 .stop").on("click", (e) => {
-        console.log("cleared");
         clearInterval(mySlider);
     });
 
