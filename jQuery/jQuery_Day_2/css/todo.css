@@ -1,0 +1,84 @@
+@import url("./style.css");
+
+body {
+    background-color: #eeeeee;
+}
+
+input,
+button {
+    border: none;
+    outline: none;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.new-todo-container input:focus::placeholder {
+    color: transparent;
+}
+
+.new-todo-container button {
+    min-width: 200px;
+    text-transform: uppercase;
+    background-color: #2e2e32;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    -moz-transition: background-color 0.3s ease-in-out;
+    -ms-transition: background-color 0.3s ease-in-out;
+    -o-transition: background-color 0.3s ease-in-out;
+}
+
+.new-todo-container button:hover {
+    background-color: #0e0d0d;
+}
+
+.todo button {
+    min-width: 170px;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bold;
+    box-shadow: none;
+    transition: background-color 0.3s ease-in-out;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    -moz-transition: background-color 0.3s ease-in-out;
+    -ms-transition: background-color 0.3s ease-in-out;
+    -o-transition: background-color 0.3s ease-in-out;
+}
+
+.todo button.complete {
+    background-color: #3164d1;
+}
+
+.todo button.complete:hover {
+    background-color: #1f4aa4;
+}
+
+.todo button.delete {
+    background-color: #eb3838;
+}
+.todo button.delete:hover {
+    background-color: #ca1b1b;
+}
+
+.todo .todo-text {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+.todo-text.striked {
+    text-decoration: line-through;
+    color: #a0a0a0;
+}
+
+.new-todo-container {
+    margin-top: 4%;
+}
+
+.invalid {
+    border: 2px solid #ca1b1b;
+}
+
+.invalid::placeholder {
+    color: #ca1b1b;
+}
