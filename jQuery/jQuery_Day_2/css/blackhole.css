@@ -2,8 +2,11 @@
 
 .rabbit-container {
     cursor: grab;
-    background-color: white;
     font-weight: bold;
     max-width: 500px !important;
     max-height: 500px !important;
+}
+
+.rabbit-container p {
+    background-color: white;
 }

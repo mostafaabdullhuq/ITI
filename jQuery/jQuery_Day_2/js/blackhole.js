@@ -11,7 +11,7 @@ $(() => {
         revert: true,
         // when dragging start, change text
         start: function (e, targetElement) {
-            $(targetElement.helper).find("p").text("Leave meeeee!!!!!!");
+            $(targetElement.helper).find("p").text("Leave meeeee!!!!!!").css("color", "red");
             var rabbitImage = $(targetElement.helper).find("img");
             // start the shake immediately
             rabbitImage.effect("shake", 500, callback);
@@ -27,7 +27,7 @@ $(() => {
             // stop the shake
             clearInterval(shakeInterval);
             // change the text
-            $(targetElement.helper).find("p").text("Drag me!");
+            $(targetElement.helper).find("p").text("Don't Touch me!").css("color", "black");
         },
     });
 
