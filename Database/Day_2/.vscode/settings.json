@@ -1,0 +1,24 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "xprotocol"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 33060,
+            "driver": "MySQL",
+            "name": "ITI_DATABASE",
+            "username": "root",
+            "database": "iti_database",
+            "password": "Maxmachine2011",
+            "connectionTimeout": 1000
+        },
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "database": "${workspaceFolder:Day_2}/SQL-Lab1.accdb",
+            "name": "iti_lab2"
+        }
+    ]
+}
