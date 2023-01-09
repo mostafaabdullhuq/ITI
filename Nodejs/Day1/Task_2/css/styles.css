@@ -1,0 +1,371 @@
+/* General */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Cairo", sans-serif;
+}
+
+body {
+    background-color: rgba(238, 238, 238, 0.834);
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+@media all and (max-width: 800px) {
+    form#login-form,
+    form#register-form {
+        padding: 50px 40px !important;
+    }
+    div.todo-container {
+        padding: 250px 0 0 0 !important;
+    }
+}
+
+@media all and (min-width: 800px) and (max-width: 1000px) {
+    div.todo-container {
+        padding: 170px 0 0 0 !important;
+    }
+}
+
+@media all and (max-height: 746px) {
+    form#register-form {
+        padding: 20px 40px !important;
+    }
+}
+
+/* login page */
+
+.login-container {
+    height: 100vh;
+    align-content: center !important;
+}
+
+form#login-form,
+form#register-form {
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    padding: 100px 80px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+}
+
+div.notification {
+    max-width: 800px;
+    margin: auto;
+    background-color: #c72f1e;
+    color: white;
+    margin-bottom: 10px !important;
+    padding: 15px 10px;
+    font-size: 19px;
+    visibility: hidden;
+}
+
+.btn-danger:hover {
+    background-color: #c72f1e !important;
+    border-color: #c72f1e !important;
+}
+
+div.notification.active {
+    visibility: visible;
+}
+
+form#login-form input,
+form#register-form input {
+    font-size: 18px !important;
+    border: 1px solid transparent !important;
+    background-color: rgb(243, 243, 243) !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    -o-border-radius: 0px !important;
+    border-radius: 0px !important;
+    outline: none !important;
+}
+
+form#login-form input.invalid,
+form#register-form input.invalid {
+    border: 1px solid #c72f1e !important;
+}
+
+form#login-form input.invalid::placeholder,
+form#register-form input.invalid::placeholder {
+    color: #c72f1e !important;
+}
+
+form#login-form input:focus,
+form#login-form input:hover,
+form#register-form input:focus,
+form#register-form input:hover {
+    outline: none !important;
+    border: 1px solid transparent !important;
+}
+
+form#login-form input:hover::placeholder,
+form#register-form input:hover::placeholder {
+    color: #c72f1e !important;
+}
+form#login-form input:focus::placeholder,
+form#register-form input:focus::placeholder {
+    color: transparent !important;
+}
+
+form#login-form *:focus,
+form#register-form *:focus {
+    -webkit-transform: scale(103%);
+    -moz-transform: scale(103%);
+    -ms-transform: scale(103%);
+    -o-transform: scale(103%);
+    transform: scale(103%);
+
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+form#login-form button,
+form#register-form button {
+    font-size: 20px !important;
+    text-transform: uppercase;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    -o-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
+
+form#login-form input::placeholder,
+form#register-form input::placeholder {
+    color: rgba(92, 91, 91, 0.56) !important;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.form-control:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.login-button,
+.register-button {
+    background-color: #d74635;
+}
+
+a.register {
+    font-weight: bold;
+    color: #d74635 !important;
+}
+
+/* todo page */
+
+nav {
+    width: 100% !important;
+    padding: 10px 0px !important;
+    background-color: #d74635 !important;
+    -webkit-border-radius: 0px 0px 3px 3px;
+    -moz-border-radius: 0px 0px 3px 3px;
+    -ms-border-radius: 0px 0px 3px 3px;
+    -o-border-radius: 0px 0px 3px 3px;
+    border-radius: 0px 0px 3px 3px;
+}
+
+nav input.create-text {
+    font-size: 18px;
+    padding: 10px 30px !important;
+    text-align: left !important;
+    cursor: text;
+    outline: none !important;
+    border: 1px solid white !important;
+}
+
+nav input.create-text:focus::placeholder {
+    color: transparent !important;
+}
+
+nav input.create-text:focus {
+    outline: none !important;
+}
+nav input.create-text::placeholder {
+    text-transform: uppercase;
+    color: #d74635;
+}
+
+button.new-todo,
+button.todo-dropdown {
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 30px !important;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    font-size: 18px;
+}
+
+button.new-todo:hover,
+button.todo-dropdown:hover,
+.todo-dropdown.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+    background-color: white;
+    color: #d74635;
+}
+
+div.nav-container {
+    width: 100%;
+}
+
+div.todo-container {
+    padding: 100px 0 0 0;
+}
+
+li.todo,
+div.no-todo {
+    outline: none !important;
+    font-size: 22px;
+    cursor: pointer;
+    background-color: white;
+    padding: 30px 50px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    white-space: pre-line;
+}
+
+div.no-todo {
+    display: none;
+}
+
+div.no-todo.active {
+    display: block;
+}
+
+li.todo.completed {
+    background-color: rgb(240, 240, 240);
+    text-decoration: line-through;
+}
+
+.card-container {
+    width: 100% !important;
+    visibility: hidden;
+}
+.card-container.active {
+    visibility: visible;
+}
+
+li.todo:hover {
+    background-color: rgba(238, 238, 238, 0.824) !important;
+}
+
+.show-todo-controls {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    font-weight: 400;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-size: 40px;
+    font: var(--fa-font-solid);
+    content: "\f141";
+    cursor: pointer;
+    color: #d74635;
+}
+
+.show-todo-controls.active {
+    display: block;
+    -webkit-transition: all 0.5 ease-in-out;
+    -moz-transition: all 0.5 ease-in-out;
+    -ms-transition: all 0.5 ease-in-out;
+    -o-transition: all 0.5 ease-in-out;
+    transition: all 0.5 ease-in-out;
+}
+
+li[contenteditable] {
+    background-color: #d74635 !important;
+    color: white;
+    width: 100% !important;
+    color: 100% !important;
+    overflow: hidden !important;
+    -webkit-transform: scale(100%);
+    -moz-transform: scale(100%);
+    -ms-transform: scale(100%);
+    -o-transform: scale(100%);
+    transform: scale(100%);
+    cursor: text;
+}
+li[contenteditable]:focus,
+li[contenteditable]:hover {
+    background-color: #d74635 !important;
+}
+
+ul.controls-container {
+    text-align: center;
+    /*font-weight: bold;
+    */
+    font-size: 17px;
+    position: absolute;
+    top: 56%;
+    right: -4.5%;
+    cursor: pointer;
+    display: none;
+    z-index: 999;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    border: 0.5px solid rgb(185, 183, 183);
+    transition: all 0.3s ease-in-out;
+}
+
+ul.controls-container.active {
+    display: inline-block;
+}
+
+ul.controls-container li {
+    padding: 10px 50px;
+    /* background-color: #eee !important; */
+}
+
+ul.controls-container li:hover {
+    background-color: #d74635;
+    color: white;
+}
+
+.logout-link {
+    padding: 0px 20px !important;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 17px;
+    color: #d74635;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <link rel="stylesheet" href="./../css/bootstrap.min.css" />
+        <link rel="stylesheet" href="./../css/fontawesome/css/all.min.css" />
+        <link rel="stylesheet" href="./../css/styles.css" />
+
+        <title>Todo App</title>
+    </head>
+    <body>
+        <!-- overlay background -->
+        <div class="background-overlay"></div>
+        <!-- navbar -->
+        <nav class="navbar fixed-top">
+            <div class="nav-container container p-2 p-md-0">
+                <div class="search-container col-lg-8 col-12 me-md-3 mb-3 mb-lg-0">
+                    <input id="todo-text" class="form-control bg-white create-text" placeholder="Enter todo text here." aria-label="Search" />
+                </div>
+                <button id="add-todo" class="new-todo btn btn-outline-danger col-12 col-md me-0 me-sm-3 mb-3 mb-md-0" type="submit">Add</button>
+                <div class="dropdown col">
+                    <button class="btn todo-dropdown dropdown-toggle col-12" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="todos-count" class="me-3">0</span>/<span id="completed-count" class="ms-3">0</span> &ThickSpace;
+                    </button>
+                    <ul style="width: 100% !important" class="dropdown-menu">
+                        <li><a id="logout" class="logout-link dropdown-item text-center" href="./../index.html">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- todos section -->
+        <div id="todos" class="container todo-container">
+            <div id="no-todos-message" class="no-todo mb-3">
+                <p class="col m-0 text-center">There's no todos to show.</p>
+            </div>
+            <div id="cards-container" class="card card-container" spellcheck="false">
+                <ul id="todos-list" class="list-group list-group-flush"></ul>
+            </div>
+        </div>
+        <!-- content container -->
+        <div class="container"></div>
+        <script src="./../js/popper.min.js"></script>
+        <script src="./../js/bootstrap.min.js"></script>
+        <script src="./../js/sweetalert2.js"></script>
+        <script type="module" src="../js/todo.js"></script>
+    </body>
+</html>

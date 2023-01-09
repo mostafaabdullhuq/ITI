@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/styles.css" />
+        <title>Login</title>
+    </head>
+    <body>
+        <!-- overlay background -->
+        <div class="background-overlay"></div>
+
+        <!-- content container -->
+        <div class="container">
+            <div class="login-container row align-items-center">
+                <!-- invalid login notification box -->
+                <div id="notification-bar" class="text-center notification col-12">
+                    <div id="login-alert" class="col-12"></div>
+                </div>
+                <!-- login form -->
+                <form id="login-form" class="animate__repeat-3 col-12" method="post" action="/login">
+                    <!-- username input -->
+                    <div class="mb-3 row">
+                        <input id="login-username" type="text" name="username" class="form-control p-4" placeholder="Username" />
+                    </div>
+
+                    <!-- password input -->
+                    <div class="mb-3 row">
+                        <input id="login-password" type="password" name="password" class="form-control p-4" placeholder="Password" />
+                    </div>
+
+                    <!-- login button -->
+                    <div class="mb-3 row">
+                        <button type="submit" class="login-button btn btn-danger col-12 p-4">Login</button>
+                    </div>
+
+                    <!-- not registered box -->
+                    <div class="text-center">
+                        <span class="m-1">Not registered?</span>
+                        <a class="register" href="./docs/register.html">Create an account.</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/sweetalert2.js"></script>
+        <!-- <script type="module" src="js/login.js"></script> -->
+    </body>
+</html>
