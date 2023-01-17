@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <title>Book Archive</title>
+</head>
+
+<body>
+    <!-- navbar -->
+
+    <!-- if user choose dark mode, change to dark mode, else change to light mode -->
+    <%if(settings.darkMode){%>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-4 px-0">
+        <%}else{%>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light py-4 px-0">
+            <%}%>
+            <div class="container d-flex flex-column flex-md-row">
+                <a class="navbar-brand fw-bolder text-uppercase me-5 col" href="/">Book Archive</a>
+                <form class="d-flex col mt-4 mt-md-0" role="search" action="/search">
+                    <input class="form-control me-2 p-3" type="search" name="q" placeholder="Search" aria-label="Search" />
+                    <%if(settings.darkMode){%>
+            <button class="btn btn-danger  px-4" type="submit">Search</button>
+            <%}else{%>
+            <button class="btn btn-success text-white px-4" type="submit">Search</button>
+            <%}%>
+
+                </form>
+            </div>
+    </nav>
+
+    <!-- books -->
+    <div class="container my-5">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <!-- books cards -->
+            <!-- loop on each book and create a card for it -->
+                    <% for(let book of books){ %>
+            <div class="col">
+                <%if(settings.darkMode){%>
+                <div class="card h-100 text-bg-dark">
+                    <%}else{%>
+                    <div class="card h-100">
+                        <%}%>
+
+                    <div class="book-image" style="--background: url('<%=book.image%>')">
+
+                    </div>
+                    <!-- <img src="<%=book.image%>" class="card-img-top" alt="..." /> -->
+                    <div class="card-body">
+                        <h5 class="card-title"><%=book.title%></h5>
+                        <p class="card-text"><%=book.author%></p>
+                        <a href="/deletebook?id=<%=book.id%>" class="btn btn-danger py-2 px-4 me-2">Delete</a>
+                        <a href="/editbook?id=<%=book.id%>" class="btn btn-primary py-2 px-4">Edit</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+
+            <!-- add new book card -->
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body d-flex  align-items-center justify-content-center">
+                        <a class="card-text addbook" href="/addbook">+</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+            <script src="/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
