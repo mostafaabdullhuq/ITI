@@ -1,7 +1,6 @@
 $(function () {
     let todosContainer = $(".todos-container"),
         todoInput = $(".todo-text-input");
-
     // when add todo button is clicked
     $(".add-todo").on("click", function () {
         // get the todo text
