@@ -133,7 +133,7 @@ app.post("/addcontact", async (req, res) => {
     res.send(response);
 });
 
-// delete specific user from database with id
+// delete specific contact from database with id
 app.delete("/deletecontact/:id", async (req, res) => {
     const response = {
         success: false,
@@ -168,6 +168,7 @@ app.delete("/deletecontact/:id", async (req, res) => {
     res.send(response);
 });
 
+// update specific contact in database
 app.put("/updatecontact", async (req, res) => {
     const response = {
         success: false,
@@ -226,7 +227,7 @@ app.get("/searchcontacts/:q", async (req, res) => {
 
     // if all data given
     if (req.params.q) {
-        // try to find contact in database
+        // try to find contacts in database with the phone or name given
         let contacts = await contactsCollection
             .find({
                 $or: [{ name: { $regex: req.params.q, $options: "i" } }, { phone: { $regex: req.params.q, $options: "i" } }],
