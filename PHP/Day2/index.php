@@ -106,6 +106,7 @@
         "</pre>" .
         nl2br("-----------------\n");
     ?>
+    <!-- Display the array in an HTML table with Name, Email and Status table headers. Specify PHP status with red color -->
 
     <table>
         <thead>
