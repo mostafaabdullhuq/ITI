@@ -64,3 +64,18 @@ document.querySelectorAll("form a").forEach(function (anchor) {
         });
     });
 });
+
+const passSwitchers = document.querySelectorAll(".password-switcher i");
+
+// toggle password visibility
+passSwitchers.forEach((switcher) => {
+    switcher.addEventListener("click", function (e) {
+        const passInputs = this.closest("form").querySelectorAll(".password-switcher-container input");
+        passInputs.forEach((input) => {
+            input.type = input.type === "password" ? "text" : "password";
+        });
+        this.classList.toggle("fa-eye");
+        this.title = this.title === "Show Password" ? "Hide Password" : "Show Password";
+        this.classList.toggle("fa-eye-slash");
+    });
+});
