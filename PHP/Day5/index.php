@@ -39,7 +39,7 @@ else {
             <input type="submit" name="submit" value="login" />
             <p>Don't have an account? <a href="#" data-form="signup">Create New</a></p>
         </form>
-        <form id="signup" method="POST" action="/signup.php">
+        <form id="signup" method="POST" action="signup.php">
             <input type="hidden" name="formtype" value="1" />
             <input type="text" name="name" placeholder="Full Name" />
             <input type="text" name="email" placeholder="Email Address" />
