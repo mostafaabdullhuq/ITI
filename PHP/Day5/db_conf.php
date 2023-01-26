@@ -1,5 +1,20 @@
 <?php
 
+/*
+
+use SQL Code below to structure database
+
+CREATE DATABASE IF NOT EXISTS users;
+
+CREATE TABLE IF NOT EXISTS users_info (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    full_name VARCHAR(50) NOT NULL,
+    email_address VARCHAR(100) NOT NULL UNIQUE,
+    pass VARCHAR(255) NOT NULL
+);
+
+
+*/
 
 class Auth
 {
@@ -50,6 +65,8 @@ class Auth
             return 0;
         }
     }
+
+
 
     public function signup($fullName, $email, $password)
     {

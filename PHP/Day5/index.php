@@ -25,6 +25,7 @@ else {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
+    <!-- <link rel="stylesheet" href="https://mostafaabdullhuq.com/fonts/fontawesome-6.2.1/css/all.min.css" /> -->
     <link rel="stylesheet" href="./style.css" />
     <script defer src="./script.js"></script>
     <title>Home</title>
