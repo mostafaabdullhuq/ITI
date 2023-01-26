@@ -46,7 +46,7 @@ if (isset($submit)) {
                 $isAddError = false;
                 // redirect to index.php
                 header(
-                        "Location: /index.php"
+                        "Location: ./index.php"
                     );
             }
         } 
@@ -154,7 +154,7 @@ if (isset($submit)) {
             <div class="controls col-12 d-flex">
                 <input class="btn btn-success col p-3 me-3" type="submit" name="submit" value="Add User" />
                 <button class="btn btn-secondary col d-flex justify-content-center align-items-center p-0"><a
-                        href="/index.php"
+                        href="./index.php"
                         class="w-100 h-100 px-2 py-3 d-flex justify-content-center align-items-center">Cancel</a></button>
             </div>
         </form>

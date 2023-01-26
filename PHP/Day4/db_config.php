@@ -36,19 +36,18 @@ class MYSQL
     }
 
 
- 
+
 
     // function to close connection with database.
     private function disconnect()
     {
         // if there's a connection, close it and anyway update the connection status
-        $this->status = $this->connection 
-        ?(
-            mysqli_close($this->connection) 
-            ? 'Not Connected' 
-            : 'Error Closing Connection.'
-         ) 
-         : 'Not Connected.';
+        $this->status = $this->connection
+            ? (mysqli_close($this->connection)
+                ? 'Not Connected'
+                : 'Error Closing Connection.'
+            )
+            : 'Not Connected.';
     }
 
 
@@ -62,9 +61,9 @@ class MYSQL
     {
         // connect to database
         $this->connect();
-        
-        $result = $this->connection 
-                                    ? mysqli_query($this->connection, '
+
+        $result = $this->connection
+            ? mysqli_query($this->connection, '
                                         CREATE TABLE IF NOT EXISTS `students_info` (
                                             id INT PRIMARY KEY AUTO_INCREMENT,
                                             name VARCHAR(255) NOT NULL,
@@ -73,11 +72,11 @@ class MYSQL
                                             subscribed BOOLEAN
                                         );
                                         ')
-                                    : false;
+            : false;
 
         // close connection
         $this->disconnect();
-        
+
         // if no connection
         return $result;
     }
@@ -92,7 +91,7 @@ class MYSQL
         $email = mysqli_real_escape_string($this->connection, $email);
         $gender = mysqli_real_escape_string($this->connection, $gender);
 
-        
+
         if ($this->connection) {
             $isExists = mysqli_num_rows(mysqli_query($this->connection, "
                 SELECT * FROM students_info
@@ -108,7 +107,7 @@ class MYSQL
                                     $mailStatus
                                     );";
                 // success and fail states
-                $result = [mysqli_query($this->connection, $query),"Unexpected Error, Please try again later."];
+                $result = [mysqli_query($this->connection, $query), "Unexpected Error, Please try again later."];
             } else {
                 $result = [false, "Email Already Exists."];
             }
@@ -123,12 +122,12 @@ class MYSQL
 
     // function to get all students from database
     public function getAllStudents()
-    {        
+    {
         // connect to database
         $this->connect();
-        
+
         $query = "SELECT * FROM students_info;";
-        $result = $this->connection 
+        $result = $this->connection
             ? mysqli_query($this->connection, $query)
             : false;
 
@@ -146,12 +145,12 @@ class MYSQL
         $this->connect();
 
         // retrieve student data from database
-        $result = $this->connection 
-                            ? mysqli_fetch_row(mysqli_query($this->connection, "
+        $result = $this->connection
+            ? mysqli_fetch_row(mysqli_query($this->connection, "
                                     SELECT * FROM students_info
                                     WHERE (id= '$id');
                                 "))
-                            : false;
+            : false;
 
         // close connection
         $this->disconnect();
@@ -160,7 +159,6 @@ class MYSQL
 
         // return the result
         return $result;
-
     }
 
     // function to update student details in database based on student id
@@ -195,8 +193,8 @@ class MYSQL
                 }
                 // if id exists and email is not exists
                 else {
-                // update user info
-                $query = "
+                    // update user info
+                    $query = "
                         UPDATE students_info
                         SET
                             name='$newName',
@@ -205,9 +203,8 @@ class MYSQL
                             subscribed=$newMailStatus
                         WHERE (id= $id);
                         ";
-                // success and fail states
-                $result = [mysqli_query($this->connection, $query),"Unexpected Error, Please try again later."];
-
+                    // success and fail states
+                    $result = [mysqli_query($this->connection, $query), "Unexpected Error, Please try again later."];
                 }
             } else {
                 $result = [false, "There's no user with this id."];
@@ -244,6 +241,3 @@ class MYSQL
 
 // create new instance of mysql class
 $mysql = new MYSQL('localhost', 'root', '', 'students');
-
-
-?>

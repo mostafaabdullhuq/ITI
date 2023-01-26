@@ -3,7 +3,7 @@
 include_once('./db_config.php');
 
 if (!$_REQUEST) {
-    header("Location: /index.php");
+    header("Location: ./index.php");
 }
 
 
@@ -106,7 +106,7 @@ if (isset($submit)) {
             <h4 class="mb-5 text-center">There's no data to show.</h4>
             <?php } ?>
             <button class="btn btn-secondary col d-flex justify-content-center align-items-center p-0"><a
-                    href="/index.php"
+                    href="./index.php"
                     class="w-100 h-100 px-2 py-3 d-flex justify-content-center align-items-center">Back</a></button>
 
         </div>

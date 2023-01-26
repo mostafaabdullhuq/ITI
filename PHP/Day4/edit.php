@@ -6,7 +6,7 @@ include_once('./db_config.php');
 <?php
 
 if (!$_REQUEST) {
-    header("Location: /index.php");
+    header("Location: ./index.php");
 }
 
 
@@ -63,7 +63,7 @@ if (isset($submit)) {
                     $isUpdateError = false;
                     // redirect to index.php
                     header(
-                            "Location: /index.php"
+                            "Location: ./index.php"
                         );
                 }
             } 
@@ -192,7 +192,7 @@ if (isset($submit)) {
                 <?php } ?>
                 <input class="btn btn-success col p-3 me-3" type="submit" name="submit" value="Update User" />
                 <button class="btn btn-secondary col d-flex justify-content-center align-items-center p-0"><a
-                        href="/index.php"
+                        href="./index.php"
                         class="w-100 h-100 px-2 py-3 d-flex justify-content-center align-items-center">Cancel</a></button>
             </div>
         </form>

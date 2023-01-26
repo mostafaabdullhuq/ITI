@@ -22,7 +22,7 @@ if (isset($submit)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="https://mostafaabdullhuq.com/fonts/fontawesome-6.2.1/css/all.min.css" rel="stylesheet">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
@@ -92,7 +92,7 @@ if (isset($submit)) {
             <h1 class="col">Users Details</h1>
             <button class="col-2 btn btn-success d-flex justify-content-center align-items-center p-0"><a
                     class="addstudent col w-100 h-100 px-2 py-3 d-flex justify-content-center align-items-center"
-                    href="/add_student.php">Add New
+                    href="./add_student.php">Add New
                     User</a></button>
         </div>
         <hr class="mt-3 mb-5">
@@ -126,12 +126,12 @@ if (isset($submit)) {
                     <td><?php echo $gender;?></td>
                     <td><?php echo $subscribed;?></td>
                     <td class="d-flex student-controls">
-                        <form method="POST" action="/show.php">
+                        <form method="POST" action="./show.php">
                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                             <input type="hidden" name="submit" value="submit">
                             <button type="submit" value="submit" class="me-3"><i class='fa-solid fa-eye'></i></button>
                         </form>
-                        <form method="POST" action="/edit.php">
+                        <form method="POST" action="./edit.php">
                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                             <input type="hidden" name="submit" value="update">
                             <button type="submit" value="submit" class="me-3"><i
