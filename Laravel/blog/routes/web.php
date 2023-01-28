@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PostController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// list all posts
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+
+// create new post
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+
+// get specific post
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+
+// edit specific post
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+
+// delete specific post
+Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
