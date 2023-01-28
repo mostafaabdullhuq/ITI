@@ -133,6 +133,7 @@ class PostController extends Controller
         return view("posts.create", ['users' => self::$users]);
     }
 
+
     // store new post created
     public function store(Request $request)
     {
@@ -157,6 +158,8 @@ class PostController extends Controller
             return redirect()->route('posts.create');
         }
     }
+
+
     // get edit specific post page
     public function edit($id)
     {
@@ -167,26 +170,32 @@ class PostController extends Controller
         return view("posts.edit", ['post' => array_pop($post), 'users' => self::$users]);
     }
 
+
     // update edited post data
     public function update($newPost)
     {
-        // update the post in posts array then redirect to index page
+        // update the post which has the same id in posts array with the new post data
         self::$usersPosts = array_map(function ($post) use ($newPost) {
             if ($post['id'] === $newPost['id']) {
                 return $newPost;
             }
             return $post;
         }, self::$usersPosts);
+
+        // redirect to index page route
         return redirect('posts.index');;
     }
+
 
     // delete specifc post
     public function destroy($id)
     {
-        // make a new array of all items in array except the item to be destroyed
+        // make a new array of posts without the post with the same id as the id passed to this function
         self::$usersPosts = array_filter(self::$usersPosts, function ($post) use ($id) {
             return $post['id'] != $id;
         });
+
+        // redirect to index page route
         return redirect()->route('posts.index');
     }
 }

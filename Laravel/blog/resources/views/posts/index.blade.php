@@ -221,8 +221,9 @@
             <div class="controls">
                 <a href="{{ route('posts.show', $post['id']) }}" class="view-post">View</a>
                 <a href="{{ route('posts.edit', $post['id']) }}" class="edit-post">Edit</a>
-                <form id="delete-post" action="{{ route('posts.destroy', $post['id']) }}" method="POST">
+                <form class="delete-post-form" action="{{ route('posts.destroy', $post['id']) }}" method="POST">
                     @csrf
+                    {{-- html form has only post and get, so we want to add delete --}}
                     @method('DELETE')
                     <input type="submit" value="Delete" class="delete-post">
                 </form>
@@ -243,27 +244,29 @@
     </div>
     <script defer>
         // get delete modal
-        let modal = document.querySelector('.delete-prompt');
+        const modal = document.querySelector('.delete-prompt');
+        const deleteForms = document.querySelectorAll('.delete-post-form');
+        // add event listener to all delete post form submit
+        deleteForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
 
-        // add event listener to delete post form submit
-        document.getElementById('delete-post').addEventListener('submit', function(e) {
+                // prevent default submit behavior
+                e.preventDefault();
 
-            // prevent default submit behavior
-            e.preventDefault();
+                // show the modal
+                modal.classList.add('active');
 
-            // show the modal
-            modal.classList.add('active');
-
-            // if clicked outside the modal, or in cancel button hide the modal
-            [modal, document.querySelector('.delete-prompt .cancel')].forEach(element => {
-                element.addEventListener('click', function() {
-                    modal.classList.remove('active');
+                // if clicked outside the modal, or in cancel button hide the modal
+                [modal, document.querySelector('.delete-prompt .cancel')].forEach(element => {
+                    element.addEventListener('click', function() {
+                        modal.classList.remove('active');
+                    });
                 });
-            });
-            // if confirm delete clicked, submit the form
-            document.querySelector('.delete-prompt .confirm').addEventListener('click', function() {
-                e.target.submit();
-            });
+                // if confirm delete clicked, submit the form
+                document.querySelector('.delete-prompt .confirm').addEventListener('click', function() {
+                    e.target.submit();
+                });
+            })
         })
     </script>
 @endsection
