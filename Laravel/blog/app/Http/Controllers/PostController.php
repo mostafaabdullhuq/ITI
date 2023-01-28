@@ -92,7 +92,6 @@ class PostController extends Controller
                 'created_at' => '2022-01-16 03:05'
             ]
         ];
-        var_dump($_SESSION);
     }
 
     // get all posts
