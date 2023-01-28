@@ -187,7 +187,6 @@ class PostController extends Controller
         self::$usersPosts = array_filter(self::$usersPosts, function ($post) use ($id) {
             return $post['id'] != $id;
         });
-        // dd(self::$usersPosts);
         return redirect()->route('posts.index');
     }
 }

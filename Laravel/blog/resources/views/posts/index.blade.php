@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+
+
+
 @section('title')
     Posts
 @endsection
@@ -139,11 +142,13 @@
     background-color: #455bd4;
     }
 
-    .post .controls .edit-post {
+    .post .controls .edit-post,
+    .delete-prompt .content button.cancel {
     background-color: #50b754;
     }
 
-    .post .controls .delete-post {
+    .post .controls .delete-post,
+    .delete-prompt .content button.confirm {
     background-color: #ee3b2e;
     }
 
@@ -151,12 +156,56 @@
     background-color: #313f91;
     }
 
-    .post .controls .edit-post:hover {
+    .post .controls .edit-post:hover,
+    .delete-prompt .content button.cancel:hover {
     background-color: #419643;
     }
 
-    .post .controls .delete-post:hover {
+    .post .controls .delete-post:hover,
+    .delete-prompt .content button.confirm:hover {
     background-color: #c4342a;
+    }
+
+    .delete-prompt {
+    font-size: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .delete-prompt.active {
+    display: flex;
+    }
+
+    .delete-prompt .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 50px 30px;
+    border-radius: 3px;
+    border: 1px solid #e5e5e5;
+    }
+
+    .delete-prompt .content p {
+    font-weight: bold;
+    }
+
+    .delete-prompt .content button {
+    border: none;
+    padding: 10px 30px;
+    color: white;
+    border-radius: 3px;
+    }
+    .delete-prompt .content button.cancel {
+    margin-left: 10px;
     }
 @endsection
 
@@ -172,7 +221,7 @@
             <div class="controls">
                 <a href="{{ route('posts.show', $post['id']) }}" class="view-post">View</a>
                 <a href="{{ route('posts.edit', $post['id']) }}" class="edit-post">Edit</a>
-                <form action="{{ route('posts.destroy', $post['id']) }}" method="POST">
+                <form id="delete-post" action="{{ route('posts.destroy', $post['id']) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <input type="submit" value="Delete" class="delete-post">
@@ -183,4 +232,38 @@
     <div class="new-post">
         <a href="{{ route('posts.create') }}">+</a>
     </div>
+    <div class="delete-prompt">
+        <div class="content">
+            <p>Are you sure you want to delete this post?</p>
+            <div class="prompt-controls mt-3">
+                <button class="confirm">Confirm</button>
+                <button class="cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <script defer>
+        // get delete modal
+        let modal = document.querySelector('.delete-prompt');
+
+        // add event listener to delete post form submit
+        document.getElementById('delete-post').addEventListener('submit', function(e) {
+
+            // prevent default submit behavior
+            e.preventDefault();
+
+            // show the modal
+            modal.classList.add('active');
+
+            // if clicked outside the modal, or in cancel button hide the modal
+            [modal, document.querySelector('.delete-prompt .cancel')].forEach(element => {
+                element.addEventListener('click', function() {
+                    modal.classList.remove('active');
+                });
+            });
+            // if confirm delete clicked, submit the form
+            document.querySelector('.delete-prompt .confirm').addEventListener('click', function() {
+                e.target.submit();
+            });
+        })
+    </script>
 @endsection
