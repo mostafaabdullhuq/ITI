@@ -40,7 +40,7 @@
         </div>
     </nav>
     <div class="container my-5">
-        @yield('content');
+        @yield('content')
     </div>
 </body>
 
