@@ -84,18 +84,13 @@
 @endsection
 
 @section('content')
-    <form class="create-post" method="POST" action="{{ route('posts.store') }}">
+    <form class="create-post" method="POST" action="{{ route('posts.update', $post->id) }}">
         @csrf
-        <input type="text" name="title" placeholder="Post title" value="{{ $post['title'] }}" autofocus />
-        <textarea name="description" placeholder="What's on your mind?">{{ $post['description'] }}</textarea>
+        @method('PUT')
+        <input type="text" name="title" placeholder="Post title" value="{{ $post->title }}" autofocus />
+        <textarea name="description" placeholder="What's on your mind?">{{ $post->description }}</textarea>
         <select class="creator" name="posted_by">
-            @foreach ($users as $user)
-                @if ($user['name'] == $post['posted_by'])
-                    <option value="{{ $user['name'] }}" selected>{{ $user['name'] }}</option>
-                @else
-                    <option value="{{ $user['name'] }}">{{ $user['name'] }}</option>
-                @endif
-            @endforeach
+            <option value="{{ $post->user->id }}" selected>{{ $post->user->name }}</option>
         </select>
         <button type="submit">Update Post</button>
     </form>

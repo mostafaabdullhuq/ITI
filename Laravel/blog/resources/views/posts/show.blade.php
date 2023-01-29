@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ $post['title'] }}
+    @if ($post)
+        {{ $post['title'] }}
+    @else
+        Post not found
+    @endif
 @endsection
 
 @section('style')
@@ -28,7 +32,7 @@
     background-color: #fff;
     border: 1px solid #e5e5e5;
     border-radius: 3px;
-    padding: 30px 30px 10px 30px;
+    padding: 30px 30px 15px 30px;
     width: 100%;
     max-width: 1000px;
     min-width: 400px;
@@ -40,20 +44,28 @@
     -o-border-radius: 3px;
     }
 
-
-    .post .post-info {
-    color: rgb(115, 115, 115);
+    .post .title {
+    font-size: 40px;
+    margin-bottom: 0;
     }
 
-    .post .post-info .author {
-    text-decoration: underline;
-    cursor: pointer;
+    .post .description {
+    color: rgb(79 79 79);
     }
 
-    .post .post-info .author:hover {
-    color: rgb(75, 75, 75)
+    .post .post-info::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #e5e5e5;
+    margin-top: 10px;
     }
 
+    .post .post-info,
+    .post .last_update {
+    font-size: 18px;
+    }
 
     .post .controls {
     display: flex;
@@ -80,18 +92,20 @@
     -o-border-radius: 3px;
     }
 
-    .post .post-info {
+    .post .post-info,
+    .post .last_update {
     position: relative;
     color: rgb(68, 68, 68);
     font-style: italic
     }
 
-    .post .post-info span {
+    .post .post-info span,
+    .post .last_update span {
     color: rgb(115, 115, 115);
 
     }
 
-    .post .post-info::before {
+    .post .last_update::before {
     content: "";
     position: absolute;
     top: -15px;
@@ -102,12 +116,12 @@
 
     }
 
-    .post .post-info .author {
+    .post .post-info .author-name {
     text-decoration: underline;
     cursor: pointer;
     }
 
-    .post .post-info .author:hover {
+    .post .post-info .author-name:hover {
     color: rgb(75, 75, 75);
     }
 
@@ -138,10 +152,19 @@
 
 @section('content')
     <div class="post">
-        <h4 class="title mb-3">{{ $post['title'] }}</h4>
-        <p class="description">{{ $post['description'] }}</p>
-        <p class="post-info mt-3">Created By <span class="author">{{ $user['name'] }}</span> ({{ $user['email'] }})
-            at
-            {{ $post['created_at'] }}</p>
+        @if ($post)
+            <h4 class="title mb-1">{{ $post['title'] }}</h4>
+            <p class="post-info mb-3 ms-1">
+                <span class="author-name">{{ $post->user->name }} ({{ $post->user->email }})</span>
+                &nbsp;at &nbsp;<span class="created-at">{{ $post->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
+            </p>
+            <p class="description">{{ $post['description'] }}</p>
+            <p class="last_update mt-3 ms-1">
+                Last update on: <span class="updated-at">{{ $post->updated_at->format('jS \o\f F, Y g:i:s a') }}</span>
+            </p>
+        @else
+            <h4 class="mb-1">Post not found or has been deleted.</h4>
+        @endif
+
     </div>
 @endsection

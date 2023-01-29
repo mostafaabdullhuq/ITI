@@ -105,6 +105,7 @@
     }
 
     .post .description {
+    min-height: 96px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -143,7 +144,8 @@
     }
 
     .post .controls .edit-post,
-    .delete-prompt .content button.cancel {
+    .delete-prompt .content button.cancel,
+    .post.deleted .restore-post {
     background-color: #50b754;
     }
 
@@ -157,13 +159,29 @@
     }
 
     .post .controls .edit-post:hover,
-    .delete-prompt .content button.cancel:hover {
+    .delete-prompt .content button.cancel:hover,
+    .post.deleted .restore-post:hover {
     background-color: #419643;
     }
 
     .post .controls .delete-post:hover,
     .delete-prompt .content button.confirm:hover {
     background-color: #c4342a;
+    }
+
+
+    .post.deleted {
+    background-color: #f8f8f8;
+    }
+
+    .post.deleted .title,
+    .post.deleted .description,
+    .post.deleted .post-info {
+    opacity: 0.7
+    }
+
+    .post.deleted .restore-post {
+    width: 100%;
     }
 
     .delete-prompt {
@@ -211,29 +229,39 @@
 @endsection
 
 @section('content')
+    <div class="new-post">
+        <a href="{{ route('posts.create') }}">+</a>
+    </div>
+
     @foreach ($posts as $post)
-        <div class="post">
-            <h4 class="title"title="{{ $post['title'] }}">{{ $post['title'] }}</h4>
+        <div class="post {{ $post->trashed() ? 'deleted' : '' }}">
+            <h4 class="title"title="{{ $post->title }}">{{ $post->title }}</h4>
             <p class="post-info">
-                <span class="author">{{ $post['posted_by'] }}</span> at
-                <span class="date">{{ $post['created_at'] }}</span>
+                <span class="author">{{ $post->user->name }}</span> at
+                <span class="date">{{ $post->created_at->format('y-m-d') }}</span>
             </p>
-            <p class="description">{{ $post['description'] }}</p>
+            <p class="description">{{ $post->description }}</p>
             <div class="controls">
-                <a href="{{ route('posts.show', $post['id']) }}" class="view-post">View</a>
-                <a href="{{ route('posts.edit', $post['id']) }}" class="edit-post">Edit</a>
-                <form class="delete-post-form" action="{{ route('posts.destroy', $post['id']) }}" method="POST">
+                @if (!$post->trashed())
+                    <a href="{{ route('posts.show', $post->id) }}" class="view-post">View</a>
+                    <a href="{{ route('posts.edit', $post->id) }}" class="edit-post">Edit</a>
+                @endif
+                <form class="{{ $post->trashed() ? '' : 'delete-post-form' }}"
+                    action="{{ route('posts.destroy', $post->id) }}" method="POST">
                     @csrf
                     {{-- html form has only post and get, so we want to add delete --}}
-                    @method('DELETE')
-                    <input type="submit" value="Delete" class="delete-post">
+                    {{-- @if ($post->trashed() ? 'Restore' : 'Delete') --}}
+                    @if ($post->trashed())
+                        @method('PATCH')
+                    @else
+                        @method('DELETE')
+                    @endif
+                    <input type="submit" value="{{ $post->trashed() ? 'Restore Post' : 'Delete' }}"
+                        class="{{ $post->trashed() ? 'restore-post' : 'delete-post' }}">
                 </form>
             </div>
         </div>
     @endforeach
-    <div class="new-post">
-        <a href="{{ route('posts.create') }}">+</a>
-    </div>
     <div class="delete-prompt">
         <div class="content">
             <p>Are you sure you want to delete this post?</p>
@@ -256,7 +284,6 @@
 
                 // show the modal
                 modal.classList.add('active');
-
                 // if clicked outside the modal, or in cancel button hide the modal
                 [modal, document.querySelector('.delete-prompt .cancel')].forEach(element => {
                     element.addEventListener('click', function() {

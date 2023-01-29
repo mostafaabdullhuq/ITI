@@ -33,3 +33,6 @@ Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.upda
 
 // delete specific post
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+// restore specific post
+Route::patch('/posts/{post}', [PostController::class, 'restore'])->name('posts.restore');

@@ -90,7 +90,7 @@
         <textarea name="description" placeholder="What's on your mind?"></textarea>
         <select class="creator" name="posted_by">
             @foreach ($users as $user)
-                <option value="{{ $user['name'] }}">{{ $user['name'] }}</option>
+                <option value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
         </select>
         <button type="submit">Create Post</button>
