@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\PostController;
 |
 */
 
+// -------------Posts Routes--------------
 
 // list all posts
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
@@ -36,3 +38,28 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 
 // restore specific post
 Route::patch('/posts/{post}', [PostController::class, 'restore'])->name('posts.restore');
+
+
+
+// -------------Comments Routes--------------
+
+
+// list all comments for specific post
+Route::get('/posts/{post}/comments', [CommentController::class, 'index'])->name('comments.index');
+
+// create new comment for specific post
+Route::get('/posts/{post}/comments/create', [CommentController::class, 'create'])->name('comments.create');
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+// get specific comment for specific post
+Route::get('/posts/{post}/comments/{comment}', [CommentController::class, 'show'])->name('comments.show');
+
+// edit specific comment for specific post
+Route::get('/posts/{post}/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/posts/{post}/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+
+// delete specific comment
+Route::delete('/posts/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+// restore specific comment
+Route::patch('/posts/{post}/comments/{comment}', [CommentController::class, 'restore'])->name('comments.restore');

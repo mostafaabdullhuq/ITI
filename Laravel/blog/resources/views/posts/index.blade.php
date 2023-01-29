@@ -39,6 +39,19 @@
     justify-content: flex-start;
     }
 
+    .pagination-container nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    }
+
+    .pagination-container nav ul li a,
+    .pagination-container nav ul li span{
+    font-size: 20px !important;
+    }
+
+
     .post,
     .new-post {
     background-color: #fff;
@@ -71,6 +84,7 @@
     -moz-transition: transform 0.3s;
     -ms-transition: transform 0.3s;
     -o-transition: transform 0.3s;
+    user-select: none;
     }
 
     .new-post a:hover {
@@ -195,6 +209,7 @@
     display: none;
     justify-content: center;
     align-items: center;
+    z-index: 999;
     }
 
     .delete-prompt.active {
@@ -232,7 +247,7 @@
     <div class="new-post">
         <a href="{{ route('posts.create') }}">+</a>
     </div>
-
+    {{-- {{ dd($posts->onEachSide(1)->links()) }} --}}
     @foreach ($posts as $post)
         <div class="post {{ $post->trashed() ? 'deleted' : '' }}">
             <h4 class="title"title="{{ $post->title }}">{{ $post->title }}</h4>
@@ -270,6 +285,9 @@
                 <button class="cancel">Cancel</button>
             </div>
         </div>
+    </div>
+    <div class="mt-5 col-12 d-flex align-items-center pagination-container">
+        {!! $posts->onEachSide(1)->links() !!}
     </div>
     <script defer>
         // get delete modal

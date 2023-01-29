@@ -1,21 +1,29 @@
 <?php
 
-namespace App\HTTP\Controllers;
+namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Http\Request;
 
-class PostController extends Controller
+
+
+
+
+
+class CommentController extends Controller
 {
-    // get all posts
-    public function index()
+    // get all comments
+    public function index($post)
     {
-        // get all posts from database posts table
-        $posts = Post::withTrashed()->paginate(8);
-        return view("posts.index", ['posts' => $posts]);
+        // get all comments from database comments table
+        $post = Post::find($post);
+        dd($post->comments);
+        return view("posts.index", ['posts' => $comments]);
     }
+
 
     // get single post
     public function show($id)
