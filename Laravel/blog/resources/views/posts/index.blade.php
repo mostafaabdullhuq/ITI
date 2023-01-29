@@ -204,6 +204,7 @@
     color: white;
     border-radius: 3px;
     }
+
     .delete-prompt .content button.cancel {
     margin-left: 10px;
     }
@@ -262,6 +263,7 @@
                         modal.classList.remove('active');
                     });
                 });
+
                 // if confirm delete clicked, submit the form
                 document.querySelector('.delete-prompt .confirm').addEventListener('click', function() {
                     e.target.submit();
