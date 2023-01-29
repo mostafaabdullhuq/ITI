@@ -184,7 +184,7 @@ class PostController extends Controller
         }, self::$usersPosts);
 
         // redirect to index page route
-        return redirect('posts.index');;
+        redirect()->route('posts.index');
     }
 
 
