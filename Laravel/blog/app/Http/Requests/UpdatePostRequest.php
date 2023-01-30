@@ -13,7 +13,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,12 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            // title are required, unique over posts titles except the current post being edited, minimum 3 characters
+            'title' => 'required|min:3|max:600|unique:posts,id,except,' . $this->id,
+            // description are required, minimum 10 characters
+            'description' => 'required|min:10',
+            // posted_by are required, must be an existing user id
+            'posted_by' => 'required|exists:users,id'
         ];
     }
 }

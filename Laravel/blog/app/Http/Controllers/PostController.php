@@ -5,6 +5,7 @@ namespace App\HTTP\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\User;
 
@@ -67,24 +68,18 @@ class PostController extends Controller
 
 
     // update edited post data
-    public function update($id, Request $newPost)
+    public function update($id, UpdatePostRequest $newPost)
     {
         // get request data
         $newPost = request()->all();
 
         // if all inputs are given
-        if ($newPost['title'] && $newPost['description'] && $newPost['posted_by']) {
-            $post = Post::find($id);
-            // redirect to index page route
-            $post->title = $newPost['title'];
-            $post->description = $newPost['description'];
-            $post->save();
-            return redirect()->route('posts.index');
-        }
-        // if some input is empty
-        else {
-            return redirect()->route('posts.edit', ['post' => $id]);
-        }
+        $post = Post::find($id);
+        // redirect to index page route
+        $post->title = $newPost['title'];
+        $post->description = $newPost['description'];
+        $post->save();
+        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
 
