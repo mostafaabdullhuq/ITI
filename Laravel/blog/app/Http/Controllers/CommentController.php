@@ -92,7 +92,7 @@ class CommentController extends Controller
             $comment->comment = $newComment['comment'];
             // save the comment to database
             $comment->save();
-            return redirect()->route('comments.index', $comment->commentable_id);
+            return redirect()->route('comments.index', ['post' => $comment->commentable_id]);
         }
         // if some input is empty
         else {
@@ -105,12 +105,9 @@ class CommentController extends Controller
     public function destroy($id)
     {
         // delete the comment
-        $comment = Comment::find($id);
-        $post = Post::find($comment->commentable_id);
-        $comment->delete();
+        $comment = Comment::find($id)->delete();
         // redirect to index page route
-        dd($post);
-        return redirect()->route('comments.index', ['post', $post]);
+        return redirect()->route('comments.index', ['post', $comment->commentable_id]);
     }
 
     // restore specifc post
@@ -119,8 +116,7 @@ class CommentController extends Controller
         // restore the post
         Comment::withTrashed()->find($id)->restore();
         $comment = Comment::find($id);
-        $post = Post::find($comment->commentable_id);
         // redirect to index page route
-        return redirect()->route('comments.index', ['post', $post]);
+        return redirect()->route('comments.index', ['post', $comment->commentable_id]);
     }
 }

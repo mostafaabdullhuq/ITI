@@ -77,7 +77,6 @@ class PostController extends Controller
     // update edited post data
     public function update($id, Request $newPost)
     {
-
         // get request data
         $newPost = request()->all();
 

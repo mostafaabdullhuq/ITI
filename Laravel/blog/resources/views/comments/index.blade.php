@@ -243,6 +243,7 @@
     }
 @endsection
 
+{{-- //////////////////todo////////////////////////// --}}
 @section('content')
     <div class="new-comment">
         <a href="{{ route('comments.create', $post->id) }}">+</a>

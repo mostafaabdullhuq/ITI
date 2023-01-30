@@ -65,7 +65,8 @@
     .post .post-info,
     .post .last_update,
     .comment-info {
-    font-size: 17px;
+    font-size: 1.2em;
+    margin: 5px 0px;
     }
 
     .post .controls {
@@ -127,27 +128,27 @@
     color: rgb(75, 75, 75);
     }
 
-    .post .controls .view-post {
+    .post .controls .view-comment {
     background-color: #455bd4;
     }
 
-    .post .controls .edit-post {
+    .post .controls .edit-comment {
     background-color: #50b754;
     }
 
-    .post .controls .delete-post {
+    .post .controls .delete-comment {
     background-color: #ee3b2e;
     }
 
-    .post .controls .view-post:hover {
+    .post .controls .view-comment:hover {
     background-color: #313f91;
     }
 
-    .post .controls .edit-post:hover {
+    .post .controls .edit-comment:hover {
     background-color: #419643;
     }
 
-    .post .controls .delete-post:hover {
+    .post .controls .delete-comment:hover {
     background-color: #c4342a;
     }
 @endsection
@@ -189,14 +190,14 @@
                     <div id="flush-collapse-{{ $comment->id }}" class="accordion-collapse collapse"
                         aria-labelledby="flush-heading-{{ $comment->id }}" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">{{ $comment->comment }}</div>
-                        <div class="controls">
-                            {{-- <a href="{{ route('comments.show', $comment->id) }}" class="view-comment">View</a>
-                        <a href="{{ route('comments.edit', $comment->id) }}" class="edit-comment">Edit</a>
-                        <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" value="Delete" class="delete-comment">
-                        </form> --}}
+                        <div class="controls mb-3 d-flex justify-content-center align-items-center">
+                            <a href="{{ route('comments.show', $comment->id) }}" class="view-comment ">View</a>
+                            <a href="{{ route('comments.edit', $comment->id) }}" class="edit-comment ">Edit</a>
+                            <form action="{{ route('comments.destroy', $comment->id) }}" class="" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input type="submit" value="Delete" class="delete-comment">
+                            </form>
                         </div>
                     </div>
                 </div>
