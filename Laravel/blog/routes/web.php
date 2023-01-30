@@ -44,7 +44,7 @@ Route::patch('/posts/{post}', [PostController::class, 'restore'])->name('posts.r
 // -------------Comments Routes--------------
 
 
-
+// store comment in database
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
 // get specific comment for specific post

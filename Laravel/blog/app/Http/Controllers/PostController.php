@@ -4,6 +4,7 @@ namespace App\HTTP\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
 use App\Models\User;
 
@@ -37,31 +38,22 @@ class PostController extends Controller
 
 
     // store new post created
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         // get all data from form user submitted
         $postData = $request->all();
-
         // validate if all fields are provided from form
-        if ($postData['title'] && $postData['description'] && $postData['posted_by']) {
 
-            // create new post object, then set it's column values
-            $post = new Post;
-            $post->title = $postData['title'];
-            $post->description = $postData['description'];
-            $post->user_id = $postData['posted_by'];
-
-            // save the post to database
-            $post->save();
-
-            // redirect to index page route
-            return redirect()->route('posts.index');
-        }
-
-        // if any form input not provided in request, redirect to the same form again
-        else {
-            return redirect()->route('posts.create');
-        }
+        // create new post in database
+        $post = Post::create(
+            [
+                'title' => $postData['title'],
+                'description' => $postData['description'],
+                'user_id' => $postData['posted_by'],
+            ]
+        );
+        // redirect to the post page
+        return redirect()->route('posts.show', ['post' => $post->id]);
     }
 
 

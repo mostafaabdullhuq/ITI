@@ -20,7 +20,7 @@ class CommentFactory extends Factory
     {
         return [
             // comment factory
-            'comment' => $this->faker->text(200),
+            'comment' => $this->faker->realTextBetween(50, 200),
             'commentable_type' => Post::class,
             'commentable_id' => $this->faker->numberBetween(1, 500),
             'user_id' => $this->faker->numberBetween(1, 20),
