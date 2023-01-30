@@ -212,7 +212,7 @@
             {{-- check if there's comments on this post --}}
             @if (!$post->comments->isEmpty())
                 {{-- loop through comments --}}
-                @foreach ($post->comments as $comment)
+                @foreach ($post->comments->sortBy('updated_at') as $comment)
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-heading-{{ $comment->id }}">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -223,7 +223,7 @@
                                         ({{ $comment->user->email }})
                                     </span>
                                     &nbsp;at &nbsp;<span
-                                        class="created-at">{{ $comment->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
+                                        class="created-at">{{ $comment->updated_at->format('jS \o\f F, Y g:i:s a') }}</span>
                                 </p>
 
                             </button>

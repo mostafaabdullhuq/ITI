@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
@@ -97,15 +96,5 @@ class CommentController extends Controller
         $comment = Comment::find($id);
         $comment->delete();
         return redirect()->route('posts.show', ['post' => $comment->commentable]);
-    }
-
-    // restore specifc comment
-    public function restore($id)
-    {
-        // restore the post
-        Comment::withTrashed()->find($id)->restore();
-        $comment = Comment::find($id);
-        // redirect to index page route
-        return redirect()->route('comments.index', ['post', $comment->commentable_id]);
     }
 }

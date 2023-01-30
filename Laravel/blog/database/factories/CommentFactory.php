@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,7 @@ class CommentFactory extends Factory
         return [
             // comment factory
             'comment' => $this->faker->text(200),
-            'commentable_type' => 'App\Models\Post',
+            'commentable_type' => Post::class,
             'commentable_id' => $this->faker->numberBetween(1, 500),
             'user_id' => $this->faker->numberBetween(1, 20),
         ];

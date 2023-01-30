@@ -56,6 +56,3 @@ Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('c
 
 // delete specific comment
 Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
-
-// restore specific comment
-Route::patch('/comments/{comment}', [CommentController::class, 'restore'])->name('comments.restore');
