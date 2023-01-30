@@ -20,55 +20,54 @@ class CommentController extends Controller
     {
         // get all comments from database comments table
         $post = Post::find($post);
-        dd($post->comments);
-        return view("posts.index", ['posts' => $comments]);
+        return view("comments.index", ['post' => $post]);
     }
-
 
     // get single post
     public function show($id)
     {
         // get the post with the same id from the database
-        $post = Post::find($id);
-
-        return view("posts.show", ['post' => $post]);
+        $comment = Comment::find($id);
+        // get the parent post of comment
+        return view("comments.show", ['comment' => $comment]);
     }
 
     // get create new post page
-    public function create()
+    public function create($id)
     {
+        $post = Post::find($id);
         // get all users from database
         $users = User::all();
-
-        return view("posts.create", ['users' => $users]);
+        return view("comments.create", ['users' => $users, 'post' => $post]);
     }
 
-
     // store new post created
-    public function store(Request $request)
+    public function store($postID, Request $request)
     {
         // get all data from form user submitted
-        $postData = $request->all();
+        $commentData = $request->all();
 
         // validate if all fields are provided from form
-        if ($postData['title'] && $postData['description'] && $postData['posted_by']) {
+        if ($commentData['comment'] && $commentData['commented_by']) {
 
-            // create new post object, then set it's column values
-            $post = new Post;
-            $post->title = $postData['title'];
-            $post->description = $postData['description'];
-            $post->user_id = $postData['posted_by'];
-
-            // save the post to database
-            $post->save();
-
+            // create new comment object, then set it's column values
+            $comment = new Comment;
+            $comment->comment = $commentData['comment'];
+            $comment->user_id = $commentData['commented_by'];
+            $comment->commentable_id = $postID;
+            $comment->commentable_type = 'App\Models\Post';
+            // save the comment to database
+            $comment->save();
             // redirect to index page route
-            return redirect()->route('posts.index');
+            return redirect()->route('comments.index', ['post' => $postID]);
         }
 
         // if any form input not provided in request, redirect to the same form again
         else {
-            return redirect()->route('posts.create');
+            $post = Post::find($postID);
+            // get all users from database
+            $users = User::all();
+            return redirect()->route('comments.create', ['users' => $users, 'post' => $post]);
         }
     }
 
@@ -77,51 +76,51 @@ class CommentController extends Controller
     public function edit($id)
     {
         // get post with given id
-        $post = Post::find($id);
-        return view("posts.edit", ['post' => $post]);
+        $comment = Comment::find($id);
+        return view("comments.edit", ['comment' => $comment]);
     }
 
 
-    // update edited post data
-    public function update($id, Request $newPost)
+    // update edited comment data
+    public function update($id, Request $newComment)
     {
-
         // get request data
-        $newPost = request()->all();
-
+        $newComment = request()->all();
+        $comment = Comment::find($id);
         // if all inputs are given
-        if ($newPost['title'] && $newPost['description'] && $newPost['posted_by']) {
-            $post = Post::find($id);
-            // redirect to index page route
-            $post->title = $newPost['title'];
-            $post->description = $newPost['description'];
-            $post->save();
-            return redirect()->route('posts.index');
+        if ($newComment['comment']) {
+            $comment->comment = $newComment['comment'];
+            // save the comment to database
+            $comment->save();
+            return redirect()->route('comments.index', $comment->commentable_id);
         }
         // if some input is empty
         else {
-            return redirect()->route('posts.edit', ['post' => $id]);
+            return redirect()->route('comments.edit', ['comment' => $comment]);
         }
     }
 
 
-    // delete specifc post
+    // delete specifc comment
     public function destroy($id)
     {
-        // delete the post
-        Post::find($id)->delete();
-
+        // delete the comment
+        $comment = Comment::find($id);
+        $post = Post::find($comment->commentable_id);
+        $comment->delete();
         // redirect to index page route
-        return redirect()->route('posts.index');
+        dd($post);
+        return redirect()->route('comments.index', ['post', $post]);
     }
 
     // restore specifc post
     public function restore($id)
     {
         // restore the post
-        Post::withTrashed()->find($id)->restore();
-
+        Comment::withTrashed()->find($id)->restore();
+        $comment = Comment::find($id);
+        $post = Post::find($comment->commentable_id);
         // redirect to index page route
-        return redirect()->route('posts.index');
+        return redirect()->route('comments.index', ['post', $post]);
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('comment');
             $table->softDeletes();
-            $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->morphs('commentable');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

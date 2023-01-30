@@ -63,7 +63,8 @@
     }
 
     .post .post-info,
-    .post .last_update {
+    .post .last_update,
+    .comment-info {
     font-size: 17px;
     }
 
@@ -93,16 +94,17 @@
     }
 
     .post .post-info,
-    .post .last_update {
+    .post .last_update,
+    .comment-info {
     position: relative;
     color: rgb(68, 68, 68);
     font-style: italic
     }
 
     .post .post-info span,
-    .post .last_update span {
+    .post .last_update span,
+    .comment-info span {
     color: rgb(115, 115, 115);
-
     }
 
     .post .last_update::before {
@@ -171,29 +173,34 @@
     @if ($post)
         {{-- comments --}}
         <div class="accordion accordion-flush post" id="accordionFlushExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Accordion Item #1
-                    </button>
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate
-                        the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-
-                    <div class="controls">
-                        {{-- <a href="{{ route('comments.show', $comment->id) }}" class="view-comment">View</a>
+            @foreach ($post->comments as $comment)
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-heading-{{ $comment->id }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapse-{{ $comment->id }}" aria-expanded="false"
+                            aria-controls="flush-collapse-{{ $comment->id }}">
+                            <p class="comment-info">
+                                <span class="author-name">{{ $comment->user->name }} ({{ $comment->user->email }})</span>
+                                &nbsp;at &nbsp;<span
+                                    class="created-at">{{ $comment->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
+                            </p>
+                        </button>
+                    </h2>
+                    <div id="flush-collapse-{{ $comment->id }}" class="accordion-collapse collapse"
+                        aria-labelledby="flush-heading-{{ $comment->id }}" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">{{ $comment->comment }}</div>
+                        <div class="controls">
+                            {{-- <a href="{{ route('comments.show', $comment->id) }}" class="view-comment">View</a>
                         <a href="{{ route('comments.edit', $comment->id) }}" class="edit-comment">Edit</a>
                         <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <input type="submit" value="Delete" class="delete-comment">
                         </form> --}}
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
         {{-- add comment --}}
         <div class="new-comment post">

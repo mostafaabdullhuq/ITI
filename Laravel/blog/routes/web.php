@@ -44,6 +44,7 @@ Route::patch('/posts/{post}', [PostController::class, 'restore'])->name('posts.r
 // -------------Comments Routes--------------
 
 
+
 // list all comments for specific post
 Route::get('/posts/{post}/comments', [CommentController::class, 'index'])->name('comments.index');
 
@@ -52,14 +53,14 @@ Route::get('/posts/{post}/comments/create', [CommentController::class, 'create']
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
 // get specific comment for specific post
-Route::get('/posts/{post}/comments/{comment}', [CommentController::class, 'show'])->name('comments.show');
+Route::get('/comments/{comment}', [CommentController::class, 'show'])->name('comments.show');
 
 // edit specific comment for specific post
-Route::get('/posts/{post}/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
-Route::put('/posts/{post}/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+Route::get('/comments/{comment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
 
 // delete specific comment
-Route::delete('/posts/{post}/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 // restore specific comment
-Route::patch('/posts/{post}/comments/{comment}', [CommentController::class, 'restore'])->name('comments.restore');
+Route::patch('/comments/{comment}', [CommentController::class, 'restore'])->name('comments.restore');
