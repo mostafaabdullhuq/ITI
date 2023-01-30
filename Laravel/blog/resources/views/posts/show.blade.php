@@ -65,10 +65,12 @@
     .post .post-info,
     .post .last_update,
     .comment-info {
-    font-size: 1.2em;
+    font-size: 18px;
     margin: 5px 0px;
     }
-
+    .comment-info {
+    font-size: 1.2em
+    }
     .post .controls {
     display: flex;
     gap: 10px;
@@ -151,6 +153,38 @@
     .post .controls .delete-comment:hover {
     background-color: #c4342a;
     }
+
+    .new-comment form{
+    display: flex;
+    flex-direction: column
+    }
+    .new-comment form textarea {
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    padding: 20px;
+    outline: none;
+    height: 300px;
+    resize: none;
+    }
+
+    .new-comment form button {
+    border: none;
+    border-radius: 3px;
+    padding: 15px 25px;
+    background-color: rgb(68, 68, 68);
+    color: white;
+
+    }
+    .new-comment form button:hover {
+    background-color: rgb(75, 75, 75);
+    }
+
+    .new-comment .user-select {
+    border: 1px solid #e5e5e5;
+    padding: 15px;
+    border-radius: 3px;
+    outline: none;
+    }
 @endsection
 
 @section('content')
@@ -174,42 +208,60 @@
     @if ($post)
         {{-- comments --}}
         <div class="accordion accordion-flush post" id="accordionFlushExample">
-            @foreach ($post->comments as $comment)
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-heading-{{ $comment->id }}">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapse-{{ $comment->id }}" aria-expanded="false"
-                            aria-controls="flush-collapse-{{ $comment->id }}">
-                            <p class="comment-info">
-                                <span class="author-name">{{ $comment->user->name }} ({{ $comment->user->email }})</span>
-                                &nbsp;at &nbsp;<span
-                                    class="created-at">{{ $comment->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
-                            </p>
-                        </button>
-                    </h2>
-                    <div id="flush-collapse-{{ $comment->id }}" class="accordion-collapse collapse"
-                        aria-labelledby="flush-heading-{{ $comment->id }}" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">{{ $comment->comment }}</div>
-                        <div class="controls mb-3 d-flex justify-content-center align-items-center">
-                            <a href="{{ route('comments.show', $comment->id) }}" class="view-comment ">View</a>
-                            <a href="{{ route('comments.edit', $comment->id) }}" class="edit-comment ">Edit</a>
-                            <form action="{{ route('comments.destroy', $comment->id) }}" class="" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="submit" value="Delete" class="delete-comment">
-                            </form>
+
+            {{-- check if there's comments on this post --}}
+            @if (!$post->comments->isEmpty())
+                {{-- loop through comments --}}
+                @foreach ($post->comments as $comment)
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-heading-{{ $comment->id }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapse-{{ $comment->id }}" aria-expanded="false"
+                                aria-controls="flush-collapse-{{ $comment->id }}">
+                                <p class="comment-info">
+                                    <span class="author-name">{{ $comment->user->name }}
+                                        ({{ $comment->user->email }})
+                                    </span>
+                                    &nbsp;at &nbsp;<span
+                                        class="created-at">{{ $comment->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
+                                </p>
+
+                            </button>
+                        </h2>
+                        <div id="flush-collapse-{{ $comment->id }}" class="accordion-collapse collapse"
+                            aria-labelledby="flush-heading-{{ $comment->id }}" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">{{ $comment->comment }}</div>
+                            <div class="controls mb-3 d-flex justify-content-center align-items-center">
+                                <a href="{{ route('comments.show', $comment->id) }}" class="view-comment ">Full Info</a>
+                                <a href="{{ route('comments.edit', $comment->id) }}" class="edit-comment ">Edit</a>
+                                <form action="{{ route('comments.destroy', $comment->id) }}" class="" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" value="Delete" class="delete-comment">
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+
+                {{-- if there's no comments of the post --}}
+            @else
+                <h5 class="text-center">No comments to show.</h5>
+            @endif
         </div>
+
         {{-- add comment --}}
         <div class="new-comment post">
-            <form>
-                <textarea name="comment"></textarea>
-                <button class="btn btn-primary mt-3 py-3">Add Comment</button>
+            <form method="POST" action="{{ route('comments.store', $post->id) }}">
+                @csrf
+                <textarea name="comment" placeholder="Write an answer..."></textarea>
+                <select name="commented_by" class="user-select mt-3">
+                    @foreach ($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+                <button class="mt-3 mb-2">Add Comment</button>
             </form>
-
         </div>
     @endif
 @endsection

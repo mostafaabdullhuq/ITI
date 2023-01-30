@@ -14,7 +14,8 @@ class Comment extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'comment'
+        'comment',
+        'user_id'
     ];
 
     public function commentable(): MorphTo

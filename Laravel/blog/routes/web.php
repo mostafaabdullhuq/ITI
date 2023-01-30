@@ -45,11 +45,6 @@ Route::patch('/posts/{post}', [PostController::class, 'restore'])->name('posts.r
 
 
 
-// list all comments for specific post
-Route::get('/posts/{post}/comments', [CommentController::class, 'index'])->name('comments.index');
-
-// create new comment for specific post
-Route::get('/posts/{post}/comments/create', [CommentController::class, 'create'])->name('comments.create');
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
 // get specific comment for specific post

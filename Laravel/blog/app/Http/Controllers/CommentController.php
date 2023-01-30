@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use App\Models\Comment;
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 
@@ -15,59 +15,42 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    // get all comments
-    public function index($post)
-    {
-        // get all comments from database comments table
-        $post = Post::find($post);
-        return view("comments.index", ['post' => $post]);
-    }
-
-    // get single post
+    // get single comment
     public function show($id)
     {
-        // get the post with the same id from the database
+        // get the comment with the same id from the database
         $comment = Comment::find($id);
-        // get the parent post of comment
+
         return view("comments.show", ['comment' => $comment]);
     }
 
-    // get create new post page
-    public function create($id)
-    {
-        $post = Post::find($id);
-        // get all users from database
-        $users = User::all();
-        return view("comments.create", ['users' => $users, 'post' => $post]);
-    }
 
     // store new post created
     public function store($postID, Request $request)
     {
         // get all data from form user submitted
         $commentData = $request->all();
-
         // validate if all fields are provided from form
         if ($commentData['comment'] && $commentData['commented_by']) {
 
-            // create new comment object, then set it's column values
-            $comment = new Comment;
-            $comment->comment = $commentData['comment'];
-            $comment->user_id = $commentData['commented_by'];
-            $comment->commentable_id = $postID;
-            $comment->commentable_type = 'App\Models\Post';
-            // save the comment to database
-            $comment->save();
+            // get post with given id
+            $post = Post::find($postID);
+
+            // add comment to post
+            $post->comments()->create(
+                [
+                    'comment' => $commentData['comment'],
+                    'user_id' => $commentData['commented_by'],
+                ]
+            );
+
             // redirect to index page route
-            return redirect()->route('comments.index', ['post' => $postID]);
+            return redirect()->route('posts.show', ['post' => $postID]);
         }
 
         // if any form input not provided in request, redirect to the same form again
         else {
-            $post = Post::find($postID);
-            // get all users from database
-            $users = User::all();
-            return redirect()->route('comments.create', ['users' => $users, 'post' => $post]);
+            return redirect()->route('posts.show', ['post' => true]);
         }
     }
 
@@ -75,25 +58,31 @@ class CommentController extends Controller
     // get edit specific post page
     public function edit($id)
     {
+
         // get post with given id
         $comment = Comment::find($id);
         return view("comments.edit", ['comment' => $comment]);
     }
 
-
     // update edited comment data
     public function update($id, Request $newComment)
     {
+
         // get request data
         $newComment = request()->all();
         $comment = Comment::find($id);
+
         // if all inputs are given
         if ($newComment['comment']) {
+
+            // set the new value
             $comment->comment = $newComment['comment'];
+
             // save the comment to database
             $comment->save();
-            return redirect()->route('comments.index', ['post' => $comment->commentable_id]);
+            return redirect()->route('posts.show', ['post' => $comment->commentable]);
         }
+
         // if some input is empty
         else {
             return redirect()->route('comments.edit', ['comment' => $comment]);
@@ -104,13 +93,13 @@ class CommentController extends Controller
     // delete specifc comment
     public function destroy($id)
     {
-        // delete the comment
-        $comment = Comment::find($id)->delete();
-        // redirect to index page route
-        return redirect()->route('comments.index', ['post', $comment->commentable_id]);
+        // find the comment then delete it
+        $comment = Comment::find($id);
+        $comment->delete();
+        return redirect()->route('posts.show', ['post' => $comment->commentable]);
     }
 
-    // restore specifc post
+    // restore specifc comment
     public function restore($id)
     {
         // restore the post

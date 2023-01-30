@@ -22,8 +22,8 @@ class PostController extends Controller
     {
         // get the post with the same id from the database
         $post = Post::find($id);
-
-        return view("posts.show", ['post' => $post]);
+        $users = User::all();
+        return view("posts.show", ['post' => $post, 'users' => $users]);
     }
 
     // get create new post page
