@@ -98,7 +98,6 @@ class PostController extends Controller
         } else {
             $path = null;
         }
-
         $post->title = $newPost['title'];
         $post->description = $newPost['description'];
         $post->post_image = $path;
