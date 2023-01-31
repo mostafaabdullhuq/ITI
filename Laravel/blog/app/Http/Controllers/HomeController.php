@@ -25,6 +25,6 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::withTrashed()->paginate(8);
-        return view('posts.index', ['posts' => $posts]);
+        return redirect()->route('posts.index', ['posts' => $posts]);
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,4 +65,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 // from laravel-ui auth plugin
 Auth::routes();
-Route::get('/', [HomeController::class, 'index'])->name('home');
+
+// make home and / routes redirect to posts route
+Route::get('/', [PostController::class, 'index'])->name('posts.index');
+Route::get('/home', [PostController::class, 'index'])->name('posts.index');
