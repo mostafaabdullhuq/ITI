@@ -54,6 +54,7 @@
 
     .post .description {
     color: rgb(79 79 79);
+    word-break: break-word;
     }
 
     .post .post-info::after {
@@ -220,14 +221,22 @@
     border-radius: 3px;
     }
 
-    .post-image {
-    width: 100%;
-    height: 500px;
-    background-size: cover;
-    background:
-    url('https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80')
-    no-repeat center;
-    border-radius: 3px;
+    {{-- @dd(Storage::url($post->post_image)) --}}
+
+    @if ($post->post_image)
+        .post-image {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        background: url('{{ Storage::url($post->post_image) }}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 3px;
+        border: 1px solid #e5e5e5;
+        }
+    @endif
+    .new-comment-submit {
+    margin-top: 10px;
     }
 @endsection
 
@@ -240,16 +249,20 @@
         <span class="publisher fw-bold" data-email="{{ $post->user->email }}">{{ $post->user->name }}</span>
         on <span>{{ $post->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
     </div>
-    <div class="post-image"></div>
+
+    {{-- if post has an image, add it  --}}
+    @if ($post->post_image)
+        <div class="post-image">
+        </div>
+    @endif
+
+
+
+
 
     {{-- post content --}}
     <div class="post">
         @if ($post)
-            {{-- <h4 class="title mb-1">{{ $post['title'] }}</h4>
-            <p class="post-info mb-3 ms-1">
-                <span class="author-name">{{ $post->user->name }} ({{ $post->user->email }})</span>
-                &nbsp;at &nbsp;<span class="created-at">{{ $post->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
-            </p> --}}
             <p class="description sec-end">{{ $post['description'] }}</p>
             <p class="last_update mt-0 ms-1">
                 Last update on: <span
@@ -264,9 +277,9 @@
     {{-- <div class="sec-end"></div> --}}
     @if ($post)
         {{-- comments --}}
-        <div class="accordion accordion-flush " id="accordionFlushExample">
-            {{-- check if there's comments on this post --}}
-            @if (!$post->comments->isEmpty())
+        {{-- check if there's comments on this post --}}
+        @if (!$post->comments->isEmpty())
+            <div class="accordion accordion-flush " id="accordionFlushExample">
                 {{-- loop through comments --}}
                 @foreach ($post->comments->sortBy('updated_at') as $comment)
                     <div class="accordion-item">
@@ -299,12 +312,10 @@
                         </div>
                     </div>
                 @endforeach
-                {{-- <div class="sec-end"></div> --}}
+            </div>
+        @endif
 
-                {{-- if there's no comments of the post --}}
-            @endif
-        </div>
-        {{-- add comment --}}
+        {{-- add new comment --}}
         <div class="new-comment">
             <form method="POST" action="{{ route('comments.store', $post->id) }}">
                 @csrf
@@ -318,18 +329,7 @@
                         {{ $message }}
                     </div>
                 @enderror
-
-                {{-- <select name="commented_by" class="user-select mt-3">
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
-                @error('commented_by')
-                    <div class="errornotification">
-                        {{ $message }}
-                    </div>
-                @enderror --}}
-                <button class="mt-3 mb-2">Add Comment</button>
+                <button class="new-comment-submit mb-2">Add Comment</button>
             </form>
         </div>
     @endif

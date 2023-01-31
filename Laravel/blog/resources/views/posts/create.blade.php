@@ -90,7 +90,7 @@
 @endsection
 
 @section('content')
-    <form class="create-post" method="POST" action="{{ route('posts.store') }}">
+    <form class="create-post" method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
         <input type="text" name="title" placeholder="Post title"
             value="@if ($errors->any()) {{ old('title') }} @endif" />
@@ -111,17 +111,7 @@
             </div>
         @enderror
 
-        {{-- <select class="creator" name="posted_by">
-            @foreach ($users as $user)
-                <option value="{{ $user->id }}">{{ $user->name }}</option>
-            @endforeach
-        </select>
-        @error('posted_by')
-            <div class="errornotification">
-                {{ $message }}
-            </div>
-        @enderror --}}
-
+        <input class="form-control" type="file" id="formFile" name="post_image" accept="image/png, image/jpeg">
         <button type="submit">Create Post</button>
     </form>
 @endsection

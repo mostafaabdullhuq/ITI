@@ -20,7 +20,8 @@ class PostFactory extends Factory
             'title' => fake()->sentence(6, true),
             'description' => fake()->realTextBetween(300, 600),
             'user_id' => fake()->numberBetween(1, 20),
-            'slug' => fake()->slug(4, true)
+            'slug' => fake()->slug(4, true),
+            'post_image' => null
         ];
     }
 }

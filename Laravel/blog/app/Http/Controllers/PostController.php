@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -44,7 +45,17 @@ class PostController extends Controller
     {
         // get all data from form user submitted
         $postData = $request->all();
-        // validate if all fields are provided from form
+
+
+        if ($request->exists('post_image')) {
+            // upload image to storage
+            $path = Storage::putFile('public', $request->file('post_image'));
+        } else {
+            $path = null;
+        }
+
+        // dd(Storage::allFiles());
+
 
         // create new post in database
         $post = Post::create(
@@ -52,6 +63,7 @@ class PostController extends Controller
                 'title' => $postData['title'],
                 'description' => $postData['description'],
                 'user_id' => Auth::id(),
+                'post_image' => $path
             ]
         );
         // redirect to the post page

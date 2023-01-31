@@ -28,6 +28,8 @@ class UpdatePostRequest extends FormRequest
             'title' => 'required|min:3|max:600|unique:posts,id,except,' . $this->id,
             // description are required, minimum 10 characters
             'description' => 'required|min:10',
+            'post_image' => 'mimes:jpg,png'
+
             // posted_by are required, must be an existing user id
             // 'posted_by' => 'required|exists:users,id'
         ];
