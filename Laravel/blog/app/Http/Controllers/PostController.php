@@ -54,9 +54,6 @@ class PostController extends Controller
             $path = null;
         }
 
-        // dd(Storage::allFiles());
-
-
         // create new post in database
         $post = Post::create(
             [
@@ -81,16 +78,25 @@ class PostController extends Controller
 
 
     // update edited post data
-    public function update($id, UpdatePostRequest $newPost)
+    public function update($id, UpdatePostRequest $request)
     {
         // get request data
-        $newPost = request()->all();
+        $newPost = $request->all();
 
         // if all inputs are given
         $post = Post::find($id);
         // redirect to index page route
+
+        if ($request->exists('post_image')) {
+            // upload image to storage
+            $path = Storage::putFile('public', $request->file('post_image'));
+        } else {
+            $path = null;
+        }
+
         $post->title = $newPost['title'];
         $post->description = $newPost['description'];
+        $post->post_image = $path;
         $post->save();
         return redirect()->route('posts.show', ['post' => $post->id]);
     }

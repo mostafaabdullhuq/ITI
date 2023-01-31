@@ -34,4 +34,19 @@ class StorePostRequest extends FormRequest
             // 'posted_by' => 'required|exists:users,id'
         ];
     }
+
+
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Post title cannot be empty.',
+            'title.min' => 'Post title must be at least 3 characters',
+            'title.max' => 'Post title must be less than 600 characters',
+            'title.unique' => 'Post title already exists.',
+            'description.required' => 'Post description cannot be empty.',
+            'description.min' => 'Post description must be at least 10 characters',
+            'post_image.mimes' => 'Only (png, jpg) images are allowed.',
+        ];
+    }
 }

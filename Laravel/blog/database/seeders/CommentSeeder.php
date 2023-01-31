@@ -15,6 +15,6 @@ class CommentSeeder extends Seeder
     public function run()
     {
         // function to run when use php artisan db:seed, creating 1000 comment
-        Comment::factory()->count(1000)->create();
+        Comment::factory(1000)->create();
     }
 }

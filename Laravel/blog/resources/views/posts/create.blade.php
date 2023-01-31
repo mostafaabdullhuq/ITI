@@ -111,7 +111,14 @@
             </div>
         @enderror
 
+
         <input class="form-control" type="file" id="formFile" name="post_image" accept="image/png, image/jpeg">
+        @error('post_image')
+            <div class="errornotification">
+                {{ $message }}
+            </div>
+        @enderror
+
         <button type="submit">Create Post</button>
     </form>
 @endsection

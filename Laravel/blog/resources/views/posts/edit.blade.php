@@ -92,7 +92,7 @@
 
 
 @section('content')
-    <form class="create-post" method="POST" action="{{ route('posts.update', $post->id) }}">
+    <form class="create-post" method="POST" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <input type="text" name="title" placeholder="Post title" value="{{ $post->title }}" autofocus />
@@ -110,17 +110,13 @@
                 {{ $message }}
             </div>
         @enderror
-        {{-- 
-        <select class="creator" name="posted_by">
-            <option value="{{ $post->user->id }}" selected>{{ $post->user->name }}</option>
-        </select> --}}
-
-        {{-- if error in user id validation --}}
-        {{-- @error('posted_by')
+        <input class="form-control" type="file" id="formFile" name="post_image" accept="image/png, image/jpeg">
+        @error('post_image')
             <div class="errornotification">
                 {{ $message }}
             </div>
-        @enderror --}}
+        @enderror
+
         <button type="submit">Update Post</button>
     </form>
 @endsection

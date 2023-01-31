@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PostFactory extends Factory
 {
+
+
     /**
      * Define the model's default state.
      *
@@ -16,11 +18,14 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+
+        $faker = fake('en_US');
+
         return [
-            'title' => fake()->sentence(6, true),
-            'description' => fake()->realTextBetween(300, 600),
-            'user_id' => fake()->numberBetween(1, 20),
-            'slug' => fake()->slug(4, true),
+            'title' => $faker->text(100),
+            'description' => $faker->realTextBetween(300, 600),
+            'user_id' => $faker->numberBetween(1, 20),
+            'slug' => $faker->slug(4, true),
             'post_image' => null
         ];
     }

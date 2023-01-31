@@ -17,6 +17,6 @@ class PostSeeder extends Seeder
         // function to run when use php artisan db:seed
 
         // create 500 posts
-        Post::factory()->count(500)->create();
+        Post::factory(500)->create();
     }
 }

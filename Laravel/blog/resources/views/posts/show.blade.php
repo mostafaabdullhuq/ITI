@@ -274,7 +274,6 @@
             <h4 class="mb-1">Post not found or has been deleted.</h4>
         @endif
     </div>
-    {{-- <div class="sec-end"></div> --}}
     @if ($post)
         {{-- comments --}}
         {{-- check if there's comments on this post --}}
