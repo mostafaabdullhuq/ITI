@@ -50,6 +50,7 @@
 
     .title {
     margin-bottom: 0;
+    word-break: break-word;
     }
 
     .post .description {

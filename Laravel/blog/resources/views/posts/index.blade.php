@@ -241,6 +241,9 @@
     .delete-prompt .content button.cancel {
     margin-left: 10px;
     }
+    .slug,.description {
+    word-break: break-word;
+    }
 @endsection
 
 @section('content')

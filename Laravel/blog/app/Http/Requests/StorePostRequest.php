@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\UserMaxPostsRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePostRequest extends FormRequest
@@ -25,14 +26,20 @@ class StorePostRequest extends FormRequest
     {
         return [
             // title are required, unique over posts titles, minimum 3 characters
-            'title' => 'required|min:3|max:600|unique:posts,title',
             // description are required, minimum 10 characters
             'description' => 'required|min:10',
-            'post_image' => 'mimes:jpg,png'
-
-            // posted_by are required, must be an existing user id
-            // 'posted_by' => 'required|exists:users,id'
+            'post_image' => 'mimes:jpg,png',
+            'title' => [
+                'required',
+                'min:3',
+                'max:600',
+                'unique:posts,title',
+                new UserMaxPostsRule()
+            ],
         ];
+        // posted_by are required, must be an existing user id
+        // 'posted_by' => 'required|exists:users,id'
+
     }
 
 
@@ -47,6 +54,7 @@ class StorePostRequest extends FormRequest
             'description.required' => 'Post description cannot be empty.',
             'description.min' => 'Post description must be at least 10 characters',
             'post_image.mimes' => 'Only (png, jpg) images are allowed.',
+
         ];
     }
 }
