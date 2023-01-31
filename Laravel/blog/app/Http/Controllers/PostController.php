@@ -5,9 +5,11 @@ namespace App\HTTP\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Jobs\PruneOldPostsJob;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -15,6 +17,7 @@ class PostController extends Controller
     // get all posts
     public function index()
     {
+
 
         // get all posts from database posts table
         $posts = Post::withTrashed()->paginate(8);
@@ -98,6 +101,7 @@ class PostController extends Controller
         } else {
             $path = null;
         }
+        $post->slug = null;
         $post->title = $newPost['title'];
         $post->description = $newPost['description'];
         $post->post_image = $path;

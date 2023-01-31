@@ -7,19 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Spatie\Tags\HasTags;
 
 class Post extends Model
 {
     use HasFactory;
     use SoftDeletes;
     use Sluggable;
+    use HasTags;
 
     protected $fillable = [
         'title',
         'description',
         'user_id',
         'slug',
-        'post_image'
+        'post_image',
+        'tags'
     ];
 
 

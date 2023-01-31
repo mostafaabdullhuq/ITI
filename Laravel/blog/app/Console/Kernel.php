@@ -15,16 +15,26 @@ class Kernel extends ConsoleKernel
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
+
+    protected $commands = [
+        Commands\LogCron::class,
+    ];
+
     protected function schedule(Schedule $schedule)
     {
-        // create a job and dispatch it to delete all posts older than 2 years, then schedule it to run everyday at midnight
-        $schedule->job(
-            dispatch(
-                new PruneOldPostsJob(
-                    Date::now()->subDays(365 * 2)
-                )
-            )
-        )->daily();
+
+        $schedule->command('log:cron')
+            ->everyMinute();
+
+
+        // // create a job and dispatch it to delete all posts older than 2 years, then schedule it to run everyday at midnight
+        // $schedule->job(
+        //     dispatch(
+        //         new PruneOldPostsJob(
+        //             Date::now()->subDays(365 * 2)
+        //         )
+        //     )
+        // )->daily();
     }
 
     /**
