@@ -17,7 +17,7 @@
     background-color: #f5f5f5;
     }
 
-    .container {
+    .container.my-container {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
@@ -185,6 +185,15 @@
     border-radius: 3px;
     outline: none;
     }
+    .errornotification {
+    display: flex;
+    padding: 10px 20px !important;
+    background-color: #CD0404 !important;
+    color: white ;
+    margin-top: 20px;
+    border-radius: 3px;
+
+    }
 @endsection
 
 @section('content')
@@ -198,7 +207,9 @@
             </p>
             <p class="description">{{ $post['description'] }}</p>
             <p class="last_update mt-3 ms-1">
-                Last update on: <span class="updated-at">{{ $post->updated_at->format('jS \o\f F, Y g:i:s a') }}</span>
+                Last update on: <span
+                    class="updated-at">{{ $post->updated_at->format('jS \o\f F, Y g:i:s a') }}</span><br>Post Slug: <span
+                    class="updated-at">{{ $post->slug }}</span>
             </p>
             {{-- add comments section --}}
         @else
@@ -254,12 +265,27 @@
         <div class="new-comment post">
             <form method="POST" action="{{ route('comments.store', $post->id) }}">
                 @csrf
-                <textarea name="comment" placeholder="Write an answer..."></textarea>
+                <textarea name="comment" placeholder="Write an answer...">
+@if ($errors->any())
+{{ old('comment') }}
+@endif
+</textarea>
+                @error('comment')
+                    <div class="errornotification">
+                        {{ $message }}
+                    </div>
+                @enderror
+
                 <select name="commented_by" class="user-select mt-3">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach
                 </select>
+                @error('commented_by')
+                    <div class="errornotification">
+                        {{ $message }}
+                    </div>
+                @enderror
                 <button class="mt-3 mb-2">Add Comment</button>
             </form>
         </div>

@@ -17,7 +17,7 @@
     background-color: #f5f5f5;
     }
 
-    .container {
+    .container.my-container {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;

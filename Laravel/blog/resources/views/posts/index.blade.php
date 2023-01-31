@@ -32,7 +32,7 @@
     background-color: #f5f5f5;
     }
 
-    .container {
+    .container.my-container {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
@@ -253,7 +253,8 @@
             <h4 class="title"title="{{ $post->title }}">{{ $post->title }}</h4>
             <p class="post-info">
                 <span class="author">{{ $post->user->name }}</span> at
-                <span class="date">{{ $post->created_at->format('y-m-d') }}</span>
+                <span class="date">{{ $post->created_at->format('y-m-d') }}</span><br>
+                <span class="slug">{{ $post->slug }}</span>
             </p>
             <p class="description">{{ $post->description }}</p>
             <div class="controls">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCommentRequest;
 use App\Models\Post;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -25,32 +26,25 @@ class CommentController extends Controller
 
 
     // store new post created
-    public function store($postID, Request $request)
+    public function store($postID, StoreCommentRequest $request)
     {
         // get all data from form user submitted
         $commentData = $request->all();
         // validate if all fields are provided from form
-        if ($commentData['comment'] && $commentData['commented_by']) {
 
-            // get post with given id
-            $post = Post::find($postID);
+        // get post with given id
+        $post = Post::find($postID);
 
-            // add comment to post
-            $post->comments()->create(
-                [
-                    'comment' => $commentData['comment'],
-                    'user_id' => $commentData['commented_by'],
-                ]
-            );
+        // add comment to post
+        $post->comments()->create(
+            [
+                'comment' => $commentData['comment'],
+                'user_id' => $commentData['commented_by'],
+            ]
+        );
 
-            // redirect to index page route
-            return redirect()->route('posts.show', ['post' => $postID]);
-        }
-
-        // if any form input not provided in request, redirect to the same form again
-        else {
-            return redirect()->route('posts.show', ['post' => true]);
-        }
+        // redirect to index page route
+        return redirect()->route('posts.show', ['post' => $postID]);
     }
 
 

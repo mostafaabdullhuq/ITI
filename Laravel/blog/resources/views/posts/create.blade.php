@@ -15,7 +15,7 @@
     height: 100vh;
     }
 
-    .container {
+    .container.my-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,7 +29,7 @@
     transform: translate(-50%, -50%);
     }
 
-    .container .create-post {
+    .container.my-container .create-post {
     font-size: 20px;
     background-color: white;
     padding: 50px 30px;
@@ -46,7 +46,7 @@
     -o-border-radius: 10px;
     }
 
-    .container .create-post * {
+    .container.my-container .create-post * {
     border: none;
     outline: none;
     padding: 20px;
@@ -55,19 +55,19 @@
     border: 1px solid #f1f1f1;
     }
 
-    .container .create-post textarea {
+    .container.my-container .create-post textarea {
     resize: none;
     height: 200px;
     }
 
-    .container .create-post *::placeholder,
-    .container .create-post *::-webkit-input-placeholder,
-    .container .create-post select,
-    .container .create-post select option {
+    .container.my-container .create-post *::placeholder,
+    .container.my-container .create-post *::-webkit-input-placeholder,
+    .container.my-container .create-post select,
+    .container.my-container .create-post select option {
     color: rgb(47, 47, 47);
     }
 
-    .container .create-post button {
+    .container.my-container .create-post button {
     background-color: #4b4b4b;
     color: white;
     cursor: pointer;
@@ -78,21 +78,50 @@
     -o-transition: background-color 0.3s ease;
     }
 
-    .container .create-post button:hover {
+    .container.my-container .create-post button:hover {
     background-color: #3a3a3a;
+    }
+    .errornotification {
+    display: flex;
+    padding: 10px 20px !important;
+    background-color: #CD0404 !important;
+    color: white ;
     }
 @endsection
 
 @section('content')
     <form class="create-post" method="POST" action="{{ route('posts.store') }}">
         @csrf
-        <input type="text" name="title" placeholder="Post title" autofocus />
-        <textarea name="description" placeholder="What's on your mind?"></textarea>
+        <input type="text" name="title" placeholder="Post title"
+            value="@if ($errors->any()) {{ old('title') }} @endif" />
+        @error('title')
+            <div class="errornotification">
+                {{ $message }}
+            </div>
+        @enderror
+
+        <textarea name="description" placeholder="What's on your mind?">
+@if ($errors->any())
+{{ old('description') }}
+@endif
+</textarea>
+        @error('description')
+            <div class="errornotification">
+                {{ $message }}
+            </div>
+        @enderror
+
         <select class="creator" name="posted_by">
             @foreach ($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
         </select>
+        @error('posted_by')
+            <div class="errornotification">
+                {{ $message }}
+            </div>
+        @enderror
+
         <button type="submit">Create Post</button>
     </form>
 @endsection

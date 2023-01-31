@@ -29,7 +29,7 @@
     transform: translate(-50%, -50%);
     }
 
-    .container .create-comment {
+    .container.my-container .create-comment {
     font-size: 20px;
     background-color: white;
     padding: 50px 30px;
@@ -46,7 +46,7 @@
     -o-border-radius: 10px;
     }
 
-    .container .create-comment * {
+    .container.my-container .create-comment * {
     border: none;
     outline: none;
     padding: 20px;
@@ -55,19 +55,19 @@
     border: 1px solid #f1f1f1;
     }
 
-    .container .create-comment textarea {
+    .container.my-container .create-comment textarea {
     resize: none;
     height: 200px;
     }
 
-    .container .create-comment *::placeholder,
-    .container .create-comment *::-webkit-input-placeholder,
-    .container .create-comment select,
-    .container .create-comment select option {
+    .container.my-container .create-comment *::placeholder,
+    .container.my-container .create-comment *::-webkit-input-placeholder,
+    .container.my-container .create-comment select,
+    .container.my-container .create-comment select option {
     color: rgb(47, 47, 47);
     }
 
-    .container .create-comment button {
+    .container.my-container .create-comment button {
     background-color: #4b4b4b;
     color: white;
     cursor: pointer;
@@ -78,7 +78,7 @@
     -o-transition: background-color 0.3s ease;
     }
 
-    .container .create-comment button:hover {
+    .container.my-container .create-comment button:hover {
     background-color: #3a3a3a;
     }
 @endsection

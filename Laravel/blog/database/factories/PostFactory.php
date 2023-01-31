@@ -19,7 +19,8 @@ class PostFactory extends Factory
         return [
             'title' => fake()->sentence(6, true),
             'description' => fake()->realTextBetween(300, 600),
-            'user_id' => fake()->numberBetween(1, 20)
+            'user_id' => fake()->numberBetween(1, 20),
+            'slug' => fake()->slug(4, true)
         ];
     }
 }
