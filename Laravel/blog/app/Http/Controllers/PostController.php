@@ -5,14 +5,17 @@ namespace App\HTTP\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Jobs\PruneOldPostsJob;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Date;
 
 class PostController extends Controller
 {
     // get all posts
     public function index()
     {
+
         // get all posts from database posts table
         $posts = Post::withTrashed()->paginate(8);
         return view("posts.index", ['posts' => $posts]);
