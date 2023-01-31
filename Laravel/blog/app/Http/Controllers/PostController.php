@@ -91,8 +91,10 @@ class PostController extends Controller
             // upload image to storage
             $path = Storage::putFile('public', $request->file('post_image'));
 
-            // delete old image
-            Storage::delete($post->post_image);
+            if ($post->post_image) {
+                // delete old image
+                Storage::delete($post->post_image);
+            }
         } else {
             $path = null;
         }
