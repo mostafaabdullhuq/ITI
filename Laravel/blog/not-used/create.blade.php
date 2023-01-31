@@ -87,11 +87,11 @@
     <form class="create-comment" method="POST" action="{{ route('comments.store', $post->id) }}">
         @csrf
         <textarea name="comment" placeholder="What's on your mind?"></textarea>
-        <select class="creator" name="commented_by">
+        {{-- <select class="creator" name="commented_by">
             @foreach ($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
-        </select>
+        </select> --}}
         <button type="submit">Create Comment</button>
     </form>
 @endsection

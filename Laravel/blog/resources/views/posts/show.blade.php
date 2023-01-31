@@ -17,13 +17,18 @@
     background-color: #f5f5f5;
     }
 
+    :root {
+    --post-background: attr(data-img-src)
+    }
+
     .container.my-container {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     flex-wrap: wrap;
     justify-content: flex-start;
     flex-direction: column;
-    align-items: center;
+    {{-- align-items: center; --}}
+    max-width: 1200px;
     }
 
     .post,
@@ -34,7 +39,6 @@
     border-radius: 3px;
     padding: 30px 30px 15px 30px;
     width: 100%;
-    max-width: 1000px;
     min-width: 400px;
     display: flex;
     flex-direction: column;
@@ -44,8 +48,7 @@
     -o-border-radius: 3px;
     }
 
-    .post .title {
-    font-size: 33px;
+    .title {
     margin-bottom: 0;
     }
 
@@ -71,14 +74,14 @@
     .comment-info {
     font-size: 1.2em
     }
-    .post .controls {
+    .controls {
     display: flex;
     gap: 10px;
     margin-top: 10px;
     }
 
-    .post .controls input,
-    .post .controls a {
+    .controls input,
+    .controls a {
     border: none;
     border-radius: 3px;
     padding: 10px 25px;
@@ -110,16 +113,7 @@
     color: rgb(115, 115, 115);
     }
 
-    .post .last_update::before {
-    content: "";
-    position: absolute;
-    top: -15px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #e5e5e5;
 
-    }
 
     .post .post-info .author-name {
     text-decoration: underline;
@@ -130,27 +124,27 @@
     color: rgb(75, 75, 75);
     }
 
-    .post .controls .view-comment {
+    .controls .view-comment {
     background-color: #455bd4;
     }
 
-    .post .controls .edit-comment {
+    .controls .edit-comment {
     background-color: #50b754;
     }
 
-    .post .controls .delete-comment {
+    .controls .delete-comment {
     background-color: #ee3b2e;
     }
 
-    .post .controls .view-comment:hover {
+    .controls .view-comment:hover {
     background-color: #313f91;
     }
 
-    .post .controls .edit-comment:hover {
+    .controls .edit-comment:hover {
     background-color: #419643;
     }
 
-    .post .controls .delete-comment:hover {
+    .controls .delete-comment:hover {
     background-color: #c4342a;
     }
 
@@ -161,9 +155,10 @@
     .new-comment form textarea {
     border: 1px solid #e5e5e5;
     border-radius: 3px;
+    font-size: 20px;
     padding: 20px;
     outline: none;
-    height: 300px;
+    height: 200px;
     resize: none;
     }
 
@@ -194,32 +189,82 @@
     border-radius: 3px;
 
     }
+
+    .post-details {
+    margin-left: 5px;
+    }
+    .sec-end::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #e5e5e5;
+    margin-top: 5px;
+    }
+
+    .post-details .publisher {
+    position: relative;
+    cursor: pointer;
+    text-decoration: underline;
+    }
+
+
+    .post-details .publisher:hover::after {
+    content: attr(data-email);
+    position: absolute;
+    top: 20px;
+    left: -50%;
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border-radius: 3px;
+    }
+
+    .post-image {
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background:
+    url('https://images.unsplash.com/photo-1675141194800-ae6f2f729ed9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80')
+    no-repeat center;
+    border-radius: 3px;
+    }
 @endsection
 
 @section('content')
-    {{-- posts --}}
+
+
+
+    <h1 class="title">{{ $post->title }}</h1>
+    <div class="post-details sec-end">
+        <span class="publisher fw-bold" data-email="{{ $post->user->email }}">{{ $post->user->name }}</span>
+        on <span>{{ $post->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
+    </div>
+    <div class="post-image"></div>
+
+    {{-- post content --}}
     <div class="post">
         @if ($post)
-            <h4 class="title mb-1">{{ $post['title'] }}</h4>
+            {{-- <h4 class="title mb-1">{{ $post['title'] }}</h4>
             <p class="post-info mb-3 ms-1">
                 <span class="author-name">{{ $post->user->name }} ({{ $post->user->email }})</span>
                 &nbsp;at &nbsp;<span class="created-at">{{ $post->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
-            </p>
-            <p class="description">{{ $post['description'] }}</p>
-            <p class="last_update mt-3 ms-1">
+            </p> --}}
+            <p class="description sec-end">{{ $post['description'] }}</p>
+            <p class="last_update mt-0 ms-1">
                 Last update on: <span
-                    class="updated-at">{{ $post->updated_at->format('jS \o\f F, Y g:i:s a') }}</span><br>Post Slug: <span
-                    class="updated-at">{{ $post->slug }}</span>
+                    class="updated-at">{{ $post->updated_at->format('jS \o\f F, Y g:i:s a') }}</span><br><span
+                    class="post-slug">{{ $post->slug }}</span>
             </p>
             {{-- add comments section --}}
         @else
             <h4 class="mb-1">Post not found or has been deleted.</h4>
         @endif
     </div>
+    {{-- <div class="sec-end"></div> --}}
     @if ($post)
         {{-- comments --}}
-        <div class="accordion accordion-flush post" id="accordionFlushExample">
-
+        <div class="accordion accordion-flush " id="accordionFlushExample">
             {{-- check if there's comments on this post --}}
             @if (!$post->comments->isEmpty())
                 {{-- loop through comments --}}
@@ -239,7 +284,7 @@
 
                             </button>
                         </h2>
-                        <div id="flush-collapse-{{ $comment->id }}" class="accordion-collapse collapse"
+                        <div id="flush-collapse-{{ $comment->id }}" class="accordion-collapse collapse py-2"
                             aria-labelledby="flush-heading-{{ $comment->id }}" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">{{ $comment->comment }}</div>
                             <div class="controls mb-3 d-flex justify-content-center align-items-center">
@@ -254,15 +299,13 @@
                         </div>
                     </div>
                 @endforeach
+                {{-- <div class="sec-end"></div> --}}
 
                 {{-- if there's no comments of the post --}}
-            @else
-                <h5 class="text-center">No comments to show.</h5>
             @endif
         </div>
-
         {{-- add comment --}}
-        <div class="new-comment post">
+        <div class="new-comment">
             <form method="POST" action="{{ route('comments.store', $post->id) }}">
                 @csrf
                 <textarea name="comment" placeholder="Write an answer...">
@@ -276,7 +319,7 @@
                     </div>
                 @enderror
 
-                <select name="commented_by" class="user-select mt-3">
+                {{-- <select name="commented_by" class="user-select mt-3">
                     @foreach ($users as $user)
                         <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach
@@ -285,7 +328,7 @@
                     <div class="errornotification">
                         {{ $message }}
                     </div>
-                @enderror
+                @enderror --}}
                 <button class="mt-3 mb-2">Add Comment</button>
             </form>
         </div>

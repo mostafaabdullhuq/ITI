@@ -110,17 +110,17 @@
                 {{ $message }}
             </div>
         @enderror
-
+        {{-- 
         <select class="creator" name="posted_by">
             <option value="{{ $post->user->id }}" selected>{{ $post->user->name }}</option>
-        </select>
+        </select> --}}
 
         {{-- if error in user id validation --}}
-        @error('posted_by')
+        {{-- @error('posted_by')
             <div class="errornotification">
                 {{ $message }}
             </div>
-        @enderror
+        @enderror --}}
         <button type="submit">Update Post</button>
     </form>
 @endsection

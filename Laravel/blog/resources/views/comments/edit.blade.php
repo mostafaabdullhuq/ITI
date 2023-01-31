@@ -32,7 +32,7 @@
     .container.my-container .create-comment {
     font-size: 20px;
     background-color: white;
-    padding: 50px 30px;
+    padding: 30px;
     border-radius: 10px;
     max-width: 700px;
     width: 100%;
@@ -88,9 +88,9 @@
         @csrf
         @method('PUT')
         <textarea name="comment" placeholder="What's on your mind?">{{ $comment->comment }}</textarea>
-        <select class="creator" name="commented_by">
+        {{-- <select class="creator" name="commented_by">
             <option value="{{ $comment->user->id }}" selected>{{ $comment->user->name }}</option>
-        </select>
+        </select> --}}
         <button type="submit">Update Comment</button>
     </form>
 @endsection

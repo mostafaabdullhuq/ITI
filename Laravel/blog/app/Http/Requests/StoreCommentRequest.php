@@ -27,7 +27,7 @@ class StoreCommentRequest extends FormRequest
             // comment is required, minimum 3 characters maximum 250 character
             'comment' => 'required|min:3|max:250',
             // user must be exist and required
-            'commented_by' => 'required|exists:users,id'
+            // 'commented_by' => 'required|exists:users,id'
         ];
     }
 }

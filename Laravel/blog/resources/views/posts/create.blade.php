@@ -111,7 +111,7 @@
             </div>
         @enderror
 
-        <select class="creator" name="posted_by">
+        {{-- <select class="creator" name="posted_by">
             @foreach ($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
@@ -120,7 +120,7 @@
             <div class="errornotification">
                 {{ $message }}
             </div>
-        @enderror
+        @enderror --}}
 
         <button type="submit">Create Post</button>
     </form>

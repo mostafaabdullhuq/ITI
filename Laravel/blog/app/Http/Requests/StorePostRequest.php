@@ -29,7 +29,7 @@ class StorePostRequest extends FormRequest
             // description are required, minimum 10 characters
             'description' => 'required|min:10',
             // posted_by are required, must be an existing user id
-            'posted_by' => 'required|exists:users,id'
+            // 'posted_by' => 'required|exists:users,id'
         ];
     }
 }

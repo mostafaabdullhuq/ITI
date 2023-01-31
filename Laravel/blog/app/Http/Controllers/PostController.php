@@ -5,10 +5,9 @@ namespace App\HTTP\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Jobs\PruneOldPostsJob;
 use App\Models\Post;
 use App\Models\User;
-use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -52,7 +51,7 @@ class PostController extends Controller
             [
                 'title' => $postData['title'],
                 'description' => $postData['description'],
-                'user_id' => $postData['posted_by'],
+                'user_id' => Auth::id(),
             ]
         );
         // redirect to the post page
