@@ -29,6 +29,7 @@ class PostController extends Controller
     {
         // get the post with the same id from the database
         $post = Post::find($id);
+        // dd($post->created_at);
         $users = User::all();
         return view("posts.show", ['post' => $post, 'users' => $users]);
     }

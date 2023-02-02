@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -46,5 +48,14 @@ class Post extends Model
     public function comments(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    // accessor method to convert post created_at time to human readable format using carbon
+
+    protected function createdAt(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => Carbon::create($value)->diffForHumans()
+        );
     }
 }

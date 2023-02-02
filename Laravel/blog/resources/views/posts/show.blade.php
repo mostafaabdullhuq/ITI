@@ -239,6 +239,9 @@
     .new-comment-submit {
     margin-top: 10px;
     }
+    .create_date {
+    text-transform: capitalize;
+    }
 @endsection
 
 @section('content')
@@ -248,7 +251,7 @@
     <h1 class="title">{{ $post->title }}</h1>
     <div class="post-details sec-end">
         <span class="publisher fw-bold" data-email="{{ $post->user->email }}">{{ $post->user->name }}</span>
-        on <span>{{ $post->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
+        <br><span class="create_date fw-bold">{{ $post->created_at }}</span>
     </div>
 
     {{-- if post has an image, add it  --}}

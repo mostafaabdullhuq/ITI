@@ -255,8 +255,8 @@
         <div class="post {{ $post->trashed() ? 'deleted' : '' }}">
             <h4 class="title"title="{{ $post->title }}">{{ $post->title }}</h4>
             <p class="post-info">
-                <span class="author">{{ $post->user->name }}</span> at
-                <span class="date">{{ $post->created_at->format('y-m-d') }}</span><br>
+                <span class="author">{{ $post->user->name }}</span> <br>
+                <span class="date">{{ $post->created_at }}</span><br>
                 <span class="slug">{{ $post->slug }}</span>
             </p>
             <p class="description">{{ $post->description }}</p>

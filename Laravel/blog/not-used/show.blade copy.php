@@ -204,7 +204,7 @@ border-radius: 3px;
     <h4 class="title mb-1">{{ $post['title'] }}</h4>
     <p class="post-info mb-3 ms-1">
         <span class="author-name">{{ $post->user->name }} ({{ $post->user->email }})</span>
-        &nbsp;at &nbsp;<span class="created-at">{{ $post->created_at->format('jS \o\f F, Y g:i:s a') }}</span>
+        &nbsp;at &nbsp;<span class="created-at">{{ $post->created_at }}</span>
     </p>
     <p class="description">{{ $post['description'] }}</p>
     <p class="last_update mt-3 ms-1">
