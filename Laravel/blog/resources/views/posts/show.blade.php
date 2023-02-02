@@ -246,8 +246,6 @@
 
 @section('content')
 
-
-
     <h1 class="title">{{ $post->title }}</h1>
     <div class="post-details sec-end">
         <span class="publisher fw-bold" data-email="{{ $post->user->email }}">{{ $post->user->name }}</span>

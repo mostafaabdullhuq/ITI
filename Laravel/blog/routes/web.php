@@ -4,6 +4,8 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Resources\PostResource;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -69,3 +71,9 @@ Auth::routes();
 // make home and / routes redirect to posts route
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
 Route::get('/home', [PostController::class, 'index'])->name('posts.index');
+
+
+// for ajax calls
+Route::get('/api/posts/{post}', function ($id) {
+    return new PostResource(Post::find($id));
+})->name("posts.api.show");
