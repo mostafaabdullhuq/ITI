@@ -12,6 +12,15 @@ class PostResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+
+    public function getFullCommentData($comments)
+    {
+        foreach ($comments as $index => $comment) {
+            $comments[$index]['user'] = $comment->user;
+        }
+        return $comments;
+    }
+
     public function toArray($request)
     {
         return [
@@ -25,7 +34,7 @@ class PostResource extends JsonResource
             'user' => $this->user,
             'slug' => $this->slug,
             'post_image' => $this->post_image,
-            'comments' => $this->comments,
+            'comments' => $this->getFullCommentData($this->comments),
         ];
     }
 }

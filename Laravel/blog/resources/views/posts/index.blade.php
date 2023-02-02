@@ -279,13 +279,15 @@
     }
 
     .ajax-popup .content {
-    padding: 20px 30px;
+    {{-- padding: 0 5px 0 0; --}}
     position: absolute;
     overflow: auto;
     top: 50%;
     left: 50%;
     min-width: 700px;
-    min-height: 400px;
+    min-height: 500px;
+    max-height: 600px;
+
     {{-- overflow: scroll-y; --}}
     transform: translate(-50%, -50%);
     width: 50%;
@@ -296,7 +298,7 @@
     {{-- justify-content: center; --}}
     {{-- align-items: center; --}}
     background-color: #f5f5f5;
-    border-radius: 3px;
+    border-radius: 5px;
     }
 
     .ajax-popup .content .close {
@@ -359,24 +361,12 @@
     </div>
 
     {{-- ajax request popup --}}
-
-
-
-
-
-
-
-
-
     <div class="ajax-popup">
         <div class="overlay"></div>
         {{-- <div class="content "> --}}
         <ul class="list-group content">
         </ul>
-
-        {{-- </div> --}}
     </div>
-
 
 
 
@@ -408,7 +398,6 @@
         // add event listener to all delete post form submit
         deleteForms.forEach(form => {
             form.addEventListener('submit', function(e) {
-
                 // prevent default submit behavior
                 e.preventDefault();
 
@@ -428,56 +417,62 @@
             })
         })
 
-        let ajaxBtn = document.querySelector('.view-ajax'),
+        // view post data in ajax format
+        let ajaxBtns = document.querySelectorAll('.view-ajax'),
             ajaxPopup = document.querySelector('.ajax-popup'),
-            ajaxPopupClose = document.querySelector('.ajax-popup .close'),
+            ajaxPopupOverlay = document.querySelector('.ajax-popup .overlay'),
             ajaxPopupContent = document.querySelector(".ajax-popup .content");
-        ajaxBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            let url = e.target.href;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => data.data)
-                .then(postData => {
-                    console.log(postData);
-                    let html = `
-                    <li class="list-group-item fs-1 text-center">${postData.title}</li>
+        ajaxBtns.forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                let url = e.target.href;
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => data.data)
+                    .then(postData => {
+                        let imagePath = postData.post_image?.replace('public', '/storage') ?? false;
+                        let html = `
+                    <li class="list-group-item fs-1">${postData.title}</li>
+                    ${imagePath ? `<img src="${imagePath}">` : ''}
                     <li class="list-group-item">${postData.description}</li>
                     <li class="list-group-item">Published ${postData.created_at}</li>
-                    <li class="list-group-item">Last Update at ${postData.updated_at}</li>
+                    <li class="list-group-item">Last \Update \at ${postData.updated_at}</li>
                     <li class="list-group-item">Published \By ${postData.user.name}</li>
                     <li class="list-group-item">Publisher Email: ${postData.user.email}</li>
                     <li class="list-group-item">Image Path: ${postData.post_image ?? "No Image."}</li>
-                    <h1>Comments</h1>
+                    ${postData.comments.length ? '<div class="accordion accordion-flush mt-3" id="accordionFlushExample">' : ''}
                     `
-                    postData.comments.forEach(comment => {
-                        var comment = `
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-heading-${comment.id}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapse-${comment.id}" aria-expanded="false"
-                                aria-controls="flush-collapse-${comment.id}">
-                                <p class="comment-info">
-                                    <span class="author-name">By user ${comment.user_id}
-                                    </span>
-                                    &nbsp;at &nbsp;<span
-                                        class="created-at">${comment.created_at}</span>
-                                </p>
+                        postData.comments?.forEach(comment => {
+                            var comment = `
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="flush-heading-${comment.id}">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#flush-collapse-${comment.id}" aria-expanded="false"
+                                                    aria-controls="flush-collapse-${comment.id}">
+                                                    <p class="comment-info">
+                                                        <span class="author-name">${comment.user.name}</span>
+                                                        &nbsp;at &nbsp;
+                                                        <span class="created-at">${comment.updated_at}</span>
+                                                    </p>
+                                                </button>
+                                            </h2>
+                                            <div id="flush-collapse-${comment.id}" class="accordion-collapse collapse py-2"
+                                                aria-labelledby="flush-heading-${comment.id}" data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">${comment.comment}</div>
+                                            </div>
+                                        </div>
+                                            `
+                            html += comment;
+                        })
+                        html += postData.comments.length ? '</div>' : ''
 
-                            </button>
-                        </h2>
-                        <div id="flush-collapse-${comment.id}" class="accordion-collapse collapse py-2"
-                            aria-labelledby="flush-heading-${comment.id}" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">${comment.comment}</div>
-                        </div>
-                    </div>
-                        `
-                        html += comment;
+                        ajaxPopupContent.innerHTML = html;
+                        ajaxPopup.classList.add('active');
                     })
-                    ajaxPopupContent.innerHTML = html;
-                    ajaxPopup.classList.add('active');
-                })
+            })
         })
-        // })
+        ajaxPopupOverlay.addEventListener('click', () => {
+            ajaxPopup.classList.remove('active');
+        })
     </script>
 @endsection
