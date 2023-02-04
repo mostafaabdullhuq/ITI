@@ -77,10 +77,6 @@ Route::get('/home', [PostController::class, 'index'])->name('posts.index');
 
 
 
-
-
-
-
 function handleThirdPartyLogin($provider)
 {
     $providerUser = Socialite::driver($provider)->user();

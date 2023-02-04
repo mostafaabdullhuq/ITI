@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\HTTP\Controllers\Api\PostController;
+use App\Http\Controllers\Api\PostController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Auth;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
