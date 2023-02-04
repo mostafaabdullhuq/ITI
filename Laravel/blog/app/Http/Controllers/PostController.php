@@ -5,11 +5,9 @@ namespace App\HTTP\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Jobs\PruneOldPostsJob;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -29,7 +27,6 @@ class PostController extends Controller
     {
         // get the post with the same id from the database
         $post = Post::find($id);
-        // dd($post->created_at);
         $users = User::all();
         return view("posts.show", ['post' => $post, 'users' => $users]);
     }
@@ -109,7 +106,6 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('posts.show', ['post' => $post->id]);
     }
-
 
     // delete specifc post
     public function destroy($id)

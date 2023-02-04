@@ -368,29 +368,6 @@
         </ul>
     </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <script defer>
         // get delete modal
         const modal = document.querySelector('.delete-prompt');
@@ -427,41 +404,43 @@
                 e.preventDefault();
                 let url = e.target.href;
                 fetch(url)
-                    .then(response => response.json())
+                    .then(response =>
+                        response.json()
+                    )
                     .then(data => data.data)
                     .then(postData => {
                         let imagePath = postData.post_image?.replace('public', '/storage') ?? false;
                         let html = `
-                    <li class="list-group-item fs-1">${postData.title}</li>
-                    ${imagePath ? `<img src="${imagePath}">` : ''}
-                    <li class="list-group-item">${postData.description}</li>
-                    <li class="list-group-item">Published ${postData.created_at}</li>
-                    <li class="list-group-item">Last \Update \at ${postData.updated_at}</li>
-                    <li class="list-group-item">Published \By ${postData.user.name}</li>
-                    <li class="list-group-item">Publisher Email: ${postData.user.email}</li>
-                    <li class="list-group-item">Image Path: ${postData.post_image ?? "No Image."}</li>
-                    ${postData.comments.length ? '<div class="accordion accordion-flush mt-3" id="accordionFlushExample">' : ''}
-                    `
+            <li class="list-group-item fs-1">${postData.title}</li>
+            ${imagePath ? `<img src="${imagePath}">` : ''}
+            <li class="list-group-item">${postData.description}</li>
+            <li class="list-group-item">Published ${postData.created_at}</li>
+            <li class="list-group-item">Last \Update \at ${postData.updated_at}</li>
+            <li class="list-group-item">Published \By ${postData.user.name}</li>
+            <li class="list-group-item">Publisher Email: ${postData.user.email}</li>
+            <li class="list-group-item">Image Path: ${postData.post_image ?? "No Image."}</li>
+            ${postData.comments.length ? '<div class="accordion accordion-flush mt-3" id="accordionFlushExample">' : ''}
+            `
                         postData.comments?.forEach(comment => {
                             var comment = `
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-heading-${comment.id}">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                                    data-bs-target="#flush-collapse-${comment.id}" aria-expanded="false"
-                                                    aria-controls="flush-collapse-${comment.id}">
-                                                    <p class="comment-info">
-                                                        <span class="author-name">${comment.user.name}</span>
-                                                        &nbsp;at &nbsp;
-                                                        <span class="created-at">${comment.updated_at}</span>
-                                                    </p>
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapse-${comment.id}" class="accordion-collapse collapse py-2"
-                                                aria-labelledby="flush-heading-${comment.id}" data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body">${comment.comment}</div>
-                                            </div>
-                                        </div>
-                                            `
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-heading-${comment.id}">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapse-${comment.id}" aria-expanded="false"
+                                            aria-controls="flush-collapse-${comment.id}">
+                                            <p class="comment-info">
+                                                <span class="author-name">${comment.user.name}</span>
+                                                &nbsp;at &nbsp;
+                                                <span class="created-at">${comment.updated_at}</span>
+                                            </p>
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapse-${comment.id}" class="accordion-collapse collapse py-2"
+                                        aria-labelledby="flush-heading-${comment.id}" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">${comment.comment}</div>
+                                    </div>
+                                </div>
+                                    `
                             html += comment;
                         })
                         html += postData.comments.length ? '</div>' : ''

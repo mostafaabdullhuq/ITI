@@ -43,7 +43,6 @@ class CommentController extends Controller
                 'user_id' => Auth::id(),
             ]
         );
-
         // redirect to index page route
         return redirect()->route('posts.show', ['post' => $postID]);
     }
