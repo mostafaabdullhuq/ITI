@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -76,47 +77,5 @@ Route::get('/', [PostController::class, 'index'])->name('posts.index');
 Route::get('/home', [PostController::class, 'index'])->name('posts.index');
 
 
-
-function handleThirdPartyLogin($provider)
-{
-    $providerUser = Socialite::driver($provider)->user();
-    $user = User::where('email', $providerUser->email)->first();
-
-    if (!$user) {
-        $user = User::create([
-            'name' => $providerUser->name,
-            'email' => $providerUser->email,
-            'password' => Hash::make(Str::random(16)),
-            $provider . '_token' => $providerUser->token,
-            $provider . '_refresh_token' => $providerUser->refreshToken,
-        ]);
-    } else {
-        $user->update([
-            $provider . '_token' => $providerUser->token,
-            $provider . '_refresh_token' => $providerUser->refreshToken,
-        ]);
-    }
-    return $user;
-}
-
-Route::get('/auth/github/redirect', function () {
-    return Socialite::driver('github')->redirect();
-})->name('socialite.github.redirect');
-
-Route::get('/auth/github/callback', function () {
-
-    Auth::login(handleThirdPartyLogin('github'));
-    return redirect()->route('posts.index');
-})->name('socialite.github.callback');
-
-
-Route::get('/auth/google/redirect', function () {
-    return Socialite::driver('google')->redirect();
-})->name('socialite.google.redirect');
-
-Route::get('/auth/google/callback', function () {
-
-
-    Auth::login(handleThirdPartyLogin('google'));
-    return redirect()->route('posts.index');
-})->name('socialite.google.callback');
+Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect'])->name('auth.redirect');
+Route::get('/auth/callback/{provider}', [SocialiteController::class, 'callback'])->name('auth.callback');

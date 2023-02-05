@@ -73,10 +73,10 @@
                         </form>
                         <div class="row mb-0 mt-3">
                             <div class="col-md-6 offset-md-4 d-flex gap-2">
-                                <a href="{{ route('socialite.google.redirect') }}" class="btn btn-danger col py-2">
+                                <a href="{{ route('auth.redirect', 'google') }}" class="btn btn-danger col py-2">
                                     <i class="fab fa-google"></i> {{ __('Login with Google') }}
                                 </a>
-                                <a href="{{ route('socialite.github.redirect') }}" class="btn btn-secondary col py-2">
+                                <a href="{{ route('auth.redirect', 'github') }}" class="btn btn-secondary col py-2">
                                     <i class="fab fa-github"></i> {{ __('Login with Github') }}
                                 </a>
                             </div>
