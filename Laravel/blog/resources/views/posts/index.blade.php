@@ -279,7 +279,6 @@
     }
 
     .ajax-popup .content {
-    {{-- padding: 0 5px 0 0; --}}
     position: absolute;
     overflow: auto;
     top: 50%;
@@ -288,15 +287,11 @@
     min-height: 500px;
     max-height: 600px;
 
-    {{-- overflow: scroll-y; --}}
     transform: translate(-50%, -50%);
     width: 50%;
-    {{-- height: 50%; --}}
     z-index: 2;
     display: flex;
     flex-direction: column;
-    {{-- justify-content: center; --}}
-    {{-- align-items: center; --}}
     background-color: #f5f5f5;
     border-radius: 5px;
     }
@@ -315,7 +310,6 @@
     <div class="new-post">
         <a href="{{ route('posts.create') }}">+</a>
     </div>
-    {{-- {{ dd($posts->onEachSide(1)->links()) }} --}}
     @foreach ($posts as $post)
         <div class="post {{ $post->trashed() ? 'deleted' : '' }}">
             <h4 class="title"title="{{ $post->title }}">{{ $post->title }}</h4>
@@ -334,8 +328,6 @@
                 <form class="{{ $post->trashed() ? '' : 'delete-post-form' }}"
                     action="{{ route('posts.destroy', $post->id) }}" method="POST">
                     @csrf
-                    {{-- html form has only post and get, so we want to add delete --}}
-                    {{-- @if ($post->trashed() ? 'Restore' : 'Delete') --}}
                     @if ($post->trashed())
                         @method('PATCH')
                     @else
@@ -368,7 +360,7 @@
         </ul>
     </div>
 
-    <script defer>
+    <script>
         // get delete modal
         const modal = document.querySelector('.delete-prompt');
         const deleteForms = document.querySelectorAll('.delete-post-form');
@@ -402,15 +394,17 @@
         ajaxBtns.forEach(btn => {
             btn.addEventListener("click", (e) => {
                 e.preventDefault();
-                let url = e.target.href;
-                fetch(url)
-                    .then(response =>
-                        response.json()
-                    )
-                    .then(data => data.data)
-                    .then(postData => {
-                        let imagePath = postData.post_image?.replace('public', '/storage') ?? false;
-                        let html = `
+
+                @if (Auth::user())
+                    let url = e.target.href;
+                    fetch(url)
+                        .then(response =>
+                            response.json()
+                        )
+                        .then(data => data.data)
+                        .then(postData => {
+                            let imagePath = postData.post_image?.replace('public', '/storage') ?? false;
+                            let html = `
             <li class="list-group-item fs-1">${postData.title}</li>
             ${imagePath ? `<img src="${imagePath}">` : ''}
             <li class="list-group-item">${postData.description}</li>
@@ -421,8 +415,8 @@
             <li class="list-group-item">Image Path: ${postData.post_image ?? "No Image."}</li>
             ${postData.comments.length ? '<div class="accordion accordion-flush mt-3" id="accordionFlushExample">' : ''}
             `
-                        postData.comments?.forEach(comment => {
-                            var comment = `
+                            postData.comments?.forEach(comment => {
+                                var comment = `
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="flush-heading-${comment.id}">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -441,13 +435,18 @@
                                     </div>
                                 </div>
                                     `
-                            html += comment;
-                        })
-                        html += postData.comments.length ? '</div>' : ''
+                                html += comment;
+                            })
+                            html += postData.comments.length ? '</div>' : ''
 
-                        ajaxPopupContent.innerHTML = html;
-                        ajaxPopup.classList.add('active');
-                    })
+                            ajaxPopupContent.innerHTML = html;
+                            ajaxPopup.classList.add('active');
+                        })
+                @else
+                    window.location.href = '/login';
+                @endif
+
+
             })
         })
         ajaxPopupOverlay.addEventListener('click', () => {

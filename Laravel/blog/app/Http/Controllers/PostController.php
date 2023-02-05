@@ -9,6 +9,8 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Sanctum\PersonalAccessToken;
+use Laravel\Sanctum\Sanctum;
 
 class PostController extends Controller
 {
@@ -16,8 +18,13 @@ class PostController extends Controller
     public function index()
     {
 
+        // get the barear token of the logged in user
 
-        // get all posts from database posts table
+        // dd(
+        //     auth('sanctum')->loginUsingId(Auth::user()->id)
+        // );
+
+
         $posts = Post::withTrashed()->paginate(8);
         return view("posts.index", ['posts' => $posts]);
     }
