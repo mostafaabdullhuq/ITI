@@ -3,14 +3,8 @@
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
-use App\Http\Resources\PostResource;
-use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,5 +71,6 @@ Route::get('/', [PostController::class, 'index'])->name('posts.index');
 Route::get('/home', [PostController::class, 'index'])->name('posts.index');
 
 
+// -------------Socialite Routes--------------
 Route::get('/auth/redirect/{provider}', [SocialiteController::class, 'redirect'])->name('auth.redirect');
 Route::get('/auth/callback/{provider}', [SocialiteController::class, 'callback'])->name('auth.callback');
