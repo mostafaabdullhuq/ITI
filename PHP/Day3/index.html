@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+    </head>
+    <body>
+        <select id="family">
+            <option value="Impact,Charcoal,sans-serif">'Orbitron', sans-serif</option>
+            <option value="Orbitron">Orbitron</option>
+            <option value="Roboto">Roboto</option>
+        </select>
+        <select id="color">
+            <option value="red">red</option>
+            <option value="green">green</option>
+            <option value="blue">blue</option>
+            <option value="black">black</option>
+            <option value="yellow">yellow</option>
+            <option value="gray">gray</option>
+        </select>
+        <select id="size">
+            <option value="x-large">x-large</option>
+            <option value="large">large</option>
+            <option value="x-small">x-small</option>
+            <option value="xx-small">xx-small</option>
+        </select>
+        <br />
+        <p id="txt">Welcome</p>
+
+        <script>
+            let text = document.getElementById("txt");
+
+            // when window load, execute this function
+            (() => {
+                // try to get values from localstorage, if found update the text and if not found set default values
+                text.style.color = getLocalStorage("color") ?? "black";
+                text.style.fontFamily = getLocalStorage("family") ?? "black";
+                text.style.fontSize = getLocalStorage("size") ?? "Roboto";
+            })();
+
+            function updateLocalStorage(key, value) {
+                localStorage.setItem(key, value);
+            }
+
+            function getLocalStorage(key) {
+                return localStorage.getItem(key);
+            }
+
+            // when any change made to the family select, trigger this function
+            document.getElementById("family").addEventListener("change", function () {
+                // get the value of the select and set it to the text
+                text.style.fontFamily = this.value;
+
+                // update the value in local storage
+                updateLocalStorage("family", this.value);
+            });
+            // when any change made to the color select, trigger this function
+            document.getElementById("color").addEventListener("change", function () {
+                // get the value of the select and set it to the text
+                text.style.color = this.value;
+
+                // update the value in local storage
+                updateLocalStorage("color", this.value);
+            });
+            // when any change made to the size select, trigger this function
+            document.getElementById("size").addEventListener("change", function () {
+                // get the value of the select and set it to the text
+                text.style.fontSize = this.value;
+
+                // update the value in local storage
+                updateLocalStorage("size", this.value);
+            });
+        </script>
+    </body>
+</html>

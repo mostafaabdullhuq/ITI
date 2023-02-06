@@ -129,7 +129,7 @@
 
 <body>
     <div class="container flex-item">
-        <form class="flex-item" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);  ?>">
+        <form class="flex-item" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <!-- if user submitted the form -->
             <?php if (isset($_REQUEST["submit"])) {
                 $name = $_REQUEST["name"];
@@ -148,7 +148,7 @@
                     }
                 }
                 $isFormValid = isFormValid($name, $emailAddress, $gender);
-            ?>
+                ?>
             <!-- name input -->
             <div class="form-input required-item">
                 <!-- if user didn't enter a name -->
@@ -164,7 +164,6 @@
                 <?php }
                         // if user entered a valid name regex
                         else {
-
                             // if form is valid
                             if ($isFormValid) { ?>
                 <input type="text" name="name" placeholder="Your Name">
@@ -181,15 +180,14 @@
             <!-- email input -->
             <div class=" form-input required-item">
                 <!-- if user didn't enter an email -->
-                <?php if (empty($emailAddress)) {  ?>
+                <?php if (empty($emailAddress)) { ?>
                 <input type="email" name="email" placeholder="Email is required." class="invalid-input">
                 <?php }
                     // if user entered an email
                     else {
-
                         // if the form is valid
                         if ($isFormValid) {
-                        ?>
+                            ?>
                 <input type="email" name="email" placeholder="Email Address">
                 <?php }
                         // if form is not valid, keep the data of the input
@@ -200,7 +198,7 @@
             </div>
 
             <!-- group id input -->
-            <div class="form-input">
+            <div class=" form-input">
 
                 <!-- if all form inputs are valid -->
                 <?php if ($isFormValid) { ?>
@@ -208,13 +206,13 @@
                 <?php }
                     // if there's a problem with validation
                     else {
-                    ?>
+                        ?>
                 <input type="text" name="groupID" placeholder="Group #" value="<?php echo $groupID; ?>" />
 
                 <?php } ?>
             </div>
             <!-- class details textarea -->
-            <div class="form-input">
+            <div class=" form-input">
                 <!-- if all form inputs are valid -->
                 <?php if ($isFormValid) { ?>
                 <textarea name="classdetails" placeholder="Class Details"></textarea>
@@ -243,7 +241,7 @@
                     // if user choose a gender
                     else {
                         // if form is valid
-
+                
                         if ($isFormValid) { ?>
                 <div class="radio-item flex-item">
                     <input type="radio" id="gender1" name="gender" value="male">
@@ -277,23 +275,23 @@
             <!-- courses multi select -->
             <select name="courses[]" multiple>
                 <option value="PHP" <?php if (!$isFormValid && isset($courses) && in_array("PHP", $courses)) {
-                                            echo "selected";
-                                        } ?>>PHP</option>
+                        echo "selected";
+                    } ?>>PHP</option>
                 <option value="JavaScript" <?php if (!$isFormValid && isset($courses) && in_array("JavaScript", $courses)) {
-                                                    echo "selected";
-                                                } ?>>JavaScript</option>
+                        echo "selected";
+                    } ?>>JavaScript</option>
                 <option value="MySQL" <?php if (!$isFormValid && isset($courses) && in_array("MySQL", $courses)) {
-                                                echo "selected";
-                                            } ?>>MySQL</option>
+                        echo "selected";
+                    } ?>>MySQL</option>
                 <option value="HTML" <?php if (!$isFormValid && isset($courses) && in_array("HTML", $courses)) {
-                                                echo "selected";
-                                            } ?>>HTML</option>
+                        echo "selected";
+                    } ?>>HTML</option>
                 <option value="NodeJs" <?php if (!$isFormValid && isset($courses) && in_array("NodeJs", $courses)) {
-                                                echo "selected";
-                                            } ?>>NodeJs</option>
+                        echo "selected";
+                    } ?>>NodeJs</option>
                 <option value="RedHat" <?php if (!$isFormValid && isset($courses) && in_array("RedHat", $courses)) {
-                                                echo "selected";
-                                            } ?>>RedHat Admin 1</option>
+                        echo "selected";
+                    } ?>>RedHat Admin 1</option>
             </select>
 
             <!-- agree to terms checkbox -->
@@ -307,7 +305,6 @@
             <input type="submit" name="submit">
 
             <?php
-
                 // if user filled all required inputs
                 if ($isFormValid) {
                     echo "<h1 style='text-align:center; margin-top: 10px; font-size: 26px;'>Thanks for submitting your info.</h1>" .
@@ -365,7 +362,7 @@
             <!-- submit form -->
             <input type="submit" name="submit">
             <?php } ?>
-        </form>
+            </fo rm>
     </div>
 
 </body>

@@ -146,18 +146,11 @@
                 ],
             ];
             foreach ($students as $student): ?>
-                <tr style="<?php
-                $student['status'] == 'PHP' ? print 'color: red;' : print '';
-                ?>">
-                    <td>
-                        <?php echo $student["name"]; ?>
-                    </td>
-                    <td>
-                        <?php echo $student["email"]; ?>
-                    </td>
-                    <td>
-                        <?php echo $student["status"]; ?>
-                    </td>
+                <tr style="<?php $student['status'] == 'PHP' ? print 'color: red;' : print ''; ?>">
+                    <?php foreach ($student as $studentKey => $studentValue) {
+                        echo "<td>$studentValue</td>";
+                    }
+                    ?>
                 </tr>
             <?php endforeach;
             ?>
