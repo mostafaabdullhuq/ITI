@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<element name="phpunit">
+		<complexType>
+			<sequence>
+				<element name="testsuites">
+					<complexType>
+						<sequence>
+							<element name="testsuite">
+								<complexType>
+									<sequence>
+										<element name="directory" type="xs:string" />
+									</sequence>
+									<attribute name="name" use="required" />
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+			</sequence>
+			<attribute name="bootstrap" use="required" />
+			<attribute name="colors" type="xs:boolean" use="required" />
+			<attribute name="stopOnFailure" type="xs:boolean" use="required" />
+			<attribute name="verbose" type="xs:boolean" use="required" />
+		</complexType>
+	</element>
+</schema>
