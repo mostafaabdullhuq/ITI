@@ -1,0 +1,40 @@
+input {
+    width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+
+p {
+    min-height: 30px;
+    max-width: 500px;
+    text-align: center;
+}
+
+.container {
+    background-color: #f2f2f294;
+    padding: 20px;
+}
+
+button {
+    margin-top: 20px;
+    background-color: crimson;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
