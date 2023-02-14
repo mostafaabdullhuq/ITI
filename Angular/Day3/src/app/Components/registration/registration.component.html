@@ -1,0 +1,17 @@
+<div class="registration-container">
+  <input
+    type="text"
+    placeholder="Name"
+    [(ngModel)]="name"
+    [ngClass]="{ invalid: name.length < 3, valid: name.length >= 3 }"
+  />
+  <p>Name must be at least 3 characters.</p>
+  <input
+    type="text"
+    placeholder="Age"
+    [ngClass]="+age <= 20 || +age >= 40 || !+age ? 'invalid' : 'valid'"
+    [(ngModel)]="age"
+  />
+  <p>Age must be between 20 and 40.</p>
+  <input type="button" value="Add Student" (click)="addStudent()" />
+</div>

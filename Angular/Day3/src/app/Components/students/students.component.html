@@ -1,0 +1,19 @@
+<div class="students-container">
+  <div class="table">
+    <div class="row">
+      <p>Name</p>
+      <p>Age</p>
+    </div>
+    <div class="body" *ngIf="studentsData.length; else noData">
+      <div class="row" *ngFor="let student of studentsData">
+        <p>{{ student.name }}</p>
+        <p>{{ student.age }}</p>
+      </div>
+    </div>
+    <ng-template #noData>
+      <div class="row">
+        <p class="no-data">No data</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

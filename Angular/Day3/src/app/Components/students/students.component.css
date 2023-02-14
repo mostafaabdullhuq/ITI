@@ -1,0 +1,68 @@
+.students-container {
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+  min-height: calc(50vh - 10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+div.table {
+  border-collapse: collapse;
+  width: 50%;
+  border-radius: 3px;
+  /* overflow: hidden; */
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+div.table > div.row,
+.table .body > div.row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  color: white;
+}
+
+.table .body {
+  grid-column: span 2;
+}
+
+div.table div.row:nth-child(odd) {
+  background-color: #609ea2;
+}
+
+div.table div.row:nth-child(odd) > p:nth-child(odd) {
+  background-color: #589296;
+}
+
+div.table div.row:nth-child(even) {
+  background-color: crimson;
+}
+
+div.table div.row:nth-child(even) > p:nth-child(even) {
+  background-color: rgb(196, 15, 51);
+}
+
+div.table > div.row:nth-child(1) > p {
+  background-color: #332c39 !important;
+  font-weight: bold !important;
+  color: white !important;
+}
+
+div.table > div.row > p {
+  padding: 15px 20px;
+}
+
+p.no-data {
+  text-align: center;
+  width: 100% !important;
+  grid-column: span 2;
+}
