@@ -12,7 +12,7 @@
                 <th class="border border-slate-600 px-4 py-4">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="students;else falseBlock">
             <tr class=" text-slate-50 gap-4 border border-slate-600 text-center" *ngFor="let user of students">
                 <td class="border border-slate-600 px-4 py-2">{{user.id}}</td>
                 <td class="border border-slate-600 px-4 py-2">{{user.name.split(' ')[0] || '-'}}</td>
@@ -31,6 +31,13 @@
                 </td>
             </tr>
         </tbody>
+        <ng-template #falseBlock>
+            <tbody>
+                <tr *ngIf="!students" class=" text-slate-50 gap-4 border text-xl border-slate-600 text-center">
+                    <td colspan="8" class="border border-slate-600 px-4 py-4">There's no users to show.</td>
+                </tr>
+            </tbody>
 
+        </ng-template>
     </table>
 </div>

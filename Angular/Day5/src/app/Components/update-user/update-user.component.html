@@ -1,22 +1,30 @@
-<div class="container w-full  flex h-full items-center justify-center text-lg">
-    <form class="w-[50%] flex flex-col gap-2">
-        <input #newName type="text"
-            class="p-5 rounded-md outline-none text-white focus:placeholder:text-transparent placeholder:transition-colors bg-slate-600 placeholder:text-white text-center"
-            placeholder="Full name" value="{{user.name}}">
-        <input #newAge type="number"
-            class="p-5 rounded-md outline-none text-white focus:placeholder:text-transparent placeholder:transition-colors bg-slate-600 placeholder:text-white text-center"
-            placeholder="Age" value="{{user.age}}">
-        <input #newEmail type="email"
-            class="p-5 rounded-md outline-none text-white focus:placeholder:text-transparent placeholder:transition-colors bg-slate-600 placeholder:text-white text-center"
-            placeholder="Email Address" value="{{user.email}}">
-        <input #newPhone type="text"
-            class="p-5 rounded-md outline-none text-white focus:placeholder:text-transparent placeholder:transition-colors bg-slate-600 placeholder:text-white text-center"
-            placeholder="Phone Number" value="{{user.phone}}">
-        <input #newAddress type="text"
-            class="p-5 rounded-md outline-none text-white focus:placeholder:text-transparent placeholder:transition-colors bg-slate-600 placeholder:text-white text-center"
-            placeholder="Address" value="{{user.address}}">
-        <button
-            class="bg-red-500 text-xl border-2 border-red-500 uppercase text-white py-5 rounded-md transition-colors hover:bg-transparent hover:border-2 hover:border-red-500"
+<div class="container w-full -mt-10 gap-2 flex-col flex h-full items-center justify-center text-lg">
+    <div class="error-message transition-all opacity-0" [ngClass]="!isFormValid && !isInputsEmpty ? 'err-shown' : ''">
+        <p *ngIf="!isNameValid" class="text-left">Name should be between 5 and 50 characters.</p>
+        <p *ngIf="!isAgeValid" class="text-left">Age must be between 16 and 100.</p>
+        <p *ngIf="!isEmailValid" class="text-left">Invalid email address format.</p>
+        <p *ngIf="!isPhoneValid" class="text-left">Phone number must be between 10 to 20 digits.</p>
+        <p *ngIf="!isAddressValid" class="text-left">Address should be between 5 and 50 characters.</p>
+    </div>
+
+    <form class="form" [formGroup]="updateForm">
+        <div class="grid grid-cols-2 gap-2">
+            <input #newName type="text" formControlName="name" class="form-input" placeholder="Full name"
+                [value]="user.name" [ngClass]="!isNameValid ? 'invalid' : 'valid'">
+            <input #newAge type="number" formControlName="age" class="form-input" placeholder="Age" [value]="user.age"
+                [ngClass]="!isAgeValid ? 'invalid' : 'valid'">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+
+            <input #newPhone type="text" formControlName="phone" class="form-input" placeholder="Phone Number"
+                [value]="user.phone" [ngClass]="!isPhoneValid ? 'invalid' : 'valid'">
+            <input #newAddress type="text" formControlName="address" class="form-input" placeholder="Address"
+                [value]="user.address" [ngClass]="!isAddressValid ? 'invalid' : 'valid'">
+        </div>
+        <input #newEmail type="email" formControlName="email" class="form-input" placeholder="Email Address"
+            [value]="user.email" [ngClass]="!isEmailValid ? 'invalid' : 'valid'">
+
+        <button class="form-submit" [disabled]="!isFormValid"
             (click)="updateUser(newName.value,newAge.value,newEmail.value,newPhone.value,newAddress.value)">Update
             Student</button>
     </form>
