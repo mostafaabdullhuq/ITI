@@ -1,0 +1,23 @@
+<div class="container w-full  flex h-full items-center justify-center text-lg">
+    <form class="w-[50%] flex flex-col gap-2">
+        <input #newName type="text"
+            class="p-5 rounded-md outline-none text-white focus:placeholder:text-transparent placeholder:transition-colors bg-slate-600 placeholder:text-white text-center"
+            placeholder="Full name" value="{{user.name}}">
+        <input #newAge type="number"
+            class="p-5 rounded-md outline-none text-white focus:placeholder:text-transparent placeholder:transition-colors bg-slate-600 placeholder:text-white text-center"
+            placeholder="Age" value="{{user.age}}">
+        <input #newEmail type="email"
+            class="p-5 rounded-md outline-none text-white focus:placeholder:text-transparent placeholder:transition-colors bg-slate-600 placeholder:text-white text-center"
+            placeholder="Email Address" value="{{user.email}}">
+        <input #newPhone type="text"
+            class="p-5 rounded-md outline-none text-white focus:placeholder:text-transparent placeholder:transition-colors bg-slate-600 placeholder:text-white text-center"
+            placeholder="Phone Number" value="{{user.phone}}">
+        <input #newAddress type="text"
+            class="p-5 rounded-md outline-none text-white focus:placeholder:text-transparent placeholder:transition-colors bg-slate-600 placeholder:text-white text-center"
+            placeholder="Address" value="{{user.address}}">
+        <button
+            class="bg-red-500 text-xl border-2 border-red-500 uppercase text-white py-5 rounded-md transition-colors hover:bg-transparent hover:border-2 hover:border-red-500"
+            (click)="updateUser(newName.value,newAge.value,newEmail.value,newPhone.value,newAddress.value)">Update
+            Student</button>
+    </form>
+</div>

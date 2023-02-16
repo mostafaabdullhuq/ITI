@@ -1,0 +1,27 @@
+<div class="container w-full  flex h-full items-center justify-center">
+    <table class=" w-fit">
+        <thead>
+            <tr class=" text-slate-100 bg-slate-700 border text-xl border-slate-600 text-center">
+                <th class="border border-slate-600 px-4 py-4">ID</th>
+                <th class="border border-slate-600 px-4 py-4">First Name</th>
+                <th class="border border-slate-600 px-4 py-4">Last Name</th>
+                <th class="border border-slate-600 px-4 py-4">Age</th>
+                <th class="border border-slate-600 px-4 py-4">Email</th>
+                <th class="border border-slate-600 px-4 py-4">Phone</th>
+                <th class="border border-slate-600 px-4 py-4">Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class=" text-slate-50 gap-4 border border-slate-600 text-center">
+                <td class="border border-slate-600 px-4 py-2">{{user.id}}</td>
+                <td class="border border-slate-600 px-4 py-2">{{user.name.split(' ')[0] || '-'}}</td>
+                <td class="border border-slate-600 px-4 py-2">{{user.name.split(' ')[1] || '-'}}</td>
+                <td class="border border-slate-600 px-4 py-2">{{user.age}}</td>
+                <td class="border border-slate-600 px-4 py-2">{{user.email}}</td>
+                <td class="border border-slate-600 px-4 py-2">{{user.phone}}</td>
+                <td class="border border-slate-600 px-4 py-2">{{user.address}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
